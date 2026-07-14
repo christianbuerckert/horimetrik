@@ -1,0 +1,40 @@
+%I
+%S 3,15,84,533,3883,31998,294875,3006206,33603002,408733041,5375410231,76013015079,
+%T 1150206933969,18545538085994,317435032141745,5748797568046347,109827594310217168,
+%U 2207457411249752035,46565493803467062165,1028649317126730207600
+%N a(g) is the least m such that Sum_{d=0}^{m-g-1} (m-g-d)*(m+1)!/(m+1-d)! >= m!.
+%C In the Horimetrik framework (a positional number system with decreasing bases; see LINKS) this is the sequence of "jump positions of the depth law" (Sprungstellen des Tiefengesetzes).
+%C Arises in the mixed-radix positional system with decreasing bases (digit i has base i+1, so the most significant digit is binary): a(g) is the first "factorial shell" [m!, (m+1)!) containing a value whose digit-polynomial support height lies g below the shell index; equivalently, the first shell where the commutator of the two natural compactification operators of that system reaches depth -g.
+%C The defining sum satisfies the identity S(m,g)/m! = (m+1)*Sum_{k=1..m-g} k/(g+k+1)!, which makes distant terms computable.
+%C Proved: (g+2)!/c(g) <= a(g)+1 <= (g+2)! with c(g) = (g+2)!*Sum_{k>=1} k/(g+k+1)! = 1 + O(1/g), hence a(g)/(g+2)! -> 1.
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik/blob/main/buch/main.pdf">Horimetrik - Zahlen mit Horizont (book PDF, in German)</a>
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik/blob/main/book/main.pdf">Horimetrik - Numbers with a Horizon (book PDF, English translation)</a>
+%H Christian Felix Bürckert, <a href="https://doi.org/10.5281/zenodo.21400755">Horimetrik - Zahlen mit Horizont / Numbers with a Horizon (archived books and paper, Zenodo)</a>
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik">Horimetrik (proofs, programs, and b-files)</a>
+%F a(g) ~ (g+2)! (two-sided bounds in COMMENTS).
+%e For g=1: with M_s(X) = Sum_{d<s} (s-d)*X_(d) in the falling factorial basis X_(d) = X*(X-1)*...*(X-d+1), m=3 is the least m with M_{m-1}(m+1) >= m!, since M_2(4) = 2 + 4 = 6 >= 3! = 6, while M_1(3) = 1 < 2! = 2 fails for m=2. So a(1)=3.
+%o (Python)
+%o from fractions import Fraction
+%o from math import factorial
+%o def a(g, K=400):
+%o     S = [Fraction(0)]
+%o     for k in range(1, K+1):
+%o         S.append(S[-1] + Fraction(k, factorial(g+k+1)))
+%o     tail = Fraction(2*(K+1), factorial(g+K+2))
+%o     def ge1(m):
+%o         t = m - g
+%o         if t <= 0: return False
+%o         if t <= K: return (m+1)*S[t] >= 1
+%o         if (m+1)*S[K] >= 1: return True
+%o         assert (m+1)*(S[K]+tail) < 1
+%o         return False
+%o     lo, hi = g+1, factorial(g+2)-1
+%o     while lo < hi:
+%o         mid = (lo+hi)//2
+%o         if ge1(mid): hi = mid
+%o         else: lo = mid+1
+%o     return lo
+%Y Cf. A000142.
+%K nonn,hard
+%O 1,1
+%A _Christian Felix Bürckert_, Jul 14 2026

@@ -1,0 +1,23 @@
+%I
+%S 1,2,5,7,11,23,29,39,59,119,143,179,239,359,719,839,1007,1259,1679,2519,5039,5759,6719,8063,
+%T 10079,13439,20159,40319,45359,51839,60479,72575,90719,120959,181439,362879,403199,453599,
+%U 518399,604799,725759,907199,1209599,1814399,3628799,3991679,4435199,4989599
+%N Numbers k such that k! is a single nonzero digit in the mixed-radix system with decreasing bases (digit i has base i+1, weight (k+1)!/(i+1)!); equivalently k = (i+1)!/d - 1 for integers i >= 1, 1 <= d <= i.
+%C In the Horimetrik framework (see LINKS) these are the "single-digit factorials" (Ein-Ziffern-Fakultaeten).
+%C Exactly i terms arise from each position i (d ranges over 1..i; divisibility is automatic since d <= i). Fully characterized with proof: exactness of k! = d*(k+1)!/(i+1)! forces d = (i+1)!/(k+1), and uniqueness of the digit expansion does the rest.
+%C The characterization supplied nine exact predictions (k = 29, 39, 59, 119 and 143, 179, 239, 359, 719) before computation.
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik/blob/main/buch/main.pdf">Horimetrik - Zahlen mit Horizont (book PDF, in German)</a>
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik/blob/main/book/main.pdf">Horimetrik - Numbers with a Horizon (book PDF, English translation)</a>
+%H Christian Felix Bürckert, <a href="https://doi.org/10.5281/zenodo.21400755">Horimetrik - Zahlen mit Horizont / Numbers with a Horizon (archived books and paper, Zenodo)</a>
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik">Horimetrik (proofs, programs, and b-files)</a>
+%F Sorted values of (i+1)!/d - 1 over i >= 1, 1 <= d <= i.
+%e k=5 is a term: 5! = 120 = 1*720/3! is the single digit 1 at position 2 of horizon 5 (weight 6!/3! = 120), i.e. k = (i+1)!/d - 1 with i=2, d=1.
+%o (Python)
+%o from math import factorial
+%o def upto(limit):
+%o     vals = {factorial(i+1)//d - 1 for i in range(1, 20) for d in range(1, i+1)}
+%o     return sorted(v for v in vals if v <= limit)
+%Y Cf. A000142.
+%K nonn,easy
+%O 1,2
+%A _Christian Felix Bürckert_, Jul 14 2026

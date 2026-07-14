@@ -1,0 +1,124 @@
+\chapter{Einordnung: Wo die Horimetrik wohnt}
+\label{ch:einordnung}
+
+% Register: S44, V13. Quellen: Anhang J, experiments_einordnung.py.
+% Schlusskapitel: erst die Fronten (K8), dann die Landkarte.
+
+Ein Buch über eine neue Theorie schuldet seinen Lesern am Ende eine
+Adresse: Wo auf der Landkarte der Mathematik liegt das alles? Die
+Antwort hat sich erst ganz zum Schluss der Arbeit vollständig
+zusammengesetzt, und sie ist besser, als wir zu hoffen wagten. Es
+gibt nämlich drei mögliche Ausgänge für ein Projekt wie dieses. Ein
+\emph{unbekannter} Grundraum wäre verdächtig -- vermutlich hätte man
+nur schlecht gesucht. Eine \emph{bekannte vollständige Theorie} wäre
+das Ende -- man hätte alte Mathematik neu angemalt. Der beste Fall
+ist der dritte: ein bekannter Grundraum, auf dem neue Operationen
+und neue Sätze stehen. Genau dort sind wir gelandet.
+
+\section{Die Bewohner sind alte Bekannte}
+
+Ergänzt man die Ziffern einer Hori-Zahl um eine führende Null,
+$e=(0,a_1,\ldots,a_n)$, so gilt an jeder Stelle $0\le e_j<j$ -- und
+das ist Wort für Wort die Definition einer
+\emph{Inversionsfolge} der Länge $n{+}1$. Inversionsfolgen stehen
+in klassischer Bijektion zu den Permutationen: $e_j$ zählt, wie
+viele frühere Einträge einer Permutation größer sind als der
+$j$-te. Also:
+
+\begin{satz}[Register S44]
+$H_n$ steht in Bijektion zu den Inversionsfolgen der Länge $n{+}1$
+und damit zu den Permutationen von $n{+}1$ Elementen. Unter dieser
+Brille wird der Strukturhorizont zur Permutationsstatistik
+\[
+\sigma(P_a)=n-\min_{e_j>0}\bigl((j{-}1)-e_j\bigr),
+\]
+und seine Verteilung ist exakt bekannt: Auf jedem Niveau
+$1\le r\le n$ liegen genau $r\cdot r!$ Elemente (die Formel gilt
+für $a\ne0$; die Null hat $\sigma=0$).
+\end{satz}
+
+Die Fakultätsgröße der Horizonte war also nie ein Zufall: Die
+Bewohner der Hori-Welten \emph{sind} Permutationscodes. Das nimmt
+der Theorie nichts -- es sagt präzise, was sie ist: Die Horimetrik
+untersucht, wie diese wohlbekannten Codes ihren \emph{Wert}, ihre
+\emph{Gestalt} und ihre \emph{Identität} verändern, wenn ihr Raum
+wächst. Umzüge, Projektoren, Seitentreue, Kapazität -- all das ist
+auf dem alten Grundraum neu.
+
+Die Statistik selbst hat eine hübsche Lesart: $(j{-}1)-e_j$ ist der
+Abstand einer Ziffer von ihrer oberen Schranke. Die Literatur kennt
+die Extremfälle als \emph{tight entries} (Ziffern, die ganz oben
+anliegen); der Strukturhorizont verfeinert das zu einem Maß: Wie
+nahe kommt \emph{irgendeine} Ziffer ihrem Anschlag? Ob diese
+Statistik unter der Bijektion einer klassischen
+Permutationsstatistik entspricht, ist offen (Register V13) -- ihre
+Verteilung $r\cdot r!$ ist jedenfalls fast verdächtig sauber.
+
+\section{Die Ordnung: ein Gitter, das es schon gibt}
+
+Vergleicht man Ziffernfolgen stellenweise, wird jeder Horizont zu
+einem Produkt endlicher Ketten -- einem \emph{distributiven
+Gitter}. In dieser Ordnung ist die randvolle Gestalt $M_r$ ein
+gewöhnliches Element, und die Kapazitätsklasse
+$\mathcal F_r=\{P:\sigma(P)\le r\}$ ist schlicht das
+\emph{Hauptideal} darunter: alles, was unter $M_r$ liegt. Das ist
+die sauberste abstrakte Beschreibung des Strukturhorizonts, die wir
+kennen: $\sigma(P)$ ist die erste Stufe der Kette
+$M_0\le M_1\le M_2\le\cdots$ (mit $M_0=0$), deren Hauptideal $P$
+enthält -- und
+das Extremalprinzip aus Kapitel~\ref{ch:strukturpolynome} wird in
+dieser Sprache beinahe eine Tautologie. Dieselbe stellenweise
+Ordnung auf Inversionsfolgen wurde jüngst als \emph{middle order}
+auf Permutationen untersucht, zwischen schwacher und
+Bruhat-Ordnung. Ob unsere Projektoren $K_V$, $K_S$ in diesem Gitter
+monoton sind, ob der Kommutator ein Ordnungsdefekt ist -- das sind
+ausformulierte Anschlussfragen an ein existierendes Gebiet.
+
+\section{Der Kalkül: alte Operatoren, neue Buchhaltung}
+
+Die fallenden Fakultäten sind die Hausbasis der
+\emph{finiten Operatorrechnung}: $\Delta$ spielt dort die Rolle der
+Ableitung, und die umbrale Algebra studiert seit Jahrzehnten
+Delta-Operatoren und ihre Basisfolgen. Strukturpolynome und
+Horizontableitung sind also bestens verortet. Was die Horimetrik
+hinzufügt, ist eine Frage, die dort nicht im Mittelpunkt steht:
+nicht \emph{wie} ein Operator ein Polynom verändert, sondern
+\emph{wie viel minimale Strukturkapazität} das kostet. Das
+Horizontkalkül -- $\Gamma_+$, $\Gamma_\times$, $\Gamma_\Delta$,
+$\Gamma_E$, $\Gamma_\circ$, alle exakt und alle am selben
+kanonischen Objekt angenommen -- ist eine Kapazitätsbuchhaltung
+über einem etablierten Operatorgerüst. Zusammen mit der
+Zählbreiten-Deutung aus Kapitel~\ref{ch:strukturpolynome} ist das
+der Kandidat für einen eigenständigen Fachaufsatz ganz ohne
+Hori-Erzählung.
+
+\section{Das Forschungsprogramm dahinter}
+
+Drei weitere Nachbarschaften haben wir gesichtet, aber nicht mehr
+betreten; sie seien als Programm notiert. \emph{Erstens:} Ersetzt
+man die Ziffernschranken $0\le a_i\le i$ durch beliebige
+Kapazitätsprofile $0\le a_i<s_i$, entstehen die in der Kombinatorik
+untersuchten $s$-Inversionsfolgen samt ihrer Geometrie
+(Lecture-Hall-Polytope). Eine \emph{$s$-Horimetrik} wäre eine
+zweite Theorie -- welche Profile eine Polynombasis, eine
+Wert-Gestalt-Dualität, eine Seitentreue erlauben, ist vollständig
+offen. \emph{Zweitens:} Die Rook-Theorie schreibt ihre Polynome in
+genau unserer Basis; welche Gestalten Rook-Polynome von Brettern
+sind und ob $M_r$ ein natürliches Brett besitzt, wäre ein
+kombinatorischer Zugang zu unseren Produktformeln.
+\emph{Drittens:} Die Zählsemantik der Gestalten -- gefärbte
+geordnete Injektionen -- ist der Rohstoff der kombinatorischen
+Spezies; dort könnte eine gemeinsame Sprache für alle
+Interpretationen dieses Buchs liegen.
+
+\begin{oberflaeche}
+Das Fazit des Buchs, in drei Zeilen: Die Bewohner der Horimetrik
+sind bekannte Objekte -- Permutationscodes in einem bekannten
+Gitter, beschrieben in der Hausbasis der Differenzenrechnung. Die
+Operationen darauf -- zwei Arten zu wachsen, zwei Arten
+aufzuräumen, eine Kapazitätsbuchhaltung, eine Zählbreite -- sind
+neu, und die Sätze über sie auch. Ein bekannter Grundraum mit
+neuen Operationen und neuen Sätzen: Für eine kleine Theorie, die
+mit dem Umdrehen einer Ziffernordnung im Dunkeln begann, ist das
+vermutlich der beste Platz, den die Landkarte zu vergeben hat.
+\end{oberflaeche}

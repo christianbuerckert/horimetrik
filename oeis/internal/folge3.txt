@@ -1,0 +1,35 @@
+%I
+%S 1,8,60,360,2520,21168,211680,2268000,26611200,319334400,4229184960,61751289600,
+%T 948063916800,15617892449024,269729632972800,4961839621939200,96302371156992000,
+%U 1939563545407488000,41361094050756480000,923942970376538112000,21543347282404147200000
+%N a(n) is the number of digit sequences (d_1,...,d_n) with 0 <= d_i <= i-1 for all i and Sum_{i=1..n} d_i*(n+1)!/(i+1)! >= n!.
+%C In the Horimetrik framework (see LINKS) these are the "shell jumpers" (Schalenspringer).
+%C Equivalently: the number of x < n! that are pushed into the next factorial shell by prepending a single zero digit in the mixed-radix system with decreasing bases (base i+1 at position i; prepending a zero re-weights all positions).
+%C Coincides with n!/2 for n = 5, 6, 7 but not for n = 8 (21168 <> 20160); the proved complement formula (see FORMULA) explains the coincidence: for these three n the formula collapses to a single term equal to n!/2.
+%C The formula is proved; terms verified independently by exhaustive enumeration for n <= 10.
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik/blob/main/buch/main.pdf">Horimetrik - Zahlen mit Horizont (book PDF, in German)</a>
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik/blob/main/book/main.pdf">Horimetrik - Numbers with a Horizon (book PDF, English translation)</a>
+%H Christian Felix Bürckert, <a href="https://doi.org/10.5281/zenodo.21400755">Horimetrik - Zahlen mit Horizont / Numbers with a Horizon (archived books and paper, Zenodo)</a>
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik">Horimetrik (proofs, programs, and b-files)</a>
+%F a(n) = n! - Sum_{p=1..P} min(d_p, p)*n!/p!, where (d_1,...,d_n) is the digit sequence of n! in the system above and P is the least p with d_p = p, or n if no such p exists.
+%e For n=3: the digit caps are d_1=0, d_2<=1, d_3<=2 with weights 12, 4, 1, so the largest reachable value is 0+4+2 = 6 = 3!; exactly one sequence, (0,1,2), reaches at least 3!. So a(3)=1.
+%o (Python)
+%o from math import factorial
+%o def N(n):
+%o     x, digits = factorial(n), []
+%o     for base in range(n+1, 1, -1):
+%o         x, r = divmod(x, base)
+%o         digits.append(r)
+%o     d = digits[::-1]
+%o     P = n
+%o     for p in range(1, n+1):
+%o         if d[p-1] == p:
+%o             P = p
+%o             break
+%o     return sum(min(d[p-1], p)*factorial(n)//factorial(p) for p in range(1, P+1))
+%o def a(n):
+%o     return factorial(n) - N(n)
+%Y Cf. A000142.
+%K nonn
+%O 3,2
+%A _Christian Felix Bürckert_, Jul 14 2026

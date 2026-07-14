@@ -1,0 +1,153 @@
+\chapter{Zwei Arten zu wachsen: Struktur oder Wert}
+\label{ch:erweiterungen}
+
+% Register: D5, S8. Quellen: Spez. Abschnitt 5 und 6.
+
+\section{Der Moment der Gabelung}
+
+Nehmen wir die Sieben in ihrem Zuhause $H_4$: dort schreibt sie sich
+$0012$. Jetzt geben wir ihr eine Stelle mehr. Was soll das heißen?
+
+Die erste Antwort ist die naive: Wir stellen eine Null davor.
+\[
+0012 \;\longmapsto\; 00012 .
+\]
+Die Ziffern bleiben stehen -- aber in $H_5$ wiegen alle Stellen
+außer der letzten anders, und der Wert rutscht von $7$ auf $8$. Die \emph{Gestalt}
+wurde bewahrt, der Wert nicht.
+
+Die zweite Antwort ist die vorsichtige: Wir wollen, dass die Zahl
+dieselbe bleibt, und codieren die $7$ in $H_5$ neu:
+\[
+0012 \;\longmapsto\; 00011 .
+\]
+Der \emph{Wert} wurde bewahrt, die Gestalt nicht.
+
+Im Dezimalsystem sind beide Antworten dieselbe Operation -- deshalb
+ist uns nie aufgefallen, dass es zwei Fragen sind. Im Horiraum
+trennen sie sich, und wir geben ihnen Namen: Die strukturtreue --
+gleichwertig sagen wir: gestalttreue -- Erweiterung $Z$ stellt die
+Null voran, der werttreue Lift $L$ codiert um.
+
+\begin{definition}[Register D5]
+$Z_n(a_1,\ldots,a_n)=(0,a_1,\ldots,a_n)$ und
+$L_n(a)=E_{n+1}(V_n(a))$, wobei $E_{n+1}$ die Codierung in
+$\Hn{n+1}$ ist. Es gilt $V_{n+1}(L_n(a))=V_n(a)$, während $Z_n$ im
+Allgemeinen den Wert verändert.
+\end{definition}
+
+\section{Zwei Treppen, zwei Himmel}
+
+Beide Operationen verbinden die endlichen Horizonte zu einer
+unendlichen Treppe -- aber es sind \emph{verschiedene} Treppen, und
+sie führen an verschiedene Orte. Die Frage ist jeweils: Welche
+Elemente aufeinanderfolgender Horizonte gelten als „dasselbe“?
+
+Unter $L$ gelten zwei Darstellungen als dasselbe, wenn sie denselben
+Wert haben: $013$ in $H_3$, $0012$ in $H_4$, $00011$ in $H_5$ sind
+ein einziges Objekt -- die Sieben. Unter $Z$ gelten sie als
+dasselbe, wenn sie dieselbe Gestalt haben: $12$, $012$, $0012$ sind
+ein einziges Objekt -- das Muster „eins-zwei“, dessen Wert von
+Stufe zu Stufe wandert.
+
+\begin{satz}[Register S8]\label{satz:grenzen}
+Der Grenzraum der Treppe unter $L$ ist $\Nn$, die Menge der
+gewöhnlichen natürlichen Zahlen. Der Grenzraum unter $Z$ ist der
+Raum aller Gestalten -- formal: der Halbring der Polynome mit
+nichtnegativen ganzzahligen Koeffizienten in der Basis der
+fallenden Fakultäten, den das nächste Kapitel einführt.
+\end{satz}
+
+\begin{proof}[Beweisidee]
+Unter $L$ werden genau Darstellungen desselben Wertes identifiziert
+(die Codierung ist injektiv), und jeder Wert kommt vor -- die
+Klassen \emph{sind} die natürlichen Zahlen. Unter $Z$ werden genau
+Ziffernfolgen identifiziert, die sich um führende Nullen
+unterscheiden, und jede Gestalt kommt ab ihrem kleinsten zulässigen
+Horizont vor -- die Klassen sind die Gestalten. Der vollständige
+Beweis über gerichtete Systeme steht in Anhang~\ref{ch:anhang-beweise}.
+\end{proof}
+
+\begin{beispiel}
+Die beiden Treppen, nebeneinander. Werttreu bleibt die Sieben sie
+selbst und wechselt die Gestalt; gestalttreu bleibt das Muster
+„eins-zwei“ und wechselt den Wert:
+\begin{center}
+\begin{tabular}{l|llll}
+Welt & $H_2$ & $H_3$ & $H_4$ & $H_5$\\
+\hline
+werttreu (immer 7) & --- & $013$ & $0012$ & $00011$\\
+gestalttreu (immer „12“) & $12=5$ & $012=6$ & $0012=7$ & $00012=8$\\
+\end{tabular}
+\end{center}
+Man beachte die Kreuzung: $0012$ kommt in beiden Zeilen vor -- einmal
+als zweite Wohnung der Sieben, einmal als drittes Leben des Musters.
+Dasselbe Element, zwei Lesarten.
+\end{beispiel}
+
+Das ist der erste Satz dieses Buchs, den man philosophisch lesen
+darf: \emph{Dieselben endlichen Räume erzeugen verschiedene
+Unendlichkeiten, je nachdem, welchen Konsistenzbegriff man zwischen
+den Stufen wählt.} Die vertraute Zahlengerade ist eine dieser
+Unendlichkeiten -- die werttreue. Die andere, die gestalttreue, ist
+mathematisch genauso legitim, nur hat sie im gewöhnlichen
+Zahlensystem nie jemand von der ersten unterscheiden können, weil
+dort beide Treppen zusammenfallen.
+
+\section{Die dritte Treppe}
+
+Lange dachten wir, es gäbe genau zwei Arten zu wachsen. Dann las ein
+externer Mathematiker eine Kurzbeschreibung dieses Systems -- und
+verankerte die Basenleiter versehentlich am anderen Ende. Aus seinem
+„Missverständnis“ fiel eine dritte Treppe heraus.
+
+Man kann einer Zahl nämlich auch \emph{rechts} eine Null anhängen.
+Dabei behalten alle Ziffern ihre Position von links gezählt, und es
+gilt eine verblüffend saubere Regel: Der Wert vervielfacht sich
+nicht unkontrolliert, sondern skaliert \emph{exakt} mit dem Faktor $n+2$ --
+aus $12$ in $H_2$ (Wert $5$) wird $120$ in $H_3$ (Wert $20$).
+Invariant bleibt dabei weder der Wert noch die Gestalt, sondern eine
+dritte Größe: der \emph{Fakultätsbruch}
+$F=\sum_i a_i/(i+1)!$, denn es gilt stets
+\[
+V_n(a)=(n+1)!\cdot F(a).
+\]
+Jede Hori-Zahl ist also auch ein Bruch zwischen null und eins, mal
+der Größe ihrer Welt -- und dieses Bruchsystem ist ein alter
+Bekannter: Es ist Cantors Fakultätsbasis für Brüche, gut
+anderthalb Jahrhunderte alt.
+
+Damit hat der Horiraum drei Treppen, drei Invarianten, drei Himmel:
+
+\begin{center}
+\begin{tabular}{l|lll}
+Erweiterung & invariant & Wert & Grenzraum\\
+\hline
+werttreu ($L$) & Wert & $\times1$ & natürliche Zahlen\\
+gestalttreu ($Z$, links) & Polynom & ungleichmäßig & Strukturraum\\
+bruchtreu ($R$, rechts) & Bruch $F$ & $\times(n+2)$ & Cantor-Brüche\\
+\end{tabular}
+\end{center}
+
+Und der Einwand „das ist doch seit Cantor bekannt“ bekommt damit
+eine präzise Antwort: Er trifft die dritte Treppe vollständig -- und
+die anderen beiden samt allem, was dieses Buch über ihr Zusammenspiel
+beweist, gar nicht.
+
+\section{Der Eigenhorizont: wo die Gabelung heilt}
+
+Für jede einzelne Zahl gibt es einen Punkt, an dem der Unterschied
+zwischen $Z$ und $L$ verschwindet. Steht der gesamte Wert in der
+letzten Ziffer -- die Zahl $n$ als $0\cdots0n$; wir nennen diese
+Gestalt ihre \emph{Terminaldarstellung}, und sie ist ab dem
+Horizont $H_n$ möglich --, dann ist die Nullerweiterung wertneutral:
+Gestalt und Wert wachsen ab dort gemeinsam. Wir nennen $H_n$ den
+\emph{Eigenhorizont} von $n$. Unterhalb davon wird die Zahl bei
+jedem Umzug umgebaut; ab dort wächst sie nur noch still nach links.
+Man kann exakt ausrechnen, wann eine führende Null wertneutral ist:
+genau dann, wenn alle Ziffern außer der letzten null sind -- und
+das nächste Kapitel macht daraus mit der Horizontableitung einen
+Einzeiler.
+
+Wie sich das für eine konkrete Zahl anfühlt, erzählt das
+Interludium „Die Lebensgeschichte der Sieben“.

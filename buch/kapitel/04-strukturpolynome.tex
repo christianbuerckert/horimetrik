@@ -1,0 +1,294 @@
+\chapter{Strukturpolynome und die Horizontableitung}
+\label{ch:strukturpolynome}
+
+% Register: D3, D4, D7, D10, S2, S3, S4, S7, S39, S40, S41, S42, S43.
+% Quellen: Spez. 2, 3, 4, 9, Anhänge H und I.
+
+\section{Die Gestalt bekommt Koordinaten}
+
+Bisher war die „Gestalt“ einer Hori-Zahl nur ihr Ziffernbild.
+Jetzt geben wir ihr eine algebraische Form -- und damit wird aus
+einer Anschauung ein Rechenwerkzeug.
+
+Der Schlüssel sind die \emph{fallenden Fakultäten}
+\[
+\ff X0=1,\qquad \ff Xd=X(X-1)\cdots(X-d+1),
+\]
+die Polynome, die „geordnetes Auswählen ohne Zurücklegen“ zählen.
+Liest man die Ziffern einer Hori-Zahl von rechts nach links als
+Koeffizienten dieser Basis, entsteht ihr \emph{Strukturpolynom}:
+\[
+a=(a_1,\ldots,a_n)
+\quad\longmapsto\quad
+P_a(X)=\sum_{d=0}^{n-1}a_{n-d}\,\ff Xd .
+\]
+
+\begin{satz}[Auswertungssatz; Register S2]
+$V_n(a)=P_a(n+1)$.
+\end{satz}
+
+\begin{proof}
+Für $d=n-i$ ist $\ff{(n+1)}d=(n+1)!/(i+1)!$ -- genau das Gewicht
+der Stelle $i$. Einsetzen liefert die Wertformel.
+\end{proof}
+
+Das ist eine kleine Rechnung mit einer großen Konsequenz: Der Wert
+einer Hori-Zahl ist \emph{die Auswertung ihrer Gestalt an der Stelle
+ihres Horizonts}. Die Sieben in $H_4$, also $0012$, hat die Gestalt
+$P(X)=X+2$; ihr Wert ist $P(5)=7$. Stellt man eine Null voran,
+bleibt die Gestalt $X+2$ -- nur der Auswertungspunkt wandert:
+$P(6)=8$. Die mysteriöse Wertverschiebung durch führende Nullen ist
+kein Rätsel mehr, sondern schlicht: \emph{dasselbe Polynom, eine
+Stelle weiter ausgewertet.}
+
+Zwei Vorsichtsmaßnahmen. Erstens: Zulässig sind nur nichtnegative
+ganzzahlige Koeffizienten, und im Horizont $n$ nur Polynome mit
+$d+c_d\le n$ an allen besetzten Stellen ($c_d>0$) --
+das ist die Ziffernschranke in Polynomsprache; die Kennzahl
+$\sigma(P)=\max_{c_d>0}(d+c_d)$ -- das Maximum läuft über die
+besetzten Stellen, und für das Nullpolynom vereinbaren wir
+$\sigma(0)=0$ -- heißt Strukturhorizont (Register D4).
+Zweitens: Das Polynom allein ist \emph{nicht} die ganze Hori-Zahl.
+$12$, $012$ und $0012$ haben dieselbe Gestalt $X+2$, sind aber drei
+verschiedene Elemente -- erst das Paar aus Horizont und Polynom
+trägt alles.
+
+\section{Die Horizontableitung}
+
+Wie stark verändert eine führende Null den Wert? Die Antwort ist
+die diskrete Ableitung, in der Analysis als Vorwärtsdifferenz
+bekannt:
+\[
+\Delta P(X)=P(X+1)-P(X),
+\qquad
+\Delta\,\ff Xd=d\,\ff X{d-1}.
+\]
+Die zweite Formel ist das diskrete Ebenbild von
+$(x^d)'=d\,x^{d-1}$ -- die fallenden Fakultäten sind für das
+Differenzenrechnen, was die Potenzen fürs Differenzieren sind.
+
+\begin{satz}[Register S7]
+Die Wertänderung bei strukturtreuer Erweiterung ist
+$\Delta P(n+1)$. Insbesondere ist eine führende Null genau dann
+wertneutral, wenn $\Delta P=0$, also $P$ konstant ist -- das sind
+exakt die Zahlen in oder über ihrem Eigenhorizont.
+\end{satz}
+
+\begin{beispiel}
+Die Gestalt $X+2$ (Ziffern $\ldots12$) hat Ableitung $1$: Ihre Werte
+klettern beim Umziehen um genau eins, $5,6,7,8,\ldots$ Die Gestalt
+$\ff X2$ -- das ist die Zwölf in $H_3$, Ziffern $100$ -- hat
+Ableitung $2X$: Ihre Werte springen $12, 20, 30, 42,\ldots$, mit
+Zuwächsen $8, 10, 12$, die selbst wachsen. Eine Konstante wie die
+Gestalt $7$ hat Ableitung $0$ und rührt sich nie.
+\end{beispiel}
+
+Damit ist der Eigenhorizont aus Kapitel~\ref{ch:erweiterungen} kein
+anschaulicher Begriff mehr, sondern eine Gleichung: Die
+\emph{Gestalten} mit Horizontableitung null sind genau die
+konstanten Polynome -- als Gestalten gelesen also die natürlichen
+Zahlen. (Genau genommen: Als Elemente bilden die Konstanten viele
+horizontale Vertreter desselben Werts; erst im gestalttreuen
+Grenzraum aus Kapitel~\ref{ch:erweiterungen} wird daraus exakt eine
+Kopie von $\Nn$.) Alles andere im Horiraum hat eine
+echte „Geschwindigkeit“: Eine Gestalt vom Grad 1 wächst pro
+Horizontschritt um einen konstanten Betrag, Grad 2 beschleunigt,
+und so fort. Der Polynomgrad ist die \emph{Hori-Dimension} einer
+Gestalt (Register D7).
+
+\section{Strecke mal Strecke ist Fläche -- jetzt exakt}
+
+Die Dimension verhält sich unter Multiplikation additiv:
+$\dim(PQ)=\dim P+\dim Q$ für $P,Q\ne0$. Was in der Schule eine Eselsbrücke ist --
+Länge mal Länge gibt Fläche --, ist hier ein Satz über Grade. Und
+man kann direkt mit Gestalten rechnen. Die Vier hat in $H_3$ die
+Gestalt $X$ (Ziffern $010$), die Fünf die Gestalt $X+1$ (Ziffern
+$011$). Ihr Gestaltprodukt ist
+\[
+X(X+1)=\ff X2+2X
+\]
+(denn $X^2=\ff X2+X$), also die Ziffernfolge $120$ -- und
+tatsächlich: $120$ in $H_3$ hat den Wert $1\cdot12+2\cdot4+0=20$.
+Die Multiplikation $4\cdot5=20$ ist hier ohne einen einzigen
+Übertrag geschehen, rein durch Kombinieren der Gestalten. Die
+Produktformel der fallenden Fakultäten hat dabei eine hübsche
+Nebenbedeutung: $X\cdot X=\ff X2+X$ zerlegt alle geordneten Paare
+in die mit verschiedenen und die mit gleichen Einträgen.
+
+\section{Was Operationen kosten: das Horizontkalkül}
+\label{sec:horizontkalkuel}
+
+Jede Gestalt braucht einen Horizont, der groß genug ist -- die
+Kennzahl dafür ist der Strukturhorizont $\sigma$. Damit bekommt jede
+Operation einen \emph{Preis}: Wie viel Kapazität muss der Zielraum
+haben, damit das Ergebnis dort sicher Platz findet? Für einen
+Operator $T$ fragen wir nach dem schlimmsten Fall
+\[
+\Gamma_T(r,s)=\max\{\sigma(T(P,Q)) \mid \sigma(P)\le r,\ \sigma(Q)\le s\}
+\]
+(Register D10; für einstellige Operatoren sinngemäß $\Gamma_T(r)$). Auf den ersten Blick ein Ungetüm: Schon für $r=s=8$
+wären über hundert Milliarden Paare zu prüfen. Es geht mit einem
+einzigen.
+
+\begin{satz}[Extremalprinzip; Register S39]
+In jedem Horizont $r$ gibt es die \emph{maximal gefüllte} Gestalt
+$M_r$ -- jede Ziffer auf Anschlag,
+$M_r(X)=\sum_{d<r}(r{-}d)\,\ff Xd$; wir nennen sie auch das
+\emph{Maximalpolynom} des Horizonts.
+Für jeden Operator, der auf wachsende Koeffizienten mit wachsenden
+Koeffizienten antwortet (das tun alle aus Addition, Multiplikation
+und $\Delta$ zusammengesetzten), gilt
+\[
+\Gamma_T(r,s)=\sigma\bigl(T(M_r,M_s)\bigr).
+\]
+\end{satz}
+
+Der schlimmste Fall unter Abermilliarden Kandidaten ist immer
+derselbe: alle Ziffern voll. Der Beweis (Anhang~\ref{ch:anhang-beweise})
+ist eine Zeile Monotonie -- aber die Konsequenz ist ein
+\emph{Kalkül}: Addition kostet exakt $r+s$; die Multiplikation kostet
+$\beta(r,s)$, die im Kern fakultätisch wachsende Produkthöhe, die uns
+in Kapitel~\ref{ch:zaehlungen} als Zählfolge wiederbegegnet. Und die
+Ableitung liefert die größte Überraschung des Kalküls:
+
+\begin{satz}[Differenzüberlauf; Register S40]
+Für $r\ge2$ gilt
+\[
+\max_{\sigma(P)\le r}\sigma(\Delta P)
+=\Bigl\lfloor\tfrac{(r+1)^2}{4}\Bigr\rfloor-1 .
+\]
+\end{satz}
+
+Man halte kurz inne: $\Delta$ \emph{senkt} den Grad -- und lässt die
+Kapazität trotzdem quadratisch anschwellen. Schon bei $r=8$ hebt eine
+einzige Differenz den Strukturhorizont von 8 auf 19. Der Zeuge ist
+eine Gestalt mit einer einzigen Ziffer in der Mitte: Die Ableitung
+multipliziert jeden Koeffizienten mit seinem Grad, und am teuersten
+ist der Kompromiss aus „hoher Grad“ und „großer Koeffizient“ genau
+in der Mitte -- daher der Term $\lfloor(r{+}1)^2/4\rfloor$, das
+größte Produkt zweier Zahlen mit fester Summe. Die Lehre: Der Grad
+misst die \emph{Dimension} einer Gestalt, $\sigma$ misst ihre
+\emph{Kapazität}, und die beiden können gegenläufig springen. Eine
+gewöhnliche Gradbetrachtung ist für diesen Effekt blind.
+
+Eine Operation fehlt dem Kalkül noch, die heikelste: das
+\emph{Einsetzen} einer Gestalt in eine andere, $P\circ Q$. Dass das
+überhaupt erlaubt ist, ist selbst ein Satz -- es ist von vornherein
+nicht klar, dass beim Einsetzen wieder lauter zulässige, ganzzahlige,
+nichtnegative Ziffern entstehen.
+
+\begin{satz}[Kompositionsabschluss; Register S41]
+Setzt man eine Gestalt in eine Gestalt ein, entsteht wieder eine
+Gestalt. Auch das Einsetzen gehorcht dem Extremalprinzip:
+$\Gamma_\circ(r,s)=\sigma(M_r\circ M_s)$.
+\end{satz}
+
+Der Beweis (Anhang~\ref{ch:anhang-beweise}) ist das kombinatorische
+Herzstück dieses Kapitels: Man liest $Q$ als Bauplan-Vorrat --
+jede Ziffer $a_k$ stellt $a_k$ Schablonen bereit, die auf $k$
+verschiedene Plätze montiert werden --, dann zählt $P\circ Q$
+Tupel solcher Montagen, und die nötige Teilbarkeit durch $m!$
+kommt daher, dass das Umbenennen der Plätze keine Montage-Auswahl
+festhalten kann. Die Kosten des Einsetzens sind dann allerdings von
+ganz anderem Kaliber als alles Bisherige: Die Diagonale
+$\Gamma_\circ(r,r)$ beginnt mit
+\[
+1,\quad 4,\quad 23,\quad 6541,\quad 477\,149\,751,\quad\ldots
+\]
+-- Einsetzen multipliziert die Grade \emph{und} lässt die
+Koeffizienten explodieren; das ist die neunte und mit Abstand am
+schnellsten wachsende Zählfolge dieses Projekts
+(Kapitel~\ref{ch:zaehlungen}). Der harmloseste Spezialfall, das
+bloße Verschieben $P(X)\mapsto P(X{+}1)$, kostet exakt
+$r+\lfloor r^2/4\rfloor$ -- auf den Punkt so viel wie eine Ableitung
+einen Horizont höher (Register S42), eine kleine Dualität, die das
+Kalkül gratis abwirft.
+
+\section{Was die Gestalten zählen: die Zählbreite}
+\label{sec:zaehlbreite}
+
+Zum Abschluss des Kapitels die Frage, die man einem algebraischen
+Objekt immer stellen sollte: Zählt es etwas? Die Antwort kam als
+externe Einordnung ins Projekt und ist die bisher beste Brücke der
+Horimetrik in ein etabliertes Gebiet -- die \emph{Zählkomplexität}.
+
+Der Schlüssel ist die Grundbedeutung der fallenden Fakultät:
+$n^{\underline d}$ zählt die geordneten $d$-Tupel
+\emph{verschiedener} Objekte aus einem Vorrat von $n$. Ist nun $n$
+die Anzahl der Lösungen irgendeines Suchproblems -- in der
+Informatik sagt man: der \emph{Zeugen} --, dann liest sich eine
+Gestalt $P=\sum_d c_d\ff Xd$ als Bauplan für neue Zählobjekte:
+$c_0$ feste Sonderobjekte, $c_1$ Farben für jede einzelne Lösung,
+$c_2$ Varianten für jedes geordnete Paar verschiedener Lösungen,
+und so fort. $P(n)$ ist exakt die Anzahl dieser gefärbten
+Zeugen-Tupel. Diese harmlose Beobachtung hat eine präzise
+Konsequenz:
+
+\begin{satz}[Hori-\#P-Satz; Register S43]
+Ist $f$ die Zeugen-Zählfunktion eines beliebigen NP-Problems und
+$P$ eine Gestalt, so ist auch $P\circ f$ die Zeugen-Zählfunktion
+eines NP-Problems. Jede Gestalt ist also ein
+\emph{Abschlussoperator} der Zählklasse \#P.
+\end{satz}
+
+Der Beweis (Anhang~\ref{ch:anhang-beweise}) ist genau die
+Bauplan-Lektüre: rate den Grad, rate die Farbe, rate ein Tupel
+verschiedener Zeugen. Ehrlichkeit zuerst: Die \emph{qualitative}
+Seite dieser Aussage ist bekannt -- Polynome mit nichtnegativen
+ganzzahligen Koeffizienten in der \emph{Binomial}basis heißen in
+der Literatur \emph{binomial-good} und sind als die
+(relativierenden) \#P-Abschlussoperationen charakterisiert. Wegen
+$\ff Xd=d!\binom Xd$ sind unsere Gestalten eine \emph{echte
+Teilklasse} davon: Die Teilbarkeit durch $d!$ ist genau der
+Unterschied zwischen geordneten Tupeln und ungeordneten Auswahlen.
+Was die Literatur offenbar \emph{nicht} hat, ist die quantitative
+Schicht -- und die liefert die Horimetrik gratis mit:
+
+Plötzlich bedeuten alle Größen dieses Kapitels etwas. Die
+\emph{Addition} von Gestalten ist die disjunkte Vereinigung zweier
+Zählkonstruktionen. Die \emph{Multiplikation} koppelt zwei
+Konstruktionen, und ihre Produktformel-Koeffizienten zählen exakt
+die Überlappungsmuster zweier Zeugengruppen -- das
+$\beta$-Wachstum misst also, wie die Überlappungsvielfalt beim
+Koppeln explodiert. Die \emph{Horizontableitung} zählt, welche
+neuen Strukturen ein einziger zusätzlicher Zeuge ermöglicht
+($d$ Positionen mal Rest-Tupel: genau $d\,\ff n{d-1}$) -- und der
+Differenzüberlauf besagt: Ein neuer Zeuge senkt zwar die
+Tupelordnung, kann die Variantenvielfalt aber quadratisch aufblähen.
+Und $\sigma$ selbst? Zeichnet man das Koeffizientenbrett -- Spalte
+$d$ mit $c_d$ Kästchen --, so ist $\sigma(P)=\max(d+c_d)$ die
+kleinste \emph{Treppe}, in die das Brett passt: das Maximum aus
+„wie viele Zeugen gleichzeitig“ und „wie viele Varianten davon“.
+Wir nennen diese Größe die \emph{Zählbreite} einer Konstruktion.
+Jeder Horizont $r$ ist damit eine endliche, vollständig
+aufzählbare Familie von genau $(r{+}1)!$
+\#P-Abschlussoperatoren, und das Horizontkalkül aus
+Abschnitt~\ref{sec:horizontkalkuel} beziffert optimal, wie die
+Zählbreite beim Vereinigen, Koppeln, Erweitern und Einsetzen
+wächst.
+
+Zwei Sätze zur Abgrenzung, damit kein falscher Zauber entsteht: In
+dieser Nachbarschaft wohnt eine gewichtige offene Vermutung (schon
+ihre einfachste Fassung würde P$\,\ne\,$NP implizieren), und
+unsere Operatoren liegen ausdrücklich auf der \emph{gut
+verstandenen} Seite dieser Landschaft -- die Horimetrik löst hier
+gar nichts. Was sie beiträgt, ist bescheidener und vielleicht
+gerade deshalb brauchbar: aus einem Erlaubt-oder-nicht-erlaubt
+erstmals ein \emph{Wie breit} zu machen.
+
+\begin{oberflaeche}
+Was dieses Kapitel gebracht hat, in einem Satz: Die Gestalt einer
+Hori-Zahl ist ein Polynom, ihr Wert ist dieses Polynom am Ort ihres
+Horizonts ausgewertet, und die rätselhafte Wirkung führender Nullen
+ist einfach die Ableitung dieses Polynoms. Die gewöhnlichen Zahlen
+sind die Gestalten mit Ableitung null -- die einzigen Bewohner des
+Horiraums, denen es egal ist, wo sie wohnen. Alle anderen bewegen
+sich, wenn ihre Welt wächst. Jede Rechenoperation hat einen exakt
+bezifferbaren Preis in Kapazität, den stets dasselbe extreme
+Objekt bezahlt: die randvolle Gestalt. Und zuletzt hat sich
+gezeigt, dass die Gestalten etwas \emph{zählen} -- gefärbte
+Gruppen verschiedener Lösungen eines Suchproblems -- und $\sigma$
+die Breite dieser Zählkonstruktionen misst. Im nächsten Kapitel
+lassen wir diese bewegten Objekte rechnen -- und stoßen auf die
+Frage, was dabei mit ihrer Vergangenheit geschehen soll.
+\end{oberflaeche}

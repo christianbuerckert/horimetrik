@@ -1,0 +1,130 @@
+\chapter*{Literatur und Einordnung}
+\addcontentsline{toc}{chapter}{Literatur und Einordnung}
+\markboth{LITERATUR UND EINORDNUNG}{LITERATUR UND EINORDNUNG}
+
+Dieses Verzeichnis ist bewusst kommentiert. Die Bausteine der
+Horimetrik -- Mischbasensysteme, fallende Fakultäten,
+Inversionsfolgen, das Differenzenkalkül -- sind etablierte
+Mathematik, und dieses Buch behauptet nichts anderes. Jeder Eintrag
+nennt deshalb zweierlei: welchen Baustein er beisteuert, und was
+dort jeweils \emph{nicht} steht -- also die Stelle, an der die
+Horimetrik über ihre Quelle hinausgeht. Wer die Einordnung aus
+Kapitel~\ref{ch:einordnung} nachprüfen will, findet hier die
+Belege.
+
+% thebibliography setzt sonst ein eigenes \chapter* ("Literaturverzeichnis")
+% auf eine neue Seite; wir haben oben schon eine Kapitelüberschrift.
+\begingroup
+\makeatletter
+\renewcommand{\chapter}[2]{}%
+\renewcommand{\@mkboth}[2]{}%
+\makeatother
+\begin{thebibliography}{10}
+
+\bibitem{cantor} G.~Cantor: \emph{Über die einfachen Zahlensysteme},
+Zeitschrift für Mathematik und Physik 14 (1869), 121--128.
+--- Die Fakultätsbasis für Brüche; das ist exakt der bruchtreue
+Grenzraum der dritten Treppe (Kapitel~\ref{ch:erweiterungen}),
+nicht aber die gestalttreue Welt oder das Zusammenspiel.
+
+\bibitem{knuth} D.~E. Knuth: \emph{The Art of Computer Programming},
+Band~2, 3.~Aufl., Addison--Wesley 1997, Abschnitt 4.1.
+--- Mischbasensysteme und das Fakultätszahlensystem (Factoradic);
+dort wachsen die Basen zur signifikanten Seite, führende Nullen sind
+wertneutral.
+
+\bibitem{lehmer} D.~H. Lehmer: \emph{Teaching combinatorial tricks
+to a computer}, Proc. Sympos. Appl. Math. 10 (1960), 179--193.
+--- Lehmer-Codes und Inversionstabellen; erklären die
+Fakultätsgröße der Horizonte und die Ziffernschranke $0\le a_i\le i$,
+nicht aber die horizontabhängige Auswertung.
+
+\bibitem{gkp} R.~L. Graham, D.~E. Knuth, O.~Patashnik:
+\emph{Concrete Mathematics}, 2.~Aufl., Addison--Wesley 1994, Kap.~2.
+--- Fallende Fakultäten und Differenzenkalkül; das Werkzeug der
+Horizontableitung.
+
+\bibitem{cahen} P.-J. Cahen, J.-L. Chabert: \emph{Integer-Valued
+Polynomials}, AMS Surveys and Monographs 48, 1997.
+--- Polynome mit ganzzahligen Werten in der Binomialbasis; die
+Horimetrik nutzt nur den positiven Kegel und wertet am laufenden
+Horizont aus.
+
+\bibitem{rigo} M.~Rigo, M.~Stipulanti: \emph{Revisiting regular
+sequences in light of rational base numeration systems},
+arXiv:2103.16966.
+--- Abstrakte Numerationssysteme, in denen führende Nullen über die
+Radix-Ordnung wertsensitiv sind: der nächste bekannte Nachbar der
+Nullen-Semantik, dort formalsprachlich statt algebraisch behandelt.
+
+\bibitem{kudr} G.~Kudryavtseva, V.~Mazorchuk: \emph{On Kiselman's
+semigroup}, arXiv:math/0511374; O.~Ganyushkin, V.~Mazorchuk:
+\emph{On Kiselman quotients of 0-Hecke monoids}, arXiv:1006.0316.
+--- Monoide aus idempotenten Erzeugern mit Absorptionsrelationen;
+Nachbarschaft des sechselementigen Kompaktifizierungsmonoids.
+
+\bibitem{simon} D.~Simon: \emph{Mixed radix numeration bases:
+Horner's rule, Yang-Baxter equation and Furstenberg's conjecture},
+arXiv:2405.19798.
+--- Lokale Basiswechsel in Mischbasensystemen; Kandidatenwerkzeug
+für den Interchange-Defekt.
+
+\bibitem{invseq} S.~Corteel, M.~A.~Martinez, C.~D.~Savage,
+M.~Weselcouch: \emph{Patterns in Inversion Sequences I},
+arXiv:1510.05434.
+--- Inversionsfolgen ($0\le e_j<j$) und ihre Bijektion zu
+Permutationen; unser $H_n$ ist als Menge genau dieser Raum
+(Kapitel~\ref{ch:einordnung}). Was dort nicht steht: die umgedrehte
+Wertung, die Horizontübergänge und der Strukturhorizont als
+Statistik.
+
+\bibitem{lecturehall} C.~D. Savage, M.~J. Schuster: \emph{Ehrhart
+series of lecture hall polytopes and Eulerian polynomials for
+inversion sequences}, J. Combin. Theory Ser.~A 119 (2012),
+850--870.
+--- $s$-Inversionsfolgen mit beliebigen Kapazitätsprofilen und ihre
+Geometrie; der Rahmen für das $s$-Horimetrik-Programm aus
+Kapitel~\ref{ch:einordnung}.
+
+\bibitem{tightentries} S.~Chern, S.~Fu, Z.~Lin: \emph{Burstein's
+permutation conjecture, Hong and Li's inversion sequence
+conjecture, and restricted Eulerian distributions},
+arXiv:2209.12137.
+--- Statistiken auf Inversionsfolgen, darunter die \emph{tight
+entries} ($e_i=s_i-1$, Statistik $\mathrm{tig}$); der
+Strukturhorizont verfeinert diese Extremfall-Zählung zu einem
+Abstandsmaß (Kapitel~\ref{ch:einordnung}).
+
+\bibitem{middleorder} M.~Bouvel, L.~Ferrari, B.~E.~Tenner:
+\emph{Between weak and Bruhat: the middle order on permutations},
+arXiv:2405.08943.
+--- Die koordinatenweise Ordnung auf Inversionscodes als Gitter
+zwischen schwacher und Bruhat-Ordnung; der Rahmen, in dem
+$\mathcal F_r$ ein Hauptideal und $\sigma$ eine Idealstufe wird.
+
+\bibitem{umbral} K.~Beauduin: \emph{Operational Umbral Calculus},
+arXiv:2407.16348.
+--- Moderne finite Operatorrechnung: Delta-Operatoren und ihre
+Basisfolgen. Der Rahmen für $\Delta$ und die Strukturpolynome; was
+dort nicht steht, ist die Kapazitätsbuchhaltung $\Gamma_T$.
+
+\bibitem{ikenmeyerpak} C.~Ikenmeyer, I.~Pak: \emph{What is in \#P
+and what is not?}, FOCS 2022, arXiv:2204.13149.
+--- Charakterisiert die \emph{binomial-good}-Polynome
+(nichtnegative ganzzahlige Binomialbasis-Koeffizienten) als die
+\emph{relativierenden} polynomiellen \#P-Abschlussoperationen und
+formuliert die Binomial-Basis-Vermutung (unrelativiert gilt
+dieselbe Charakterisierung nur vermutungsweise), deren univariate
+Fassung bereits P$\,\ne\,$NP implizieren würde. Die Gestalten der Horimetrik sind wegen
+$\ff Xd=d!\binom Xd$ eine echte Teilklasse der binomial-good-Polynome
+(Kapitel~\ref{ch:strukturpolynome}); was dort \emph{nicht} steht,
+ist die quantitative Schicht: die Höhe $\max(d+c_d)$, die
+$(r{+}1)!$-Hierarchien und deren Wachstumsgesetze.
+
+\bibitem{oeis} OEIS Foundation Inc.: \emph{The On-Line Encyclopedia
+of Integer Sequences}, \texttt{https://oeis.org}.
+--- Referenzdatenbank für die neun Zählfolgen dieses Buchs;
+A-Nummern werden nach Vergabe nachgetragen.
+
+\end{thebibliography}
+\endgroup

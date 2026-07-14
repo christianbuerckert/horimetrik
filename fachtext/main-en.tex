@@ -1,0 +1,677 @@
+\documentclass[11pt]{article}
+
+\usepackage{fontspec}
+\usepackage[british]{babel}
+\usepackage[a4paper,margin=2.6cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{microtype}
+\usepackage{booktabs}
+\setlength{\emergencystretch}{1.5em}
+
+\newtheorem{satz}{Theorem}[section]
+\newtheorem{lemma}[satz]{Lemma}
+\newtheorem{korollar}[satz]{Corollary}
+\newtheorem{vermutung}[satz]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[satz]{Definition}
+\newtheorem{beispiel}[satz]{Example}
+\theoremstyle{remark}
+\newtheorem{bemerkung}[satz]{Remark}
+
+\newcommand{\Hori}{\mathcal H}
+\newcommand{\Struk}{\mathcal S}
+\newcommand{\NN}{\mathbb N_0}
+\newcommand{\val}{\operatorname{val}}
+\newcommand{\ff}[2]{#1^{\underline{#2}}}
+\newcommand{\KV}{K_V}
+\newcommand{\KS}{K_S}
+
+\title{Horimetrik:\\
+Value and Structure in a Positional Number System\\
+with Finite Factorial Horizons}
+\author{Christian Felix Bürckert, M.\,Sc.\\[2pt]
+\normalsize with mathematical collaboration by Claude (Anthropic)\\
+\normalsize and ideas contributed by GPT (OpenAI)}
+\date{14 July 2026 --- working draft, version 0.16\\[4pt]
+\normalsize License: CC\,BY\,4.0 --- companion programs: MIT\\
+\normalsize\texttt{github.com/christianbuerckert/horimetrik}}
+
+\begin{document}
+\maketitle
+
+\noindent\emph{Translated from the German original (fachtext/main.tex
+in the repository); where the two versions differ, the German text is
+authoritative.}\bigskip
+
+\begin{abstract}
+We study a mixed-radix positional number system whose bases
+\emph{decrease} towards the most significant position: a digit
+string $a_1\cdots a_n$ with $0\le a_i\le i$ denotes the value
+$\sum_i a_i\,(n+1)!/(i+1)!$. Such a system is sealed to the left;
+every number lives in a finite \emph{horizon} of size $(n+1)!$, and
+a leading zero changes the value. Every element thereby carries two
+identities: its \emph{value} and its \emph{structure} (a polynomial
+with non-negative coefficients in the basis of falling factorials).
+We show: (1)~The value- resp.\ structure-preserving embeddings of
+the finite horizons generate two different direct limit spaces,
+$\NN$ and the positive structure semiring. (2)~The space carries two
+mirror-image commutative semirings; in both, the same distinguished
+one acts as a projector onto the respective canonical copy. (3)~A
+\emph{side-fidelity theorem}: no commutative semiring arithmetic
+with value- resp.\ structure-carried operations can mix the two
+identities, independently of the choice of horizon rules; the
+obstruction is precisely the digit bound of the system. In addition
+we prove an asymptotic law for the commutator of the two
+compactifications, an extremal principle with exact growth laws of
+the structure horizon under addition, multiplication, finite
+difference, and composition (the composition closure of the
+positive semiring itself is part of the result), and document nine
+apparently unknown counting sequences. The text makes no claim of
+novelty beyond a documented search finding.
+\end{abstract}
+
+\section{The idea}
+
+Ordinary positional systems let the most significant position count
+farthest. This text studies the reverse convention. For fixed $n$,
+let a digit string $a_1a_2\cdots a_n$ with $0\le a_i\le i$ denote
+the value
+\[
+V_n(a)=\sum_{i=1}^n a_i\,\frac{(n+1)!}{(i+1)!}\,;
+\]
+the leftmost position is binary, yet carries the largest weight.
+Two consequences: the system is \emph{sealed to the left} --- below
+base $2$ there is nothing, with $n$ digits exactly $(n+1)!$ values
+are representable, and more room requires a new coordinate system.
+And \emph{leading zeros are semantic}: $12\mapsto012\mapsto0012$
+denotes $5,6,7$ in turn.
+
+Every number here thus carries two things: a value and a shape. The
+mathematics of this dual character is the subject of this text. The
+idea arose from the question of what happens if one reverses the
+exponent ordering of a number representation; the finiteness of the
+horizons is not a design goal but a necessity.
+
+\section{The Hori space}
+
+\begin{definition}
+For $n\ge0$ let $H_n=\{(a_1,\dots,a_n):0\le a_i\le i\}$, so
+$|H_n|=(n+1)!$, with the value map $V_n$ as above and the encoding
+$E_n=V_n^{-1}$. Further let
+$\mu(x)=\min\{n:x<(n+1)!\}$ be the \emph{minimal horizon} of
+$x\in\NN$.
+\end{definition}
+
+\begin{satz}\label{satz:bij}
+$V_n\colon H_n\to\{0,\dots,(n+1)!-1\}$ is bijective.
+\end{satz}
+
+\begin{proof}
+Induction on $n$ via
+$V_n(a)=(n+1)V_{n-1}(a_1,\dots,a_{n-1})+a_n$ and $0\le a_n\le n$:
+division with remainder by $n+1$ yields uniqueness; the range is
+$[0,(n+1)!-1]$, and both sides have cardinality $(n+1)!$.
+\end{proof}
+
+\begin{definition}
+With $\ff Xd=X(X-1)\cdots(X-d+1)$ let
+$\Struk=\bigl\{\sum_d c_d\ff Xd:c_d\in\NN\bigr\}$ and
+$\sigma\bigl(\sum c_d\ff Xd\bigr)=\max_{c_d>0}(d+c_d)$,
+$\sigma(0)=0$. The \emph{structure polynomial} of $a\in H_n$ is
+$P_a=\sum_{d=0}^{n-1}a_{n-d}\ff Xd$; we have $V_n(a)=P_a(n+1)$, and
+$P\in\Struk$ is representable in $H_n$ if and only if
+$\sigma(P)\le n$. The \emph{Hori space} is
+$\Hori=\{(n,P):P\in\Struk,\ n\ge\sigma(P)\}$, equivalently
+$\{(n,x):n\ge\mu(x)\}$.
+\end{definition}
+
+$\Struk$ is closed under addition and multiplication (the product
+formula of the falling factorials has non-negative structure
+constants) and is therefore a commutative semiring.
+
+\section{First main result: two limit spaces}
+
+There are two natural ways to give an element more room: the
+\emph{structure-preserving extension} $Z(n,P)=(n+1,P)$ (leading
+zero; the shape stays, the value becomes $P(n+2)$) and the
+\emph{value-preserving lift} $L(n,P)=(n+1,E_{n+1}(P(n+1)))$ (the
+value stays, the shape is re-encoded). In the decimal system the
+two coincide; here they do not.
+
+\begin{satz}\label{satz:limits}
+As directed systems,
+\[
+\varinjlim(H_n,Z_n)\cong\Struk,
+\qquad
+\varinjlim(H_n,L_n)\cong\NN .
+\]
+\end{satz}
+
+\begin{proof}
+Under $Z$, exactly those digit strings are identified that differ
+by leading zeros; each class carries exactly one structure
+polynomial, and every $P\in\Struk$ occurs (from $H_{\sigma(P)}$
+onwards). Under $L$ we have $L_{m,k}\circ L_{n,m}=L_{n,k}$ because
+$V\circ E=\mathrm{id}$, and two elements are identified precisely
+when their values agree; every value occurs.
+\end{proof}
+
+The same finite spaces thus generate, depending on the notion of
+consistency between the horizons, two different infinite worlds:
+the values $\NN$ and the structures $\Struk$. Everything that
+follows concerns the relationship between these two worlds.
+
+\begin{bemerkung}[third extension; Cantor coordinate]
+There is a third natural extension: \emph{appending} a zero on the
+right, $R(a_1,\ldots,a_n)=(a_1,\ldots,a_n,0)$. Because
+$V_n(a)=(n+1)!\cdot F(a)$ with the factorial fraction
+$F(a)=\sum_i a_i/(i+1)!\in[0,1)$, the map $R$ is
+\emph{fraction-preserving} and scales the value exactly by $n+2$;
+the associated limit space is the set of finite Cantor factorial
+fractions. The obvious objection ``essentially known since
+Cantor'' thus applies exactly to this third, fraction-preserving
+world -- not to the shape-preserving one (whose limit space is the
+structure semiring) and not to the theorems on the interplay proved
+below. Fraction, shape, and value are pairwise distinct invariants.
+\end{bemerkung}
+
+\section{Second main result: dual projector semirings}
+
+The two \emph{compactifications}\footnote{Not meant topologically:
+idempotent retractions onto the respective minimal horizon.}
+$\KV(n,x)=(\mu(x),x)$ (keep the value, smallest home) and
+$\KS(n,P)=(\sigma(P),P)$ (keep the shape, smallest home) are
+idempotent and do not commute; the smallest example is the digit
+string $010$ in $H_3$ (value 4).
+
+\begin{satz}[value side]\label{satz:wertseite}
+With
+\[
+(n,x)\oplus(m,y)=\bigl(\max(n,m,\mu(x{+}y)),\,x{+}y\bigr),
+\qquad
+(n,x)\otimes(m,y)=\bigl(\mu(xy),\,xy\bigr)
+\]
+$\Hori$ is a commutative semiring without a one; $(0,0)$ is neutral
+and absorbing; the $\KV$-fixed points form a subsemiring isomorphic
+to $(\NN,+,\cdot)$ with one $(1,1)$, and for all $h$ we have
+\[
+h\otimes(1,1)=\KV(h).
+\]
+\end{satz}
+
+\begin{proof}
+The core is the monotonicity of $\mu$. Associativity of $\oplus$:
+both bracketings yield
+$\max(n,m,k,\mu(\text{partial sum}),\mu(x{+}y{+}z))$, and the inner
+$\mu$-terms are absorbed by $\mu(x{+}y{+}z)$. Distributivity:
+$\max(\mu(xy),\mu(xz),\mu(xy{+}xz))=\mu(x(y{+}z))$, again
+monotonicity. Neutrality of $(0,0)$ follows from $n\ge\mu(x)$. An
+$\otimes$-neutral element would have to force $\mu(x)=n$ for all
+elements, which fails at $(1,0)$. Finally
+$(n,x)\otimes(1,1)=(\mu(x),x)=\KV(n,x)$.
+\end{proof}
+
+\begin{lemma}\label{lem:sigmamono}
+$\sigma(P+Q)\ge\max(\sigma(P),\sigma(Q))$.
+\end{lemma}
+
+\begin{proof}
+At the maximal position $d^*$ of $P$ we have
+$c_{d^*}(P{+}Q)\ge c_{d^*}(P)>0$.
+\end{proof}
+
+\begin{satz}[structure side, duality]\label{satz:dualitaet}
+With
+\[
+(n,P)\boxplus(m,Q)=\bigl(\max(n,m,\sigma(P{+}Q)),\,P{+}Q\bigr),
+\qquad
+(n,P)\boxtimes(m,Q)=\bigl(\sigma(PQ),\,PQ\bigr)
+\]
+$\Hori$ is likewise a commutative semiring without a one; the
+$\KS$-fixed points form a subsemiring isomorphic to $\Struk$;
+$\KS$ is a homomorphism for both operations, and for all $h$ we
+have
+\[
+h\boxtimes(1,1)=\KS(h).
+\]
+\end{satz}
+
+\begin{proof}
+Verbatim the mirror image of Theorem~\ref{satz:wertseite}, with
+Lemma~\ref{lem:sigmamono} in place of the $\mu$-monotonicity. The
+homomorphism property of $\KS$: for $\boxplus$,
+$\max(\sigma P,\sigma Q,\sigma(P{+}Q))=\sigma(P{+}Q)$ by the
+lemma; for $\boxtimes$ both sides are
+$(\sigma(PQ),PQ)$.
+\end{proof}
+
+\begin{bemerkung}
+It is \emph{the same} Hori number $(1,1)$ --- the one in its
+smallest home --- that on the value side carries $\KV$ and on the
+structure side $\KS$ as inner multiplication. The non-commuting of
+the compactifications is the non-commuting of two multiplications
+by one and the same element. Incidentally, the transformation
+monoid generated by $\KS,\KV$ is finite: it has exactly six
+elements with the relation
+$\KV\KS\KV=\KS\KV$ (via a stability lemma: $\KS$ preserves
+value-compactness) and five idempotents.
+\end{bemerkung}
+
+\section{Third main result: the side-fidelity theorem}
+
+Call an operation on $\Hori$ \emph{value-carried} if the result
+value is the sum resp.\ product of the operand values (the result
+horizon is free, provided it is valid), and
+\emph{structure-carried} if the result polynomial is the sum resp.\
+product of the operand polynomials (horizon free $\ge\sigma$).
+Theorems~\ref{satz:wertseite} and~\ref{satz:dualitaet} show: both
+\emph{side-pure} combinations are law-abiding with suitable horizon
+rules. The mixed ones never are:
+
+\begin{satz}[side fidelity]\label{satz:seitentreue}
+\emph{(A)} If $\oplus$ is value-carried and $\otimes$
+structure-carried, then already left-distributivity is
+unsatisfiable for every choice of horizon rules.
+\emph{(B)} If $\oplus$ is structure-carried and $\otimes$
+value-carried, then left-distributivity and commutativity of
+$\otimes$ are jointly unsatisfiable.
+\end{satz}
+
+\begin{proof}
+\emph{(A).} Let $u=(1,1)$ (structure $1$) and $e_1=u$,
+$e_m=e_{m-1}\oplus u$, so $\val(e_m)=m$; the structure $Q_m$ of
+$e_m$ is some valid representation of $m$.
+Left-distributivity yields inductively
+\begin{equation}\label{eq:kette}
+\val(a\otimes e_m)=m\cdot\val(a\otimes u).
+\end{equation}
+
+\emph{Step 1: every $Q_m$ is constant.} For $c\ge1$, $a_c=(c,c)$
+has the constant structure $c$; constants evaluate to themselves
+everywhere, so $\val(a_c\otimes u)=c$. With \eqref{eq:kette} it
+follows that $c\,Q_m(y_c{+}1)=mc$, hence $Q_m(y_c{+}1)=m$, where
+$y_c\ge\sigma(cQ_m)=\max_d(d+c\,q_d)\ge c$ grows without bound. All
+evaluation points lie in the strictly monotone range of $Q_m$
+(arguments $\ge\sigma+1\ge\deg+2$); for $\deg Q_m\ge1$ there would
+be at most one such point. Hence $Q_m$ is constant, and with
+$a=u$ in \eqref{eq:kette} it follows that $Q_m=m$.
+
+\emph{Step 2: constants die.} Let $g=(2,3)$ with structure
+$X$ and $r=\val(g\otimes u)=t_g{+}1\ge3$ fixed. By Step~1,
+$g\otimes e_m$ has the structure $mX$ with $\sigma(mX)=m{+}1$, so
+$\val(g\otimes e_m)=m(T{+}1)\ge m(m{+}2)$; by \eqref{eq:kette}
+this value is $mr$ --- a contradiction for $m>r-2$.
+
+\emph{(B).} Now structures add and values multiply. Let $f_1=u$,
+$f_m=f_{m-1}\oplus u$; then $f_m$ has the constant structure $m$
+and the value $m$. Let $A$ be the structure of
+$g\otimes u$ (a representation of $3$). Inductively, $g\otimes f_m$
+has the structure $mA$; as an $\otimes$-result of value $3m$,
+realized on its horizon $T_m$, validity (the digit bound) forces
+$T_m\ge\sigma(mA)\ge m$ and $A(T_m{+}1)=3$. As in Step~1,
+$A$ is constant, so $A=3$. Now consider $f_2'=g\oplus g$ with
+structure $2X$, horizon $H\ge\sigma(2X)=3$, and value
+$2(H{+}1)\ge8$. Left-distributivity and commutativity give
+\[
+u\otimes(g\oplus g)=(g\otimes u)\oplus(g\otimes u),
+\]
+on the right with structure $2\cdot3=6$, hence value $6$; on the
+left stands the value $2(H{+}1)\ge8$. Contradiction.
+\end{proof}
+
+\begin{bemerkung}
+Both contradictions use the same property:
+$\sigma(m\cdot P)$ grows linearly in $m$, because the digit bound
+$c_d\le n-d$ forces large coefficients into large horizons. The
+rigidity of the two identities is thus a direct consequence of the
+defining digit condition $0\le a_i\le i$. The non-commutative mixed
+case of type~(B) is likewise excluded under two-sided
+distributivity: right-distributivity mirrors the chain
+construction and replaces commutativity. And side fidelity is by
+now \emph{three-sided}: the fraction identity (Cantor coordinate)
+carries no arithmetic of its own -- its addition can exceed one and
+is never total -- and cannot be interwoven with either of the two
+sides (value-$\oplus$ fails at the constant factorial quotient,
+structure-$\oplus$ at the half-coefficient obstruction
+$2A(Y)=Y^{\underline k}$).
+There are exactly two computational worlds.
+\end{bemerkung}
+
+\section{The depth law of the commutator}
+
+The defect
+$\delta(h)=\operatorname{hor}(\KS\KV h)-\operatorname{hor}(\KV\KS h)$
+is unbounded on both sides, but extremely asymmetric: upwards, $+2$
+first occurs at $h=(9,720)$ ($720=6!=10\cdot9\cdot8$ has in
+$H_9$ the structure $\ff X3$; secured exhaustively); the further
+thresholds are bounded only from above: $+3$ at the latest from
+$n=14$, $+4$ at the latest from $n=20$, $+5$ at the latest from
+$n=26$. Downwards, the depth $-g$ is tied to the \emph{shell gap};
+the jump positions are
+\[
+m_g=3,\ 15,\ 84,\ 533,\ 3883,\ 31998,\ 294875\qquad(g=1,\dots,7).
+\]
+
+\begin{satz}\label{satz:asymptotik}
+With $c_g=(g{+}2)!\sum_{k\ge1}k/(g{+}k{+}1)!=1+O(1/g)$ we have
+\[
+\frac{(g+2)!}{c_g}\le m_g+1\le(g+2)!,
+\qquad\text{in particular}\quad
+\frac{m_g}{(g+2)!}\to1 .
+\]
+\end{satz}
+
+\begin{proof}
+Reindexing yields exactly
+$M_{m-g}(m{+}1)/m!=(m{+}1)\sum_{k=1}^{m-g}k/(g{+}k{+}1)!$, where
+$M_s=\sum_{d<s}(s{-}d)\ff Xd$ is the maximal polynomial. The
+right-hand side grows strictly in $m$; for $m{+}1\ge(g{+}2)!$ the
+term $k{=}1$ already suffices, and for $m{+}1<(g{+}2)!/c_g$ even
+the full series is too small. The bound
+$c_g\le1+\sum_{k\ge2}k(g{+}3)^{1-k}$
+gives $c_g=1+O(1/g)$.
+\end{proof}
+
+By now equality has also been proved: the minimum of
+$\delta$ over shell $m$ is \emph{exactly} $-g(m)$, with the
+terminal representation of $M_{s_{\min}}(m{+}1)$ as an always
+suitable (in general not unique) witness.
+Empirically, $(g{+}2)!/c_g$ even equals, to within $\pm1$, the
+value $m_g$; the prediction $m_7=294\,875$ derived from this was
+confirmed \emph{exactly}, as were two earlier predictions of this
+law ($-3$ from shell ${\approx}100$; $m_6=31998$ against a
+predicted ${\approx}31930$).
+
+\section{The horizon calculus}
+
+For a $k$-ary operator $T$ on the structure semiring
+$\Struk$ let
+\[
+\Gamma_T(r_1,\ldots,r_k)=\max\{\sigma(T(P_1,\ldots,P_k)):
+\sigma(P_i)\le r_i\}
+\]
+be the maximal structure horizon of the result.
+We write $P\preceq Q$ for the coefficientwise order in the falling
+factorial basis and
+$M_r(X)=\sum_{d<r}(r{-}d)\,\ff Xd$ for the maximally filled
+polynomial with $\sigma(M_r)=r$.
+
+\begin{satz}[extremal principle]\label{satz:extremal}
+If $T$ is coefficient-monotone in each argument --- which holds for
+every operator composed of addition, multiplication, and $\Delta$,
+since all structure constants are non-negative ---, then
+\[
+\Gamma_T(r_1,\ldots,r_k)=\sigma\bigl(T(M_{r_1},\ldots,M_{r_k})\bigr).
+\]
+\end{satz}
+
+\begin{proof}
+$\sigma(P)\le r$ is equivalent to $P\preceq M_r$ (digit bound
+$c_d\le r-d$), and $\sigma$ is $\preceq$-monotone; monotonicity of
+$T$ yields the upper bound, $M_{r_i}\in\mathcal F_{r_i}$ the
+attainment.
+\end{proof}
+
+Thus every basic operation possesses its own exact growth law:
+$\Gamma_+(r,s)=r+s$ (linear, sharp at constants),
+$\Gamma_\times(r,s)=\beta(r,s)=\sigma(M_rM_s)$ (essentially
+factorial, see below) --- and for the finite difference:
+
+\begin{satz}[difference overflow]\label{satz:differenzueberlauf}
+For $r\ge2$ we have
+$\Gamma_\Delta(r)=\lfloor(r+1)^2/4\rfloor-1$, attained at the
+single-digit structure $P=(r{-}d)\,\ff Xd$, $d=\lfloor(r+1)/2\rfloor$.
+\end{satz}
+
+\begin{proof}
+By Theorem~\ref{satz:extremal},
+$\Gamma_\Delta(r)=\sigma(\Delta M_r)$ with coefficients
+$b_k=(k{+}1)(r{-}k{-}1)$, hence
+$\Gamma_\Delta(r)=\max_{0\le k\le r-2}(k{+}1)(r{-}k)-1$; the
+product of two numbers with sum $r{+}1$ is at most
+$\lfloor(r{+}1)^2/4\rfloor$. (Confirmed exhaustively up to $r=8$:
+$1,3,5,8,11,15,19$.)
+\end{proof}
+
+So $\Delta$ lowers the degree and raises the capacity
+quadratically: the degree measures dimension, $\sigma$ measures
+capacity; a degree filtration does not see this effect.
+
+The calculus also captures substitution:
+
+\begin{satz}[composition closure]\label{satz:komposition}
+$\Struk$ is closed under composition, and $\circ$ is
+coefficient-monotone in both arguments; in particular
+$\Gamma_\circ(r,s)=\sigma(M_r\circ M_s)$.
+\end{satz}
+
+\begin{proof}[Proof sketch]
+Because $P\circ Q=\sum_d c_d(P)(Q)^{\underline d}$, it suffices
+that $(Q)^{\underline d}\in\Struk$. Interpreting $Q(x)$ as the
+number of pairs consisting of a template of arity $k$ ($a_k$ of
+each kind) and an injection $[k]\hookrightarrow[x]$, one sees that
+$Q(x)^{\underline d}$ counts the $d$-tuples of pairwise distinct
+such pairs. Classification by the union of images yields
+$Q(x)^{\underline d}=\sum_m N_m\binom xm$; on the exhausting
+tuples, $S_m$ acts \emph{freely} by relabelling the ground set (a
+permutation that fixes every injection fixes the exhausted union
+pointwise), so $m!\mid N_m$ and
+$(Q)^{\underline d}=\sum_m(N_m/m!)X^{\underline m}\in\Struk$ ---
+positivity and integrality in one stroke. Monotonicity in $Q$
+follows because larger template supplies only enlarge the tuple
+sets.
+(Confirmed exhaustively for $r,s\le4$.)
+\end{proof}
+
+The diagonal $\Gamma_\circ(r,r)=1,4,23,6541,477149751,\ldots$
+grows tower-like and is the ninth OEIS-unknown sequence of the
+project; its asymptotics are open. The shift operator
+$E\,P(X)=P(X{+}1)$, as the simplest special case, costs exactly
+$\Gamma_E(r)=r+\lfloor r^2/4\rfloor=\Gamma_\Delta(r{+}1)$ ---
+shifting costs as much as differencing one horizon higher; this
+value sequence is the classical quarter-squares sequence (A024206),
+new is the law, not the sequence. The continuous analogue of the
+composition closure is classical (absolutely monotone functions,
+Faà di Bruno); Theorem~\ref{satz:komposition} is the discrete
+lattice sharpening with the additional divisibility $m!\mid N_m$.
+Additively,
+$(\mathcal F_r)_r$ with $\mathcal F_r=\{P:\sigma(P)\le r\}$,
+$|\mathcal F_r|=(r{+}1)!$, is a classically compatible filtration;
+multiplicatively it is non-linear with optimal growth law
+$\beta$. Via the Newton expansion ($c_d=\Delta^dP(0)/d!$),
+$\sigma(P)=\max_{\Delta^dP(0)>0}\bigl(d+\Delta^dP(0)/d!\bigr)$ is a
+basis-free \emph{capacity height}; it is not a bit complexity
+($\sigma$ of a constant $c$ is $c$ itself).
+
+\section{The counting width: a \#P interpretation}
+
+Because $X^{\underline d}=d!\binom Xd$, every $P\in\Struk$ has
+non-negative integer coefficients in the binomial basis
+($b_d=c_d\,d!$) and thus lies in the class of
+\emph{binomial-good} polynomials, which are characterized as the
+(relativizing) polynomial \#P closure operations
+(Ikenmeyer--Pak, FOCS 2022, arXiv:2204.13149). $\Struk$ is a
+\emph{proper} subclass ($\binom X2\notin\Struk$); the
+$d!$-divisibility corresponds to ordered tuples instead of
+unordered selections.
+
+\begin{satz}[Hori \#P theorem]\label{satz:sharpp}
+For $f\in\#\mathrm P$ and $P\in\Struk$ we have
+$P\circ f\in\#\mathrm P$.
+\end{satz}
+
+\begin{proof}
+Guess $d\le\deg P$, a variant $\ell\le c_d$, and $d$ witness
+candidates; accept upon $d$ pairwise distinct valid witnesses. The
+number of accepting paths is
+$\sum_d c_d f(x)^{\underline d}=P(f(x))$; since $P$ is fixed,
+everything remains polynomial.
+\end{proof}
+
+In this reading the Hori operations acquire a counting semantics:
+addition is disjoint union of counting constructions,
+multiplication couples constructions (the linearization
+coefficients $\binom pj\binom qj j!$ count the overlap patterns),
+$\Delta$ counts the structures enabled by one additional witness
+($(n{+}1)^{\underline d}-n^{\underline d}=d\,n^{\underline{d-1}}$),
+and $\sigma(P)=\max(d+c_d)$ measures the maximal combination of
+witness count and variant count of a building block
+(\emph{counting width}; geometrically the smallest staircase above
+the coefficient profile). Each $\mathcal F_r$ is thus a finite
+family of exactly $(r{+}1)!$ \#P closure operators, and the horizon
+calculus quantifies optimally the growth of the counting width
+under $+$, $\times$, $\Delta$, and $\circ$. Demarcation: the
+binomial basis conjecture of Ikenmeyer--Pak (whose univariate
+version would imply P$\,\ne\,$NP) remains untouched; the Hori
+operators lie on the known, relativizing side.
+New is exclusively the quantitative hierarchy.
+
+\section{Nine counting sequences}
+
+The following sequences originate from Horimetrik and produced no
+hit in the OEIS (last checked on 14~July 2026; a negative finding
+is no proof of novelty). Submission is under way; extended data
+tables (jump positions up to $g=20$, jumper, non-jumper, and
+fixed-point sequences up to $n=40$, interchange up to
+$H_{12}$, 78 single-digit terms) are available as b-files in the
+repository:
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Sequence & First terms\\
+\midrule
+$\beta(r,r)$, maximal structure height of products &
+$1,6,22,87,407,2473,19527,\dots$\\
+Defect $D(n)$ (one-step shell jumpers) &
+$1,8,60,360,2520,21168,211680$\\
+two-sided fixed points $F(n)=n\cdot n!-D(n)$ &
+$4,17,88,540,3960,32760$\\
+jump positions $m_g$ of the depth law &
+$3,15,84,533,3883,31998,294875$\\
+interchange maxima $\max\Omega$ on $H_n$ &
+$0,1,6,43,351,2873,26443,270291$\\
+interchange zero count $\#\{\Omega=0\}$ &
+$2,5,13,23,61,111,274,564$\\
+non-jumpers $n!-D(n)$ &
+$5,16,60,360,2520,19152$\\
+single-digit factorials $\{n: n!\ \text{single-digit in } H_{\mu(n!)}\}$ &
+$1,2,5,7,11,23,29,39,59,119$\\
+composition height $\Gamma_\circ(r,r)$ &
+$1,4,23,6541,477149751,\dots$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Here $\Omega(h)=\val(LZh)-\val(ZLh)$ is the defect between the two
+growth orders; the positivity $\Omega\ge0$ is proved
+(multiplication lemma with a sharp regime boundary; additionally
+co-confirmed exhaustively up to $H_{12}$, i.e.\ over
+$6.2\cdot10^9$ elements), the
+equality cases are characterized and completely unfolded into digit
+conditions (two inequalities per level with growing excess), and
+the zero count obeys a counting formula derived from this (exact
+for all measured terms) with a proved upper bound
+$(n{+}1)^{n+1}/n!$ — indifference to the growth order is
+asymptotically extremely rare. For
+$\beta(r,r)$ the asymptotics are proved:
+$\ln(\beta(r,r)/r!)=2\sqrt r+O(\log r)$ (reduction to one maximal
+term plus elementary bounds). By the shell-jump lemma, $D(n)$
+counts exactly the elements that a single leading zero lifts into
+the next factorial shell; the corresponding digit formula runs over
+the eigenrepresentation of $n!$, whose single-digit cases are
+completely characterized ($n=(i{+}1)!/d-1$, $1\le d\le i$). All
+nine sequences will be submitted to the OEIS; the A-numbers will be
+added to this text once assigned, so that text and database
+reference each other.
+
+\section{Context and honesty}
+
+The building blocks are known mathematics: mixed-radix systems and
+factoradics, Lehmer codes, falling factorials and finite
+differences, direct limits, product semirings. The closest known
+neighbours of the zero semantics are abstract numeration systems;
+there, leading zeros change the value via the radix order, without
+a semiring theory being erected on top. What we have not found in
+this form is the constellation: finite factorial horizons with
+running evaluation, value/structure duality with two projectors to
+the same one, and a rigidity theorem that forbids mixing the
+identities.
+
+The philosophical motivation --- infinity as a staircase of finite
+horizons --- is motivation, not argument. The robust version reads:
+infinite structures can be understood as systems of finite
+horizons, and \emph{different notions of consistency between the
+horizons generate different global spaces}
+(Theorem~\ref{satz:limits}).
+
+The base space itself captures the situation most precisely. If one
+augments the digits by a leading zero, $e=(0,a_1,\dots,a_n)$, then
+$0\le e_j<j$: as a set, $H_n$ is the space of inversion sequences
+of length $n{+}1$, that is, $H_n\cong S_{n+1}$. The structure
+horizon becomes the permutation statistic
+$\sigma(P_a)=n-\min_{e_j>0}((j{-}1)-e_j)$ with exact distribution
+$|\{\sigma=r\}|=r\cdot r!$; whether it corresponds to a classical
+statistic is open. Coordinatewise, each horizon becomes a
+distributive lattice (the \emph{middle order} on permutations,
+arXiv:2405.08943), in which $\mathcal F_r$ is the principal ideal
+below $M_r$. The inhabitants are thus known permutation codes; new
+are the operations on them --- the reversed valuation, the horizon
+transitions, the duality, the side fidelity, and the capacity
+calculus. That is the most favourable situation for a young theory:
+known base space, new theorems.
+
+Several earlier conjectures of this project were refuted by our own
+computations (one bound conjecture fell twice to test ranges that
+were too small; one formula conjecture at its fourth data point).
+We regard this as a quality feature of the method, not as a
+weakness of the subject.
+
+\section{Open questions}
+
+(1)~The \emph{upper} thresholds of the depth law exactly (so far
+only ``at the latest from'' bounds; the lower side is completely
+proved). (2)~Fine structure of the $\beta$-asymptotics (conjectured:
+$-\tfrac32\ln r$ in the logarithm term). (3)~General digit
+statistics of $n!$ in its own shell (the single-digit cases are
+completely characterized); from this, the distribution asymptotics
+of $D(n)$. (4)~Classification of the \emph{coupled} arithmetics
+within one side (beyond the product constructions).
+(5)~A lower bound for the interchange zero count.
+(6)~$\Gamma_T$ for further operators (composition, shift) and the
+question whether the capacity height $\max_d(d+c_d)$ has already
+been studied elsewhere. (7)~Formalization of the side-fidelity
+theorem (the falling factorials are already available in
+Lean~4/Mathlib).
+
+\bigskip
+\noindent\textbf{Reproducibility.} All enumerations and
+verifications of this text are available as a Python reference
+implementation with self-tests; every result carries in the working
+files the status proved/conjectured/refuted with a date. Source
+code, b-files, the detailed book (German and English, with all
+proofs), and this text are available at
+\texttt{github.com/christianbuerckert/horimetrik}; an archived
+version is available on Zenodo (doi:10.5281/zenodo.21400755).
+
+\begin{thebibliography}{9}
+\bibitem{gkp} R.~L. Graham, D.~E. Knuth, O.~Patashnik:
+\emph{Concrete Mathematics}, 2nd ed., Addison--Wesley, 1994.
+\bibitem{rigo} M.~Rigo, M.~Stipulanti: \emph{Revisiting regular
+sequences in light of rational base numeration systems},
+arXiv:2103.16966.
+\bibitem{kiselman} G.~Kudryavtseva, V.~Mazorchuk: \emph{On
+Kiselman's semigroup}, arXiv:math/0511374; O.~Ganyushkin,
+V.~Mazorchuk: \emph{On Kiselman quotients of 0-Hecke monoids},
+arXiv:1006.0316.
+\bibitem{ybe} D.~Simon: \emph{Mixed radix numeration bases:
+Horner's rule, Yang-Baxter equation and Furstenberg's conjecture},
+arXiv:2405.19798.
+\bibitem{ikenmeyerpak} C.~Ikenmeyer, I.~Pak: \emph{What is in \#P
+and what is not?}, FOCS 2022, arXiv:2204.13149.
+\bibitem{middleorder} M.~Bouvel, L.~Ferrari, B.~E.~Tenner:
+\emph{Between weak and Bruhat: the middle order on permutations},
+arXiv:2405.08943.
+\end{thebibliography}
+
+\end{document}

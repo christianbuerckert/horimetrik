@@ -1,0 +1,151 @@
+\chapter{Sackgassen: was nicht funktioniert hat und warum}
+\label{ch:sackgassen}
+
+% Quellen: verworfen.md X1-X9, counterexamples.md, lab-notes.
+% Ton: erzählend, ehrlich, pro Sackgasse eine klare Lehre.
+
+Forschungsberichte erzählen gern nur die Treffer. Dieses Kapitel
+macht das Gegenteil: Es sammelt die Wege, die wir gegangen und
+wieder zurückgegangen sind. Nicht aus Bußfertigkeit, sondern weil
+die Sackgassen dieses Projekts mehr über die Horimetrik verraten
+haben als mancher Satz -- und weil mindestens eine von ihnen sich
+später als Umweg statt Irrweg entpuppte.
+
+\section{Das $n!/2$-Debakel, oder: drei Datenpunkte sind kein Muster}
+
+\begin{sackgasse}
+\emph{Idee:} Die Schalenspringer-Folge zeigte bei $n=5,6,7$ die
+Werte $60, 360, 2520$ -- exakt $n!/2$. Eine Formel!
+\emph{Hindernis:} Der vierte Datenpunkt: $21168\ne20160$.
+\emph{Lehre:} Muster aus wenigen Termen sind Hypothesen, keine
+Ergebnisse.
+\end{sackgasse}
+
+Diese Geschichte hat ein bemerkenswertes Nachspiel: Viel später
+fiel eine exakte Ziffernformel für dieselbe Folge vom Himmel -- und
+sie erklärt rückwirkend, \emph{warum} die falsche Formel drei Terme
+lang stimmte. Für alle drei Treffer reduziert sich die
+Ziffernformel auf einen einzigen Summanden, und der beträgt jeweils
+genau $n!/2$: bei $120$ und $5040$, weil sie in ihrer eigenen
+Schale Ein-Ziffern-Darstellungen haben, bei $720$, weil die erste
+Maximalziffer die Formel schon nach dem ersten beitragenden
+Summanden abschneidet. Die Koinzidenz war kein Rauschen,
+sondern ein echtes Strukturmerkmal -- nur eben eines der Ziffern
+von $n!$, nicht der Folge selbst. So rehabilitieren sich Sackgassen
+manchmal: Der Fehler von damals wurde zur Fußnote eines Satzes.
+
+\section{Die Kleine-Welt-Falle, sechsmal}
+
+Dieselbe Falle hat uns im Lauf des Projekts sechs Mal erwischt, in
+immer neuen Verkleidungen: Eine Schranke des Kompaktifizierungs-Kommutators
+sah bis zur siebten Welt wie $\pm1$ aus (sie ist in Wahrheit
+beidseitig unbeschränkt); ihre Nachfolgerin, eine einseitige
+Schranke, hielt Zufallsstichproben bis zur einundzwanzigsten Welt
+stand und fiel erst durch \emph{konstruierte} Zeugen; ein Element
+des Kompaktifizierungsmonoids wirkte bis zur vierten Welt
+idempotent, und der kleinste Gegenzeuge wohnt in der fünften; und
+das $n!/2$-Muster kennen Sie schon. Die Fälle fünf und sechs
+ereigneten sich bei der oberen Seite des Tiefengesetzes an einem
+einzigen Abend: Erst starb eine hübsche Dreieckszahlen-Hypothese am
+eigenen Kandidaten-Sweep, noch ehe sie aufgeschrieben war -- dann
+entpuppte sich die Schwelle, die dieser Sweep lieferte, ihrerseits
+als Artefakt einer zu flachen Suche. Die gemeinsame Lehre ist
+präziser als das übliche „mehr testen“:
+
+\begin{center}
+\emph{Im Horiraum wachsen die interessanten Gegenbeispiele
+fakultätisch langsam.\\ Wer Schranken behauptet, muss konstruieren,
+nicht stichproben.}
+\end{center}
+
+Übrigens spukt durch mehrere dieser Geschichten dieselbe Zahl:
+die Sechs -- Ziel des kleinsten Schalensprungs (die Fünf, um eine
+Null verlängert, wird zur Sechs), wertkleinster Trennzeuge des
+Monoids, Anfang der ersten interessanten Schale. Sie ist der
+Hausgeist dieses Buchs.
+
+\section{Verworfene Anwendungsträume}
+
+\begin{sackgasse}
+\emph{Idee:} Hori-Adressen statt IPv6, Hori-Heaps statt Binärheaps.
+\emph{Hindernis:} Der Horiraum ist innerhalb eines Horizonts
+strukturell starr -- Adressräume brauchen lokale Elastizität, und
+der Heap zahlt für die wachsende Verzweigung mit teuren
+Kindervergleichen.
+\emph{Lehre:} Die Stärke des Systems ist die globale
+Fakultätsordnung, nicht lokale Flexibilität. Anwendungen müssen zur
+Struktur passen, nicht umgekehrt.
+\end{sackgasse}
+
+\begin{sackgasse}
+\emph{Idee:} Mächtigkeits-Argumente -- ist der Horiraum „größer“
+als die natürlichen Zahlen?
+\emph{Hindernis:} Er ist abzählbar; jede Nummerierung plättet ihn.
+\emph{Lehre:} Der Mehrwert liegt nicht in der Kardinalität, sondern
+in Struktur pro Wert. Ein Schachbrett wird nicht interessanter,
+wenn man seine Felder durchnummeriert -- und nicht langweiliger.
+\end{sackgasse}
+
+Der dritte Anwendungstraum kam von außen, war der ehrgeizigste --
+und starb am ersten Satz dieses Buchs.
+
+\begin{sackgasse}
+\emph{Idee:} Kryptographie aus Kapazität (externer Vorschlag,
+Juli 2026). Eine geheime Gestalt wird durch $k$ führende Nullen
+geschoben und wertkompakt ausgewertet; veröffentlicht wird nur der
+nackte Wert. Der Angreifer, so die Hoffnung, scheitert am
+Differenzüberlauf -- der Rückweg über Anti-Differenzen sprengt die
+Kapazität -- und der Seitentreue-Satz versperrt jede hybride
+Abkürzung.
+\emph{Hindernis:} Der Rückweg braucht weder Anti-Differenzen noch
+gemischte Arithmetik. Aus $y=P(N)$ holt fortgesetzte Division mit
+Rest die Ziffern einzeln herunter: $c_0=y\bmod N$ ist \emph{exakt}
+(denn $c_0\le r<N$), dann liefert $y_1=(y-c_0)/N$ die nächste Runde
+mit Divisor $N{-}1$, und so fort -- eine Handvoll Divisionen, und
+die „geheime“ Gestalt liegt offen. Das ist kein raffinierter
+Angriff, sondern die Bijektion aus Kapitel~\ref{ch:horizonte} am
+verschobenen Auswertungspunkt: Die Gewichte $1,N,N(N{-}1),\ldots$
+bilden wieder ein Mischbasensystem, und die Ziffernschranken
+bleiben brav unter den Divisoren.
+\emph{Lehre:} Die Fakultätsordnung verwirbelt nicht, sie
+\emph{sortiert} -- dieselbe Bijektivität, die das System so sauber
+macht, verbietet ihm die kryptographische Härte. Zwei
+Präzisierungen fürs Protokoll: Der Seitentreue-Satz verbietet
+gemischte \emph{Halbringe}, nicht gemischte \emph{Algorithmen} --
+ein Angreifer darf dividieren, tabellieren und Repräsentationen
+wechseln, ohne je eine Arithmetik zu mischen. Und eine
+Einwegfunktion braucht ein Geheimnis; die Horimetrik hat keins, sie
+ist mit Absicht überall gleich hell. Was bleibt, ist die
+bescheidenere Rolle: Das Horizontkalkül aus
+Kapitel~\ref{ch:strukturpolynome} taugt als \emph{Messinstrument}
+für Kapazitäts- und Rauschwachstum in fremden Konstruktionen --
+nicht als eigene Härtequelle.
+\end{sackgasse}
+
+\section{Die tropische Fata Morgana -- und ihre Auflösung}
+
+Die lehrreichste Sackgasse verdient den Schluss. Früh fiel auf,
+dass die Horizonte sich unter Addition wie ein Maximum und unter
+Multiplikation wie eine Summe verhalten \emph{wollen} -- das
+Verhalten der sogenannten tropischen Algebra. Der direkte Versuch,
+so zu rechnen, scheiterte an einem Überlaufproblem: Die Wertsumme
+kann den Maximum-Horizont sprengen. Verworfen.
+
+Monate später -- in der Zeitrechnung dieses Projekts: Stunden --
+kehrte die Idee durch die Hintertür zurück. Der Horizont zerfällt
+in einen Pflichtanteil und einen frei wählbaren Überschuss, und
+\emph{auf dem Überschuss} funktioniert die tropische Arithmetik
+tadellos: Der Pflichtanteil fängt alle Überläufe, das Gedächtnis
+rechnet mit Maximum und Summe. Die Idee war nie falsch. Sie stand
+nur im falschen Koordinatensystem.
+
+\begin{oberflaeche}
+Wenn dieses Kapitel eine Botschaft hat, dann diese: Verwerfen ist
+keine Niederlage, sondern Buchführung. Von unseren neun
+dokumentierten Sackgassen (das Arbeitsregister führt sie als X1
+bis X9) wurde eine später zum Satz -- die tropische --, eine zur
+Fußnote eines Satzes -- das $n!/2$-Debakel --, und die übrigen
+wurden zu präzisen Warnschildern.
+Nichts davon wäre passiert, hätten wir die Fehlversuche gelöscht
+statt datiert.
+\end{oberflaeche}

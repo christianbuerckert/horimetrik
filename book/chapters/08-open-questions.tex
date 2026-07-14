@@ -1,0 +1,115 @@
+\chapter{Open Questions and a Research Programme}
+\label{ch:offen}
+
+% Source: conjectures.md, as of version 0.7.
+
+Before the final chapter locates the theory on the map of
+mathematics, an honest stop along the way: not what has been
+proved -- the preceding chapters have done that -- but what is
+open, and in what order it is worth attempting.
+
+\section{The most immediate questions}
+
+\paragraph{The digit patterns of the factorials.} The digit
+formula for the shell jumpers has shifted the question: no longer
+``how many jumpers are there?'', but ``how does $n!$ write itself
+in its own shell?''. First patterns are in: the number of leading
+zeros grows like the inverse function of the factorial, and the
+single-digit cases are by now \emph{completely} characterized:
+they are exactly the $n=(i+1)!/d-1$ with $1\le d\le i$, exactly
+$i$ of them per position, and the predictions $n=29,39,59,119$ as
+well as $143,179,239,359,719$ all came true
+(Appendix~\ref{ch:anhang-beweise}). A complete theory of the
+remaining digit patterns (distribution of the number of nonzero
+digits, position of the first maximal digit) is still missing.
+
+\paragraph{The fine structure of interchange equality.} The
+positivity of the interchange defect and the characterization of
+the equality cases are proved (Appendix~\ref{ch:anhang-beweise});
+the counting sequence $2$, $5$, $13$, $23$, $61$, $111$, $274$,
+$564,\ldots$ obeys a semi-closed formula over the sharp quotients
+$q'$ from the positivity proof, and its complete digit unfolding
+has meanwhile been proved: per level two inequalities, a growing
+excess, one descent (Appendix~\ref{ch:anhang-beweise}). The
+asymptotics of the zero-count proportion have meanwhile been
+settled from above: indifference to the order of growth is
+asymptotically extremely rare -- the proportion falls at least
+like $e^{-(1+o(1))\,n\ln n}$, because sharpness chokes off the
+digits level by level. What remains open is the matching lower
+bound.
+
+\paragraph{The upper side of the depth law.} The lower side is by
+now completely proved -- jump positions, asymptotics and, as the
+last piece during the final revision, the exact equality: the
+maximal depth in shell $m$ is \emph{exactly} the shell gap, and an
+always serviceable witness is the terminal representation of the
+value of the maximal polynomial (for shell 3: the house-spirit
+number $(6,6)$).
+All that remains open is the upper side: how fast does the
+\emph{maximum} of the commutator grow? Here caution is called for,
+and methodically well-founded caution at that: only the first jump
+is exhaustively secured ($+2$ from the ninth world onwards). All
+later thresholds are merely bounded from above ($+3$ from the
+fourteenth at the latest, $+4$ from the twentieth at the latest,
+$+5$ from the twenty-sixth at the latest) -- every deepening of
+the witness search has so far pushed them forwards, and two
+premature formula hypotheses died at exactly this front, one of
+them before it was even written down.
+
+\section{The structural questions}
+
+\paragraph{Coupled arithmetics.} The side-fidelity theorem forbids
+mixing the identities; \emph{within} one side, however, the
+landscape is not classified. The product constructions via the
+excess supply a whole family; the conservative-compact semiring is
+demonstrably not one of them. Are there further coupled
+structures? Is there a complete classification per side?
+
+\paragraph{Addendum: the non-commutative mixed case is closed.}
+This gap, too, fell during the final revision: if one demands, as
+in every semiring, \emph{both} distributive laws, then right
+distributivity mirrors the chain construction and replaces
+commutativity entirely (proof in
+Appendix~\ref{ch:anhang-beweise}). What remains is only the
+curiosity of a one-sidedly distributive mixed system -- outside
+any semiring axiomatics, and honestly more a footnote than a
+question.
+
+\paragraph{Addendum: three-sided side fidelity is proved.}
+During the final revision the last case fell as well
+(shape addition with fraction multiplication): the chain equation
+forces the polynomial identity $2A(Y)=Y^{\underline{k}}$, which
+demands the coefficient $\tfrac12$ -- but digits are integers.
+Together with the two previously settled cases this gives: there
+are exactly two worlds of arithmetic (value and shape), and the
+fraction carries no third and mixes into neither. Details in
+Appendix~\ref{ch:anhang-beweise}. So what remains open here is --
+nothing at all; the question moves into
+Chapter~\ref{ch:arithmetik} as a proved theorem.
+
+\paragraph{Formalization.} The side-fidelity theorem is elementary
+enough for a complete formalization in Lean; the falling
+factorials are already available in Mathlib. That would be the
+gold standard of assurance -- and a contribution to the
+formal-methods community into the bargain.
+
+\section{What the theory wants to be measured against}
+
+Finally, the question behind all questions: when would Horimetrik
+have \emph{failed}, when would it have \emph{succeeded}? Failed,
+if an existing formalism is found in which horizon, duality and
+side fidelity are mere renamings -- the literature search has not
+found one, but searches prove nothing. Succeeded, if one of three
+things happens: if the counting sequences of this book turn up
+independently elsewhere; if the side-fidelity theorem or the depth
+law is proved anew in a foreign language; or if someone who has
+never read this book finds the same delight in the digits of $n!$
+in its own shell as we did.
+
+\begin{oberflaeche}
+A theory is finished when it no longer generates questions. By
+that standard Horimetrik is delightfully unfinished -- and that is
+exactly how this stop along the way should end: not with a full
+stop, but with a colon. What remains is the question of the
+address: where on the map does all of this live?
+\end{oberflaeche}

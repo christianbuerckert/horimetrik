@@ -1,0 +1,299 @@
+\chapter{Structure Polynomials and the Horizon Derivative}
+\label{ch:strukturpolynome}
+
+% Register: D3, D4, D7, D10, S2, S3, S4, S7, S39, S40, S41, S42, S43.
+% Sources: Spec. 2, 3, 4, 9, Appendices H and I.
+
+\section{The shape acquires coordinates}
+
+So far the ``shape'' of a Hori number was nothing but its digit
+picture. Now we give it an algebraic form -- and an intuition
+becomes a computational tool.
+
+The key are the \emph{falling factorials}
+\[
+\ff X0=1,\qquad \ff Xd=X(X-1)\cdots(X-d+1),
+\]
+the polynomials that count ``ordered selection without
+replacement''. Reading the digits of a Hori number from right to
+left as coefficients in this basis produces its \emph{structure
+polynomial}:
+\[
+a=(a_1,\ldots,a_n)
+\quad\longmapsto\quad
+P_a(X)=\sum_{d=0}^{n-1}a_{n-d}\,\ff Xd .
+\]
+
+\begin{satz}[Evaluation theorem; Register S2]
+$V_n(a)=P_a(n+1)$.
+\end{satz}
+
+\begin{proof}
+For $d=n-i$ we have $\ff{(n+1)}d=(n+1)!/(i+1)!$ -- exactly the
+weight of place $i$. Substituting yields the value formula.
+\end{proof}
+
+A small computation with a large consequence: the value of a Hori
+number is \emph{the evaluation of its shape at the place of its
+horizon}. The seven in $H_4$, that is $0012$, has the shape
+$P(X)=X+2$; its value is $P(5)=7$. Prepend a zero and the shape
+remains $X+2$ -- only the evaluation point moves: $P(6)=8$. The
+mysterious value shift caused by leading zeros is no longer a
+riddle but simply this: \emph{the same polynomial, evaluated one
+place further on.}
+
+Two precautions. First: only nonnegative integer coefficients are
+admissible, and in horizon $n$ only polynomials with $d+c_d\le n$
+at all occupied places ($c_d>0$) --
+that is the digit bound in polynomial language; the quantity
+$\sigma(P)=\max_{c_d>0}(d+c_d)$ -- the maximum runs over the
+occupied places, and for the zero polynomial we agree that
+$\sigma(0)=0$ -- is called the structure horizon (Register D4).
+Second: the polynomial alone is \emph{not} the whole Hori number.
+$12$, $012$ and $0012$ all have the shape $X+2$, yet they are three
+different elements -- only the pair of horizon and polynomial
+carries everything.
+
+\section{The horizon derivative}
+
+How strongly does a leading zero change the value? The answer is
+the discrete derivative, known in analysis as the forward
+difference:
+\[
+\Delta P(X)=P(X+1)-P(X),
+\qquad
+\Delta\,\ff Xd=d\,\ff X{d-1}.
+\]
+The second formula is the discrete counterpart of
+$(x^d)'=d\,x^{d-1}$ -- the falling factorials are to the calculus
+of differences what the powers are to differentiation.
+
+\begin{satz}[Register S7]
+The value change under a structure-preserving extension is
+$\Delta P(n+1)$. In particular, a leading zero is value-neutral
+exactly when $\Delta P=0$, that is, when $P$ is constant -- these
+are precisely the numbers at or above their eigenhorizon.
+\end{satz}
+
+\begin{beispiel}
+The shape $X+2$ (digits $\ldots12$) has derivative $1$: its values
+climb by exactly one with each move, $5,6,7,8,\ldots$ The shape
+$\ff X2$ -- that is the twelve in $H_3$, digits $100$ -- has
+derivative $2X$: its values jump $12, 20, 30, 42,\ldots$, with
+increments $8, 10, 12$ that grow themselves. A constant such as
+the shape $7$ has derivative $0$ and never stirs.
+\end{beispiel}
+
+With this, the eigenhorizon from Chapter~\ref{ch:erweiterungen} is
+no longer an intuitive notion but an equation: the \emph{shapes}
+with horizon derivative zero are exactly the constant polynomials
+-- read as shapes, the natural numbers. (Strictly speaking: as
+elements, the constants form many horizontal representatives of
+the same value; only in the shape-preserving limit space of
+Chapter~\ref{ch:erweiterungen} does this become exactly one copy
+of $\Nn$.) Everything else in the Hori space has a genuine
+``velocity'': a shape of degree 1 grows by a constant amount per
+horizon step, degree 2 accelerates, and so on. The degree of the
+polynomial is the \emph{Hori dimension} of a shape (Register D7).
+
+\section{Length times length is area -- now exact}
+
+Dimension behaves additively under multiplication:
+$\dim(PQ)=\dim P+\dim Q$ for $P,Q\ne0$. What is a mnemonic at school --
+length times length gives area -- is here a theorem about degrees.
+And one can compute with shapes directly. In $H_3$ the four has
+the shape $X$ (digits $010$), the five the shape $X+1$ (digits
+$011$). Their shape product is
+\[
+X(X+1)=\ff X2+2X
+\]
+(since $X^2=\ff X2+X$), hence the digit string $120$ -- and
+indeed: $120$ in $H_3$ has the value $1\cdot12+2\cdot4+0=20$.
+The multiplication $4\cdot5=20$ has happened here without a single
+carry, purely by combining the shapes. The product formula of the
+falling factorials carries a pretty side meaning along the way:
+$X\cdot X=\ff X2+X$ splits all ordered pairs into those with
+distinct and those with equal entries.
+
+\section{What operations cost: the horizon calculus}
+\label{sec:horizontkalkuel}
+
+Every shape needs a horizon large enough for it -- the quantity
+that measures this is the structure horizon $\sigma$. With it,
+every operation acquires a \emph{price}: how much capacity must
+the target space have so that the result is guaranteed to fit
+there? For an operator $T$ we ask for the worst case
+\[
+\Gamma_T(r,s)=\max\{\sigma(T(P,Q)) \mid \sigma(P)\le r,\ \sigma(Q)\le s\}
+\]
+(Register D10; for unary operators, correspondingly
+$\Gamma_T(r)$). At first sight a monster: already for $r=s=8$ more
+than a hundred billion pairs would have to be checked. One
+suffices.
+
+\begin{satz}[Extremal principle; Register S39]
+In every horizon $r$ there is the \emph{maximally filled} shape
+$M_r$ -- every digit at the limit,
+$M_r(X)=\sum_{d<r}(r{-}d)\,\ff Xd$; we also call it the
+\emph{maximal polynomial} of the horizon.
+For every operator that answers growing coefficients with growing
+coefficients (all those composed from addition, multiplication
+and $\Delta$ do), we have
+\[
+\Gamma_T(r,s)=\sigma\bigl(T(M_r,M_s)\bigr).
+\]
+\end{satz}
+
+The worst case among untold billions of candidates is always the
+same: all digits full. The proof (Appendix~\ref{ch:anhang-beweise})
+is one line of monotonicity -- but the consequence is a
+\emph{calculus}: addition costs exactly $r+s$; multiplication costs
+$\beta(r,s)$, the product height, factorially growing at its core,
+which we shall meet again in Chapter~\ref{ch:zaehlungen} as a
+counting sequence. And the derivative delivers the biggest
+surprise of the calculus:
+
+\begin{satz}[Difference overflow; Register S40]
+For $r\ge2$,
+\[
+\max_{\sigma(P)\le r}\sigma(\Delta P)
+=\Bigl\lfloor\tfrac{(r+1)^2}{4}\Bigr\rfloor-1 .
+\]
+\end{satz}
+
+Pause for a moment: $\Delta$ \emph{lowers} the degree -- and still
+lets the capacity swell quadratically. Already at $r=8$ a single
+difference lifts the structure horizon from 8 to 19. The witness
+is a shape with a single digit in the middle: the derivative
+multiplies each coefficient by its degree, and the most expensive
+compromise between ``high degree'' and ``large coefficient'' lies
+exactly in the middle -- hence the term
+$\lfloor(r{+}1)^2/4\rfloor$, the largest product of two numbers
+with a fixed sum. The lesson: the degree measures the
+\emph{dimension} of a shape, $\sigma$ measures its
+\emph{capacity}, and the two can jump in opposite directions. An
+ordinary degree analysis is blind to this effect.
+
+One operation is still missing from the calculus, the most
+delicate one: \emph{substituting} one shape into another,
+$P\circ Q$. That this is allowed at all is itself a theorem -- it
+is by no means clear from the outset that substitution again
+produces nothing but admissible, integral, nonnegative digits.
+
+\begin{satz}[Composition closure; Register S41]
+Substituting a shape into a shape yields a shape again.
+Substitution, too, obeys the extremal principle:
+$\Gamma_\circ(r,s)=\sigma(M_r\circ M_s)$.
+\end{satz}
+
+The proof (Appendix~\ref{ch:anhang-beweise}) is the combinatorial
+centrepiece of this chapter: one reads $Q$ as a stock of
+blueprints -- each digit $a_k$ provides $a_k$ templates, to be
+mounted on $k$ distinct slots --, then $P\circ Q$ counts tuples
+of such assemblies, and the required divisibility by $m!$ comes
+from the fact that relabelling the slots cannot fix any choice of
+assemblies. The cost of substitution, however, is of an entirely
+different calibre from everything so far: the diagonal
+$\Gamma_\circ(r,r)$ begins with
+\[
+1,\quad 4,\quad 23,\quad 6541,\quad 477\,149\,751,\quad\ldots
+\]
+-- substitution multiplies the degrees \emph{and} makes the
+coefficients explode; this is the ninth and by far the
+fastest-growing counting sequence of this project
+(Chapter~\ref{ch:zaehlungen}). The most harmless special case,
+the mere shift $P(X)\mapsto P(X{+}1)$, costs exactly
+$r+\lfloor r^2/4\rfloor$ -- to the point exactly as much as one
+derivative one horizon higher (Register S42), a small duality the
+calculus throws in for free.
+
+\section{What the shapes count: the counting width}
+\label{sec:zaehlbreite}
+
+To close the chapter, the question one should always put to an
+algebraic object: does it count something? The answer arrived as
+an external classification of the project and is so far
+Horimetrik's best bridge into an established field --
+\emph{counting complexity}.
+
+The key is the basic meaning of the falling factorial:
+$n^{\underline d}$ counts the ordered $d$-tuples of
+\emph{distinct} objects from a stock of $n$. If now $n$ is the
+number of solutions of some search problem -- in computer science
+one says: of its \emph{witnesses} --, then a shape
+$P=\sum_d c_d\ff Xd$ reads as a blueprint for new counted objects:
+$c_0$ fixed special objects, $c_1$ colours for each individual
+solution, $c_2$ variants for each ordered pair of distinct
+solutions, and so on. $P(n)$ is exactly the number of these
+coloured witness tuples. This harmless observation has a precise
+consequence:
+
+\begin{satz}[Hori \#P theorem; Register S43]
+If $f$ is the witness-counting function of an arbitrary NP
+problem and $P$ a shape, then $P\circ f$ is again the
+witness-counting function of an NP problem. Every shape is thus a
+\emph{closure operator} of the counting class \#P.
+\end{satz}
+
+The proof (Appendix~\ref{ch:anhang-beweise}) is exactly the
+blueprint reading: guess the degree, guess the colour, guess a
+tuple of distinct witnesses. Honesty first: the \emph{qualitative}
+side of this statement is known -- polynomials with nonnegative
+integer coefficients in the \emph{binomial} basis are called
+\emph{binomial-good} in the literature and are characterized as
+the (relativizing) \#P closure operations. Because of
+$\ff Xd=d!\binom Xd$ our shapes are a \emph{proper subclass} of
+these: divisibility by $d!$ is exactly the difference between
+ordered tuples and unordered selections. What the literature
+apparently does \emph{not} have is the quantitative layer -- and
+Horimetrik supplies it for free:
+
+Suddenly all the quantities of this chapter mean something. The
+\emph{addition} of shapes is the disjoint union of two counting
+constructions. \emph{Multiplication} couples two constructions,
+and the coefficients of its product formula count exactly the
+overlap patterns of two groups of witnesses -- so the growth of
+$\beta$ measures how the variety of overlaps explodes under
+coupling. The \emph{horizon derivative} counts which new
+structures a single additional witness makes possible
+($d$ positions times remaining tuples: exactly $d\,\ff n{d-1}$) --
+and the difference overflow says: a new witness lowers the tuple
+order, yet can inflate the variety of variants quadratically.
+And $\sigma$ itself? Draw the coefficient board -- column $d$ with
+$c_d$ boxes --, then $\sigma(P)=\max(d+c_d)$ is the smallest
+\emph{staircase} into which the board fits: the maximum of
+``how many witnesses at once'' and ``how many variants of them''.
+We call this quantity the \emph{counting width} of a
+construction. Every horizon $r$ is thus a finite, completely
+enumerable family of exactly $(r{+}1)!$
+\#P closure operators, and the horizon calculus of
+Section~\ref{sec:horizontkalkuel} gives the optimal figures for
+how the counting width grows under uniting, coupling, extending
+and substituting.
+
+Two sentences of demarcation, so that no false magic arises: in
+this neighbourhood lives a weighty open conjecture (even its
+simplest version would imply P$\,\ne\,$NP), and our operators lie
+expressly on the \emph{well-understood} side of this landscape --
+Horimetrik solves nothing here. What it contributes is more
+modest, and perhaps usable for precisely that reason: turning an
+allowed-or-not-allowed, for the first time, into a \emph{how
+wide}.
+
+\begin{oberflaeche}
+What this chapter has delivered, in one sentence: the shape of a
+Hori number is a polynomial, its value is that polynomial
+evaluated at the place of its horizon, and the puzzling effect of
+leading zeros is simply the derivative of this polynomial. The
+ordinary numbers are the shapes with derivative zero -- the only
+inhabitants of the Hori space who do not care where they live.
+All the others move when their world grows. Every arithmetic
+operation has a price in capacity that can be stated exactly, and
+it is always the same extreme object that pays it: the shape
+filled to the brim. And at the end it turned out that the shapes
+\emph{count} something -- coloured groups of distinct solutions
+of a search problem -- and that $\sigma$ measures the width of
+these counting constructions. In the next chapter we let these
+moving objects do arithmetic -- and run into the question of what
+should then happen to their past.
+\end{oberflaeche}

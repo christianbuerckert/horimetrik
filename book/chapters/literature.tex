@@ -1,0 +1,136 @@
+\chapter*{Literature and Context}
+\addcontentsline{toc}{chapter}{Literature and Context}
+\markboth{LITERATURE AND CONTEXT}{LITERATURE AND CONTEXT}
+
+This bibliography is deliberately annotated. The building blocks
+of Horimetrik -- mixed-radix systems, falling factorials,
+inversion sequences, the calculus of finite differences -- are
+established mathematics, and this book claims nothing else. Each
+entry therefore states two things: which building block it
+contributes, and what is \emph{not} to be found there -- that is,
+the point at which Horimetrik goes beyond its source. Whoever
+wants to check the placement given in
+Chapter~\ref{ch:einordnung} will find the evidence here.
+
+% thebibliography would otherwise set its own \chapter*
+% ("Bibliography") on a new page; we already have a chapter
+% heading above.
+\begingroup
+\makeatletter
+\renewcommand{\chapter}[2]{}%
+\renewcommand{\@mkboth}[2]{}%
+\makeatother
+\begin{thebibliography}{10}
+
+\bibitem{cantor} G.~Cantor: \emph{Über die einfachen Zahlensysteme},
+Zeitschrift für Mathematik und Physik 14 (1869), 121--128.
+--- The factorial base for fractions; this is exactly the
+fraction-preserving limit space of the third staircase
+(Chapter~\ref{ch:erweiterungen}), but not the shape-preserving
+world, nor the interplay between them.
+
+\bibitem{knuth} D.~E. Knuth: \emph{The Art of Computer Programming},
+vol.~2, 3rd ed., Addison--Wesley 1997, Section 4.1.
+--- Mixed-radix systems and the factorial number system
+(factoradic); there the bases grow towards the significant side,
+and leading zeros are value-neutral.
+
+\bibitem{lehmer} D.~H. Lehmer: \emph{Teaching combinatorial tricks
+to a computer}, Proc. Sympos. Appl. Math. 10 (1960), 179--193.
+--- Lehmer codes and inversion tables; they explain the factorial
+size of the horizons and the digit bound $0\le a_i\le i$, but not
+the horizon-dependent evaluation.
+
+\bibitem{gkp} R.~L. Graham, D.~E. Knuth, O.~Patashnik:
+\emph{Concrete Mathematics}, 2nd ed., Addison--Wesley 1994, Ch.~2.
+--- Falling factorials and the calculus of finite differences; the
+toolkit of the horizon derivative.
+
+\bibitem{cahen} P.-J. Cahen, J.-L. Chabert: \emph{Integer-Valued
+Polynomials}, AMS Surveys and Monographs 48, 1997.
+--- Polynomials with integer values in the binomial basis;
+Horimetrik uses only the positive cone and evaluates at the
+running horizon.
+
+\bibitem{rigo} M.~Rigo, M.~Stipulanti: \emph{Revisiting regular
+sequences in light of rational base numeration systems},
+arXiv:2103.16966.
+--- Abstract numeration systems in which leading zeros are
+value-sensitive via the radix order: the closest known neighbour
+of the zero semantics, treated there in formal-language terms
+rather than algebraically.
+
+\bibitem{kudr} G.~Kudryavtseva, V.~Mazorchuk: \emph{On Kiselman's
+semigroup}, arXiv:math/0511374; O.~Ganyushkin, V.~Mazorchuk:
+\emph{On Kiselman quotients of 0-Hecke monoids}, arXiv:1006.0316.
+--- Monoids of idempotent generators with absorption relations;
+the neighbourhood of the six-element compactification monoid.
+
+\bibitem{simon} D.~Simon: \emph{Mixed radix numeration bases:
+Horner's rule, Yang-Baxter equation and Furstenberg's conjecture},
+arXiv:2405.19798.
+--- Local base changes in mixed-radix systems; a candidate tool
+for the interchange defect.
+
+\bibitem{invseq} S.~Corteel, M.~A.~Martinez, C.~D.~Savage,
+M.~Weselcouch: \emph{Patterns in Inversion Sequences I},
+arXiv:1510.05434.
+--- Inversion sequences ($0\le e_j<j$) and their bijection with
+permutations; our $H_n$ is, as a set, exactly this space
+(Chapter~\ref{ch:einordnung}). What is not there: the reversed
+valuation, the horizon transitions, and the structure horizon as a
+statistic.
+
+\bibitem{lecturehall} C.~D. Savage, M.~J. Schuster: \emph{Ehrhart
+series of lecture hall polytopes and Eulerian polynomials for
+inversion sequences}, J. Combin. Theory Ser.~A 119 (2012),
+850--870.
+--- $s$-inversion sequences with arbitrary capacity profiles and
+their geometry; the framework for the $s$-Horimetrik programme of
+Chapter~\ref{ch:einordnung}.
+
+\bibitem{tightentries} S.~Chern, S.~Fu, Z.~Lin: \emph{Burstein's
+permutation conjecture, Hong and Li's inversion sequence
+conjecture, and restricted Eulerian distributions},
+arXiv:2209.12137.
+--- Statistics on inversion sequences, among them the \emph{tight
+entries} ($e_i=s_i-1$, statistic $\mathrm{tig}$); the structure
+horizon refines this extreme-case count into a distance measure
+(Chapter~\ref{ch:einordnung}).
+
+\bibitem{middleorder} M.~Bouvel, L.~Ferrari, B.~E.~Tenner:
+\emph{Between weak and Bruhat: the middle order on permutations},
+arXiv:2405.08943.
+--- The coordinatewise order on inversion codes as a lattice
+between the weak and the Bruhat order; the framework in which
+$\mathcal F_r$ becomes a principal ideal and $\sigma$ a level of
+ideals.
+
+\bibitem{umbral} K.~Beauduin: \emph{Operational Umbral Calculus},
+arXiv:2407.16348.
+--- Modern finite operator calculus: delta operators and their
+basic sequences. The framework for $\Delta$ and the structure
+polynomials; what is not there is the capacity bookkeeping
+$\Gamma_T$.
+
+\bibitem{ikenmeyerpak} C.~Ikenmeyer, I.~Pak: \emph{What is in \#P
+and what is not?}, FOCS 2022, arXiv:2204.13149.
+--- Characterizes the \emph{binomial-good} polynomials
+(nonnegative integer coefficients in the binomial basis) as the
+\emph{relativizing} polynomial closure operations of \#P, and
+states the binomial basis conjecture (without relativization the
+same characterization is only conjectural), whose univariate
+version would already imply P$\,\ne\,$NP. Because of
+$\ff Xd=d!\binom Xd$ the shapes of Horimetrik are a proper
+subclass of the binomial-good polynomials
+(Chapter~\ref{ch:strukturpolynome}); what is \emph{not} there is
+the quantitative layer: the height $\max(d+c_d)$, the $(r{+}1)!$
+hierarchies, and their growth laws.
+
+\bibitem{oeis} OEIS Foundation Inc.: \emph{The On-Line Encyclopedia
+of Integer Sequences}, \texttt{https://oeis.org}.
+--- Reference database for the nine counting sequences of this
+book; A-numbers will be added once assigned.
+
+\end{thebibliography}
+\endgroup

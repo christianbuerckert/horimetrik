@@ -1,0 +1,24 @@
+%I
+%S 2,5,13,23,61,111,274,564,1389,2584,6639,13520
+%N a(n) = number of 0 <= x < (n+1)! with P_x(n+2) = Q_x(n+3), where P_x is the digit polynomial of x at horizon n and Q_x at horizon n+1 (falling factorial basis, digits read in reverse).
+%C In the Horimetrik framework (see LINKS) this is the "interchange zero count" (Interchange-Nullzaehler).
+%C Counts the values for which the two growth orders of the decreasing-base mixed-radix system commute. Proved: the difference P_x(n+2) - Q_x(n+3) is nonnegative, and equality holds exactly when both steps of the positivity proof are sharp (carry-free increments plus a sharp multiplication lemma).
+%C Proved: a(n) <= (n+1)^(n+1)/n!, so the proportion of commuting values decays at least like exp(-(1+o(1))*n*log(n)).
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik/blob/main/buch/main.pdf">Horimetrik - Zahlen mit Horizont (book PDF, in German)</a>
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik/blob/main/book/main.pdf">Horimetrik - Numbers with a Horizon (book PDF, English translation)</a>
+%H Christian Felix Bürckert, <a href="https://doi.org/10.5281/zenodo.21400755">Horimetrik - Zahlen mit Horizont / Numbers with a Horizon (archived books and paper, Zenodo)</a>
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik">Horimetrik (proofs, programs, and b-files)</a>
+%F a(n) <= (n+1)^(n+1)/n!.
+%e For n=1: both x=0 and x=1 satisfy P_x(3) = Q_x(4) (the constant polynomials 0 and 1), so a(1)=2.
+%o (Python)
+%o from math import factorial
+%o def z(n, x):
+%o     if n == 0: return 0
+%o     q, r = divmod(x, n+1)
+%o     return r + (n+2)*z(n-1, q)
+%o def a(n):
+%o     return sum(1 for x in range(factorial(n+1)) if z(n, x) == z(n+1, x))
+%Y Cf. A000142.
+%K nonn,more
+%O 1,1
+%A _Christian Felix Bürckert_, Jul 14 2026

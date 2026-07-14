@@ -1,0 +1,743 @@
+\chapter{Die Beweise}
+\label{ch:anhang-beweise}
+
+Die Kapitel dieses Buchs erzählen die Beweisideen; hier stehen die
+Beweise selbst, nach Kapiteln geordnet. Notation wie im Haupttext;
+$E_n$ bezeichnet die Codierung $V_n^{-1}$, $\mu(x)$ den
+Minimalhorizont, $\sigma(P)=\max_{c_d>0}(d+c_d)$ (mit
+$\sigma(0)=0$) den Strukturhorizont.
+
+\section*{Zu Kapitel 3: die Grenzraumsätze}
+
+\begin{satz}[Satz~\ref{satz:grenzen}, vollständig]
+$\varinjlim(H_n,Z_n)\cong\Struk$ und
+$\varinjlim(H_n,L_n)\cong\Nn$.
+\end{satz}
+
+\begin{proof}
+\emph{Strukturtreu.} Für $m\ge n$ sei $Z_{n,m}$ das Voranstellen von
+$m-n$ Nullen; offenbar $Z_{m,k}\circ Z_{n,m}=Z_{n,k}$, das System
+ist gerichtet. Im direkten Limes gelten $a\in H_n$ und $b\in H_m$
+(o.B.d.A.\ $n\le m$) als gleich, wenn sie in einem gemeinsamen
+späteren Horizont dasselbe Bild haben, also
+$0^{k-n}a=0^{k-m}b$, was äquivalent zu $b=0^{m-n}a$ ist. Die
+Klassen sind also Ziffernfolgen modulo führender Nullen. Die
+Abbildung $[a]\mapsto P_a$ ist wohldefiniert (eine führende Null
+fügt den Koeffizienten $0$ am höchsten Grad hinzu), injektiv (die
+Ziffernfolge in $H_n$ ist die auf Länge $n$ aufgefüllte, von rechts
+gelesene Koeffizientenfolge; gleiche Polynome erzwingen also
+$b=0^{m-n}a$) und surjektiv (jedes $P\in\Struk$ ist ab
+$H_{\sigma(P)}$ darstellbar).
+
+\emph{Werttreu.} Sei $L_{n,m}=E_m\circ V_n$. Wegen
+$V_m\circ E_m=\mathrm{id}$ gilt
+$L_{m,k}\circ L_{n,m}=E_k\circ V_n=L_{n,k}$. Zwei Elemente werden
+genau dann identifiziert, wenn $E_k(V_n(a))=E_k(V_m(b))$ für ein
+$k$, und da $E_k$ injektiv ist, genau bei $V_n(a)=V_m(b)$: Die
+Klassen sind die Fasern der Wertabbildung. $[a]\mapsto V_n(a)$ ist
+wohldefiniert, injektiv und surjektiv (jedes $x$ tritt als
+$V_{\mu(x)}(E_{\mu(x)}(x))$ auf).
+\end{proof}
+
+\section*{Zu Kapitel 3: die dritte Treppe}
+
+\begin{satz}[Cantor-Koordinate und Rechts-Erweiterung]
+Mit $F(a)=\sum_i a_i/(i+1)!$ gilt $V_n(a)=(n+1)!\cdot F(a)$. Das
+Rechts-Anhängen $R(a_1,\ldots,a_n)=(a_1,\ldots,a_n,0)$ ist
+bruchtreu, skaliert den Wert exakt mit $n+2$, und
+$\varinjlim(H_n,R_n)$ ist die Menge der endlichen
+Fakultätsbrüche in $[0,1)$.
+\end{satz}
+
+\begin{proof}
+Termweise ist $a_i\,(n+1)!/(i+1)!=(n+1)!\cdot a_i/(i+1)!$, also die
+Faktorisierung. Beim Rechts-Anhängen behalten alle Ziffern Position
+und Nenner, die neue Null trägt nichts bei: $F$ invariant; der Wert
+ist $(n+2)!\,F=(n+2)\cdot(n+1)!\,F$. Im Limes werden genau
+Ziffernfolgen identifiziert, die sich um angehängte Nullen
+unterscheiden; jede Klasse trägt genau einen endlichen Bruch, und
+jeder endliche Fakultätsbruch tritt auf.
+\end{proof}
+
+\section*{Zu Kapitel 4: die Horizontableitung}
+
+\begin{satz}[$\Delta$-Kalkül]
+Die Wertänderung bei strukturtreuer Erweiterung ist
+$\Delta P(n+1)$ mit $\Delta P(X)=P(X{+}1)-P(X)$ und
+$\Delta\,\ff Xd=d\,\ff X{d-1}$; eine führende Null ist genau dann
+wertneutral, wenn $P$ konstant ist.
+\end{satz}
+
+\begin{proof}
+Unter $Z$ bleibt $P$ erhalten und der Auswertungspunkt wandert von
+$n{+}1$ zu $n{+}2$; die Änderung ist per Definition
+$\Delta P(n{+}1)$. Zur Differenzformel:
+$\ff{(X{+}1)}d=(X{+}1)\,X\cdots(X{-}d{+}2)$ und
+$\ff Xd=X\cdots(X{-}d{+}2)\,(X{-}d{+}1)$ haben den gemeinsamen
+Faktor $X(X{-}1)\cdots(X{-}d{+}2)=\ff X{d-1}$; die verbleibenden
+Faktoren sind $X{+}1$ bzw.\ $X{-}d{+}1$, ihre Differenz ist $d$,
+also $\Delta\,\ff Xd=d\,\ff X{d-1}$.
+Wertneutralität: $\Delta P=0$ für alle Auswertungspunkte im
+zulässigen Bereich erzwingt, da Polynome mit unendlich vielen
+Nullstellen verschwinden, $\Delta P\equiv0$, also $P$ konstant;
+umgekehrt klar. Für den einzelnen Schritt: $\Delta P(n{+}1)=0$ mit
+nichtnegativen Koeffizienten von $\Delta P$ (alle
+Basisdifferenzen haben nichtnegative Koeffizienten) und
+Auswertungspunkt im positiven Bereich -- wegen
+$\deg\Delta P\le n-2$ sind alle $\ff{(n{+}1)}d$ dort strikt
+positiv -- erzwingt ebenfalls $\Delta P=0$.
+\end{proof}
+
+\section*{Zu Kapitel 4: das Horizontkalkül}
+
+Wir schreiben $P\preceq Q$, wenn jeder Koeffizient von $P$ in der
+fallenden Fakultätsbasis höchstens der entsprechende Koeffizient von
+$Q$ ist, und $M_r(X)=\sum_{d=0}^{r-1}(r{-}d)\,\ff Xd$ für die maximal
+gefüllte Gestalt des Horizonts $r$.
+
+\begin{satz}[Extremalprinzip; Register S39]
+Sei $T$ ein $k$-stelliger Operator auf dem Strukturhalbring, der in
+jedem Argument koeffizientenmonoton ist (aus $P\preceq P'$ folgt
+$T(\ldots,P,\ldots)\preceq T(\ldots,P',\ldots)$). Dann gilt
+\[
+\Gamma_T(r_1,\ldots,r_k)
+:=\max\{\sigma(T(P_1,\ldots,P_k)) \mid \sigma(P_i)\le r_i\}
+=\sigma\bigl(T(M_{r_1},\ldots,M_{r_k})\bigr).
+\]
+Jeder aus Addition, Multiplikation und $\Delta$ zusammengesetzte
+Operator ist koeffizientenmonoton.
+\end{satz}
+
+\begin{proof}
+$\sigma(P)=\max_{c_d>0}(d+c_d)$ ist monoton bezüglich $\preceq$, und
+$\sigma(P)\le r$ ist äquivalent zur koeffizientenweisen Schranke
+$c_d\le r-d$, also zu $P\preceq M_r$. Aus der Monotonie von $T$
+folgt $T(P_1,\ldots,P_k)\preceq T(M_{r_1},\ldots,M_{r_k})$ und damit
+$\sigma(T(P_1,\ldots,P_k))\le\sigma(T(M_{r_1},\ldots,M_{r_k}))$;
+wegen $\sigma(M_{r_i})=r_i$ wird die Schranke angenommen. Zur
+Zusatzaussage: Addition und $\Delta$ sind koeffizientenweise linear
+mit nichtnegativen Konstanten ($\Delta\,\ff Xd=d\,\ff X{d-1}$); für
+die Multiplikation sind die Linearisierungskoeffizienten
+$\binom pj\binom qj\,j!$ der Produktformel nichtnegativ, und die
+Bilinearität überträgt die Monotonie. Kompositionen monotoner
+Operatoren sind monoton.
+\end{proof}
+
+\begin{satz}[Differenzüberlauf; Register S40]
+Für $r\ge2$ gilt
+$\Gamma_\Delta(r)=\bigl\lfloor(r+1)^2/4\bigr\rfloor-1$,
+angenommen bei der Ein-Ziffern-Gestalt $P=(r{-}d)\,\ff Xd$ mit
+$d=\lfloor(r+1)/2\rfloor$.
+\end{satz}
+
+\begin{proof}
+Nach dem Extremalprinzip ist $\Gamma_\Delta(r)=\sigma(\Delta M_r)$.
+$\Delta M_r$ hat die Koeffizienten $b_k=(k{+}1)(r{-}k{-}1)$ für
+$k=0,\ldots,r{-}2$, also
+\[
+\sigma(\Delta M_r)
+=\max_{0\le k\le r-2}\bigl[k+(k{+}1)(r{-}k{-}1)\bigr]
+=\max_{0\le k\le r-2}(k{+}1)(r{-}k)\;-\;1 .
+\]
+Mit $u=k{+}1\in\{1,\ldots,r{-}1\}$ ist $u(r{+}1{-}u)$ das Produkt
+zweier Zahlen mit fester Summe $r{+}1$, maximal bei
+$u=\lfloor(r{+}1)/2\rfloor$ mit Wert
+$\lfloor(r{+}1)^2/4\rfloor$; der Bereich ist für $r\ge2$ nicht leer.
+Die Ein-Ziffern-Gestalt $P=(r{-}d)\,\ff Xd$ hat $\sigma(P)=r$ und
+$\sigma(\Delta P)=d-1+d(r{-}d)=d(r{+}1{-}d)-1$, maximal beim selben
+$d$ mit demselben Wert. (Exhaustiv bestätigt für alle $(r{+}1)!$
+Gestalten bis $r=8$: Werte $1,3,5,8,11,15,19$.)
+\end{proof}
+
+\begin{satz}[Kompositionsabschluss; Register S41]
+Für $P,Q$ mit nichtnegativen ganzzahligen Koeffizienten in der
+fallenden Fakultätsbasis hat auch $P\circ Q$ nichtnegative
+ganzzahlige Koeffizienten. Die Komposition ist in beiden Argumenten
+koeffizientenmonoton; nach dem Extremalprinzip gilt
+$\Gamma_\circ(r,s)=\sigma(M_r\circ M_s)$.
+\end{satz}
+
+\begin{proof}
+Wegen $P\circ Q=\sum_d c_d(P)\,(Q)^{\underline d}$ mit
+$(Q)^{\underline d}=Q(Q{-}1)\cdots(Q{-}d{+}1)$ genügt es,
+$(Q)^{\underline d}$ als zulässige Gestalt nachzuweisen. Schreibe
+$Q=\sum_k a_k\ff Xk$ und wähle paarweise disjunkte Mengen $T_k$ mit
+$|T_k|=a_k$ (\emph{Schablonen der Stelligkeit $k$}). Eine
+\emph{$Q$-Struktur} auf $[x]$ sei ein Paar $(t,\varphi)$ aus einer
+Schablone $t\in T_k$ und einer Injektion
+$\varphi\colon[k]\hookrightarrow[x]$; ihre Anzahl ist
+$\sum_k a_k\,\ff xk=Q(x)$. Also zählt $Q(x)^{\underline d}$ die
+$d$-Tupel paarweise verschiedener $Q$-Strukturen auf $[x]$.
+
+Klassifiziere die Tupel nach der Vereinigung $U\subseteq[x]$ der
+Bilder aller beteiligten Injektionen. Die Anzahl $N_m$ der Tupel,
+deren Bildvereinigung eine feste $m$-Menge ganz ausschöpft, hängt
+nur von $m$ ab, und für alle $x\in\Nn$ gilt die Polynomidentität
+$Q(x)^{\underline d}=\sum_m N_m\binom xm$. Die symmetrische Gruppe
+$S_m$ wirkt auf den ausschöpfenden Tupeln durch Umbenennung der
+Grundmenge, $\pi\cdot(t,\varphi)=(t,\pi\circ\varphi)$, und diese
+Wirkung ist \emph{frei}: Fixiert $\pi$ jedes Tupelglied, so fixiert
+$\pi$ jedes Bild punktweise, wegen der Ausschöpfung also ganz $[m]$,
+d.\,h.\ $\pi=\mathrm{id}$. (Schablonen der Stelligkeit 0 stören
+nicht: Sie tragen nichts zur Vereinigung bei.) Also $m!\mid N_m$,
+und $(Q)^{\underline d}=\sum_m(N_m/m!)\,\ff Xm$ hat Koeffizienten in
+$\Nn$ -- Positivität und Ganzzahligkeit in einem Zug.
+
+Monotonie in $P$: $\Nn$-Linearkombination der
+$(Q)^{\underline d}$. Monotonie in $Q$: Aus $a_k\le a_k'$ folgt
+$T_k\subseteq T_k'$; jedes Tupel von $Q$-Strukturen ist eines von
+$Q'$-Strukturen mit gleicher Bildvereinigung, also $N_m\le N_m'$
+termweise. (Abschluss und Extremalprinzip rechnerisch exhaustiv
+bestätigt für $r,s\le4$, der Abschluss zusätzlich für 300
+Zufallspaare bis $\sigma=8$.)
+\end{proof}
+
+\begin{satz}[Shift-Überlauf; Register S42]
+Für $E\,P(X)=P(X{+}1)$ gilt
+$\Gamma_E(r)=r+\lfloor r^2/4\rfloor=\Gamma_\Delta(r{+}1)$.
+\end{satz}
+
+\begin{proof}
+$E$ ist linear mit nichtnegativen Konstanten
+($\ff{(X{+}1)}d=\ff Xd+d\,\ff X{d-1}$), also greift das
+Extremalprinzip: $\Gamma_E(r)=\sigma(E\,M_r)$ mit Koeffizienten
+$c_k=(r{-}k)+(k{+}1)(r{-}k{-}1)$ für $k\le r{-}2$ und $c_{r-1}=1$;
+somit $k+c_k=r+(k{+}1)(r{-}k{-}1)$, und das Produkt zweier Zahlen
+mit Summe $r$ ist maximal $\lfloor r^2/4\rfloor$. Die zweite
+Gleichheit ist die Identität
+$r+\lfloor r^2/4\rfloor=\lfloor(r{+}2)^2/4\rfloor-1$.
+\end{proof}
+
+\begin{satz}[Hori-\#P-Satz; Register S43]
+Ist $f\in\#\mathrm P$ und $P$ eine Gestalt (nichtnegative
+ganzzahlige Koeffizienten in der fallenden Fakultätsbasis), so ist
+$P\circ f\in\#\mathrm P$.
+\end{satz}
+
+\begin{proof}
+Sei $f(x)$ die Anzahl der Zeugen von $x$ unter einem polynomiellen
+Verifizierer $V$, und $P=\sum_{d=0}^m c_d\ff Xd$. Neue Maschine auf
+Eingabe $x$: Rate $d\in\{0,\ldots,m\}$, rate eine Variante
+$\ell\in\{1,\ldots,c_d\}$, rate $d$ Zeugenkandidaten
+$w_1,\ldots,w_d$; akzeptiere genau dann, wenn $V$ alle $w_i$
+akzeptiert und die $w_i$ paarweise verschieden sind. Da $m$ und
+alle $c_d$ feste Konstanten sind, bleibt die Maschine polynomiell,
+und ihre Anzahl akzeptierender Pfade ist exakt
+$\sum_d c_d\,f(x)^{\underline d}=P(f(x))$, denn
+$f(x)^{\underline d}$ zählt die geordneten $d$-Tupel paarweise
+verschiedener Zeugen. (Die Aussage folgt wegen
+$\ff Xd=d!\binom Xd$ auch aus der bekannten Charakterisierung der
+\emph{binomial-good}-Polynome als \#P-Abschlussoperationen,
+Ikenmeyer--Pak, FOCS 2022; der obige Beweis ist selbständig.)
+\end{proof}
+
+\section*{Zu Kapitel 5: die beiden Halbringe und die Dualität}
+
+\begin{satz}[Satz~\ref{satz:a3}, vollständig]
+Mit $(n,x)\hplus(m,y)=(\max(n,m,\muh(x{+}y)),x{+}y)$ und
+$(n,x)\htimes(m,y)=(\muh(xy),xy)$ ist $\Hori$ ein kommutativer
+Halbring ohne Eins; $(0,0)$ ist neutral und absorbierend;
+$h\htimes(1,1)=\KV(h)$; die wertkompakten Elemente bilden einen zu
+$(\Nn,+,\cdot)$ isomorphen Unterhalbring mit Eins $(1,1)$.
+\end{satz}
+
+\begin{proof}
+Vorbemerkung: $\muh$ ist monoton. \emph{Assoziativität von
+$\hplus$:} Beide Klammerungen von $(n,x)$, $(m,y)$, $(k,z)$ liefern
+den Wert $x{+}y{+}z$ und die Horizonte
+$\max(n,m,k,\muh(x{+}y),\muh(x{+}y{+}z))$ bzw.\ mit $\muh(y{+}z)$;
+wegen $x{+}y\le x{+}y{+}z$ und $y{+}z\le x{+}y{+}z$ absorbiert
+$\muh(x{+}y{+}z)$ die inneren Terme. \emph{Assoziativität von
+$\htimes$:} beide Seiten $(\muh(xyz),xyz)$.
+\emph{Distributivität:} Links steht
+$(n,x)\htimes\bigl((m,y)\hplus(k,z)\bigr)
+=(\muh(xy{+}xz),\,xy{+}xz)$, rechts
+$(\max(\muh(xy),\muh(xz),\muh(xy{+}xz)),\,xy{+}xz)$; wegen
+$xy\le xy{+}xz$ und $xz\le xy{+}xz$ absorbiert $\muh(xy{+}xz)$
+auch hier die inneren Terme.
+\emph{Neutral/absorbierend:} $(n,x)\hplus(0,0)=(\max(n,0,\muh(x)),x)
+=(n,x)$ wegen $n\ge\muh(x)$; $(n,x)\htimes(0,0)=(0,0)$.
+\emph{Keine Eins:} Ein neutrales $(k,e)$ erforderte $xe=x$ für alle
+$x$, also $e=1$, und $\muh(x)=n$ für alle Elemente -- das scheitert
+an $(1,0)$. \emph{Projektor:}
+$(n,x)\htimes(1,1)=(\muh(x),x)=\KV(n,x)$. \emph{Eck:} Für
+wertkompakte Operanden ist
+$\max(\muh(x),\muh(y),\muh(x{+}y))=\muh(x{+}y)$; unter $\htimes$ ist
+das Ergebnis per Definition wertkompakt; $(1,1)$ ist dort neutral,
+und $x\mapsto(\muh(x),x)$ ist der Isomorphismus.
+\end{proof}
+
+\begin{lemma}[$\sigma$-Additionsmonotonie]\label{lem:app-sigma}
+$\sigma(P{+}Q)\ge\max(\sigma P,\sigma Q)$.
+\end{lemma}
+
+\begin{proof}
+An der Maximalstelle $d^*$ von $P$ ist
+$c_{d^*}(P{+}Q)\ge c_{d^*}(P)>0$, also
+$\sigma(P{+}Q)\ge d^*+c_{d^*}(P{+}Q)\ge\sigma(P)$.
+\end{proof}
+
+\begin{satz}[Satz~\ref{satz:dualitaet}, vollständig]
+Mit $(n,P)\boxplus(m,Q)=(\max(n,m,\sigmah(P{+}Q)),P{+}Q)$ und
+$(n,P)\boxtimes(m,Q)=(\sigmah(PQ),PQ)$ ist $\Hori$ ein kommutativer
+Halbring ohne Eins; $(0,0)$ ist neutral und absorbierend;
+$h\boxtimes(1,1)=\KS(h)$; $\KS$ ist Homomorphismus beider
+Operationen; die strukturkompakten Elemente bilden einen zu
+$\Struk$ isomorphen Unterhalbring.
+\end{satz}
+
+\begin{proof}
+Wörtlich spiegelbildlich zum vorigen Beweis, mit
+Lemma~\ref{lem:app-sigma} anstelle der $\muh$-Monotonie. Zusätzlich
+die Homomorphie von $\KS$: für $\boxplus$ ist
+$\KS(a)\boxplus\KS(b)=(\max(\sigmah P,\sigmah Q,\sigmah(P{+}Q)),P{+}Q)
+=(\sigmah(P{+}Q),P{+}Q)=\KS(a\boxplus b)$ nach dem Lemma; für
+$\boxtimes$ sind beide Seiten $(\sigmah(PQ),PQ)$. Kein
+$\boxtimes$-neutrales Element: es erforderte $PE=P$, also $E=1$,
+und $\sigmah(P)=n$ für alle Elemente -- das scheitert an $(2,1)$,
+denn $\sigmah(1)=1$.
+\end{proof}
+
+\begin{satz}[Produktprinzip, Satz~\ref{satz:produktprinzip}]
+Jede kommutative Halbringstruktur $(\uplus,\odot)$ auf den
+Exzessen liefert via
+$(x,\varepsilon)\oplus(y,\delta)=(x{+}y,\varepsilon\uplus\delta)$,
+$(x,\varepsilon)\otimes(y,\delta)=(xy,\varepsilon\odot\delta)$
+eine gesetzestreue Arithmetik auf $\Hori$.
+\end{satz}
+
+\begin{proof}
+Die Abbildung $(n,x)\mapsto(x,\,n-\muh(x))$ ist eine Bijektion
+$\Hori\to\Nn\times\Nn$ (die Bedingung $n\ge\muh(x)$ ist genau
+$\varepsilon\ge0$; die Umkehrung ist
+$(x,\varepsilon)\mapsto(\muh(x){+}\varepsilon,x)$). Die Operationen
+sind komponentenweise definiert, mit $(\Nn,+,\cdot)$ im Wertfaktor;
+ein Produkt zweier kommutativer Halbringe erfüllt alle Gesetze
+komponentenweise. Die Selektoren sind gültig, da der
+Ergebnishorizont $\muh(\text{Wert})+\text{Exzess}\ge\muh$ ist.
+\end{proof}
+
+\begin{satz}[Kompaktifizierungsmonoid]
+$\KS$ erhält Wertkompaktheit. Folglich gilt
+$\KV\KS\KV=\KS\KV$, und das von $\KS,\KV$ erzeugte
+Transformationsmonoid hat genau sechs Elemente -- $\mathrm{id}$,
+$\KS$, $\KV$, $\KS\KV$, $\KV\KS$ und $\KS\KV\KS$ --, von denen
+alle außer $\KV\KS$ idempotent sind.
+\end{satz}
+
+\begin{proof}
+\emph{Stabilität:} Sei $(m,P)$ wertkompakt; das Element $(0,0)$
+wird von $\KS$ fixiert, sei also $m\ge1$ und damit
+$P(m{+}1)\ge m!$. Sei $s=\sigmah(P)$; angenommen, es gälte
+$P(s{+}1)<s!$. Für $s\le t<m$ wächst
+jeder Term $c_d\ff Xd$ von $t{+}1$ auf $t{+}2$ um den Faktor
+$(t{+}2)/(t{+}2{-}d)$, wegen $d\le s{-}1\le t{-}1$ also um
+höchstens $(t{+}2)/3$; damit
+$P(t{+}2)<t!\,(t{+}2)/3\le(t{+}1)!$, und Induktion liefert
+$P(m{+}1)<m!$ -- Widerspruch.
+\emph{Relation:} Für jedes $h$ ist $\KV(h)$ wertkompakt, nach der
+Stabilität auch $\KS(\KV(h))$, also fixiert $\KV$ dieses Element.
+\emph{Sechs Elemente:} Jedes alternierende Wort der Länge $\ge4$
+enthält $\KV\KS\KV$ und reduziert; Quadrate reduzieren per
+Idempotenz -- höchstens sechs. Paarweise Verschiedenheit durch
+explizite Trennzeugen (endliche Enumeration); insbesondere trennt
+$h=(6,6)$: $\KV\KS(h)=(3,6)$, aber $\KS\KV\KS(h)=(2,5)$. Daraus
+$(\KV\KS)^2=\KS\KV\KS\ne\KV\KS$: nicht idempotent; die Idempotenz
+der übrigen fünf rechnet man mit der Relation nach.
+\end{proof}
+
+\section*{Zu Kapitel 5: das Tiefengesetz}
+
+\begin{satz}[Satz~\ref{satz:tiefengesetz}, vollständig; Register S33]
+Für jede Schale $m\ge3$ gilt
+$\min\{\delta(h)\mid\muh(\val(h))=m\}=-g(m)$ mit
+$g(m)=m-s_{\min}(m)$,
+$s_{\min}(m)=\min\{s\mid M_s(m{+}1)\ge m!\}$; die
+Terminaldarstellung von $x^*=M_{s_{\min}}(m{+}1)$ ist ein Zeuge.
+\end{satz}
+
+\begin{proof}
+\emph{Schranke.} Sei $h=(n,x)$ mit $\muh(x)=m$, also $x\ge m!$.
+Links: $\KV(h)=(m,x)$, und für $P=\operatorname{struct}(x,m)$ gilt
+koeffizientenweise $P\preceq M_{\sigma(P)}$, also
+$x=P(m{+}1)\le M_{\sigma(P)}(m{+}1)$; wegen $x\ge m!$ folgt
+$\sigma(P)\ge s_{\min}$ und damit
+$\hor(\KS\KV(h))=\sigma(P)\ge s_{\min}$. Rechts: Für
+$P_n=\operatorname{struct}(x,n)$ ist die Auswertung monoton
+(nichtnegative Koeffizienten), also
+$\val(\KS(h))=P_n(\sigma(P_n){+}1)\le P_n(n{+}1)=x<(m{+}1)!$ und
+damit $\hor(\KV\KS(h))\le m$. Zusammen
+$\delta(h)\ge s_{\min}-m=-g(m)$.
+
+\emph{Annahme.} Es ist $x^*=M_{s_{\min}}(m{+}1)\in[m!,(m{+}1)!)$
+-- untere Grenze nach Definition von $s_{\min}$, obere wegen
+$M_{s_{\min}}\preceq M_m$ und $M_m(m{+}1)=(m{+}1)!-1$. Sei
+$h^*=(x^*,x^*)$ die Terminaldarstellung. $\KS$ fixiert $h^*$
+(konstante Gestalt), also
+$\hor(\KV\KS(h^*))=\muh(x^*)=m$. Andererseits ist $M_{s_{\min}}$
+im Horizont $m$ eine gültige Ziffernfolge
+($c_d\le s_{\min}-d\le m-d$) mit Wert $x^*$, nach der Bijektion
+aus Kapitel~\ref{ch:horizonte} also \emph{die} Ziffernfolge:
+$\operatorname{struct}(x^*,m)=M_{s_{\min}}$, und
+$\hor(\KS\KV(h^*))=\sigma(M_{s_{\min}})=s_{\min}$. Also
+$\delta(h^*)=s_{\min}-m=-g(m)$.
+\end{proof}
+
+\section*{Zu Kapitel 5: der Seitentreue-Satz}
+
+\begin{satz}[Satz~\ref{satz:seitentreue}, Wert-Gestalt-Fälle]
+\emph{(A)} Ist $\oplus$ wertgetragen und $\otimes$ strukturgetragen,
+so ist bereits die Links-Distributivität für jede Wahl der
+Horizontregeln unerfüllbar. \emph{(B)} Ist $\oplus$ strukturgetragen
+und $\otimes$ wertgetragen, so sind Links-Distributivität und
+Kommutativität von $\otimes$ zusammen unerfüllbar.
+\end{satz}
+
+\begin{proof}
+\emph{(A).} Sei $u=(1,1)$ (Struktur $1$), $e_1=u$,
+$e_m=e_{m-1}\oplus u$; da $\oplus$ wertgetragen ist, gilt
+$\val(e_m)=m$, und die Struktur $Q_m$ von $e_m$ ist irgendeine
+gültige Darstellung von $m$. Links-Distributivität liefert induktiv
+\begin{equation}\label{eq:app-kette}
+\val(a\otimes e_m)=m\cdot\val(a\otimes u).
+\end{equation}
+\emph{Schritt 1: $Q_m$ ist konstant.} Für $c\ge1$ hat $a_c=(c,c)$
+die konstante Struktur $c$ (Terminaldarstellung); Konstanten werten
+überall zu sich selbst aus, also $\val(a_c\otimes u)=c$. Mit
+\eqref{eq:app-kette} folgt $c\,Q_m(y_c{+}1)=mc$, also
+$Q_m(y_c{+}1)=m$, wobei $y_c$, der Horizont von $a_c\otimes e_m$,
+wegen $y_c\ge\sigmah(cQ_m)=\max_d(d+c\,q_d)\ge c$ unbeschränkt
+wächst ($Q_m\ne0$, denn $\val(e_m)=m\ge1$).
+Alle Auswertungspunkte liegen im streng monotonen Bereich
+(Argumente $\ge\sigmah+1\ge\deg+2$; fallende Fakultäten sind dort
+streng wachsend). Bei $\deg Q_m\ge1$ nähme $Q_m$ den Wert $m$
+höchstens einmal an -- Widerspruch. Also ist $Q_m$ konstant, und
+mit $a=u$ folgt $Q_m=m$.
+\emph{Schritt 2: Konstanten sterben.} Sei $g=(2,3)$ (Struktur $X$),
+sei $t_g$ der Horizont von $g\otimes u$ und
+$r=\val(g\otimes u)=t_g{+}1\ge\sigmah(X)+1=3$ fest. Nach
+Schritt~1 hat $g\otimes e_m$ die Struktur $X\cdot m=mX$ mit
+$\sigmah(mX)=m{+}1$; auf seinem Horizont $T_m\ge m{+}1$ ist also
+$\val(g\otimes e_m)=m(T_m{+}1)\ge m(m{+}2)$; nach
+\eqref{eq:app-kette} ist dieser Wert $mr$ -- Widerspruch für
+$m>r-2$.
+
+\emph{(B).} Nun addieren sich Strukturen und multiplizieren sich
+Werte. Sei $f_1=u$, $f_m=f_{m-1}\oplus u$; dann hat $f_m$ die
+konstante Struktur $m$ und den Wert $m$. Sei $A$ die Struktur von
+$g\otimes u$. Induktiv hat $g\otimes f_m$ die Struktur $mA$; als
+$\otimes$-Ergebnis vom Wert $3m$, realisiert auf seinem Horizont
+$T_m$, gilt $\sigmah(mA)\le T_m$ nach der Gültigkeit der
+Darstellung (Ziffernschranke), also $T_m\ge m$, und
+$A(T_m{+}1)=3$ an unbeschränkt vielen Stellen. Wie in Schritt~1 ist
+$A$ konstant, also $A=3$. Betrachte $f_2'=g\oplus g$ mit Struktur
+$2X$, Horizont $H\ge\sigmah(2X)=3$, Wert $2(H{+}1)\ge8$.
+Links-Distributivität und Kommutativität geben
+$u\otimes(g\oplus g)=(g\otimes u)\oplus(g\otimes u)$ mit Struktur
+$2\cdot3=6$ (Konstante), also Wert $6$; links steht aber
+$1\cdot2(H{+}1)\ge8$. Widerspruch.
+\end{proof}
+
+\begin{satz}[nichtkommutativer Fall]
+Ist $\oplus$ strukturgetragen und $\otimes$ wertgetragen und gelten
+beide Distributivgesetze, so ist das System unerfüllbar -- ohne
+Kommutativität, Assoziativität oder neutrale Elemente.
+\end{satz}
+
+\begin{proof}
+Die Rechts-Distributivität liefert induktiv
+$P_{f_m\otimes a}=m\cdot P_{u\otimes a}$; da $f_m\otimes a$ den
+Wert $m\cdot\val(a)$ hat und der Horizont
+$\ge\sigma(m\,P_{u\otimes a})\ge m$ wächst, ist $P_{u\otimes a}$
+konstant gleich $\val(a)$ (Monotonie-Argument wie oben).
+Insbesondere $P_{u\otimes g}=3$; das $g\oplus g$-Finale läuft dann
+wörtlich wie im kommutativen Fall über die Links-Distributivität.
+\end{proof}
+
+\section*{Zu Kapitel 5 und 8: die dreiseitige Seitentreue}
+
+\begin{satz}[Trilogie]
+Bruchgetragene Addition ist nie total; wertgetragene Addition mit
+bruchgetragener Multiplikation sowie strukturgetragene Addition mit
+bruchgetragener Multiplikation sind für jede Selektorwahl
+unerfüllbar (Links-Distributivität genügt).
+\end{satz}
+
+\begin{proof}
+\emph{Totalität:} $F(u)+F(u)=\tfrac12+\tfrac12=1\notin[0,1)$, und
+jedes Element hat Bruch $<1$.
+
+\emph{Wert-$\oplus$, Bruch-$\otimes$:} Ketten $e_m$ mit
+$\val(e_m)=m$, Horizont $N_m\ge\mu(m)$, Bruch $m/(N_m{+}1)!$.
+Distributivität gibt $\val(u\otimes e_m)=m\,w$ mit
+$w=\val(u\otimes u)$ -- ganzzahlig und $\ge1$, denn der Bruch von
+$u\otimes u$ ist $\tfrac14>0$. Andererseits ist, mit $h_m$ dem
+Horizont von $u\otimes e_m$,
+$\val(u\otimes e_m)=\tfrac12\cdot\frac{m}{(N_m+1)!}(h_m{+}1)!$,
+also $(h_m{+}1)!/(N_m{+}1)!=2w>1$ konstant -- aber ein
+Fakultätsquotient $>1$ ist mindestens $N_m{+}2\to\infty$.
+
+\emph{Struktur-$\oplus$, Bruch-$\otimes$:} Ketten $f_m$ mit
+konstanter Struktur $m$, Horizont $N_m\ge m$, Bruch
+$m/(N_m{+}1)!$. Distributivität gibt $P_{u\otimes f_m}=m\,A$ mit
+$A=P_{u\otimes u}$, $\deg A=:d$; der Bruchvergleich auf dem
+Horizont $T_m$ von $u\otimes f_m$ liefert nach Kürzen von $m$
+\[
+2\,A(T_m{+}1)=(T_m{+}1)^{\underline{\,k_m}},\qquad
+k_m=T_m-N_m\ge1 .
+\]
+Das Produkt rechts ist mindestens $(N_m+k_m/2)^{k_m/2}$, die linke
+Seite höchstens $C(N_m{+}k_m{+}1)^d$; wegen $N_m\to\infty$ ist
+$k_m\le2d{+}1$ für große $m$, ein Wert $k^*$ tritt unendlich oft
+auf, und $2A(Y)=Y^{\underline{k^*}}$ gilt als Polynomidentität.
+Dann hätte $A$ den Koeffizienten $\tfrac12$ -- Ziffern sind ganz.
+(Allgemeine Multiplikatoren $a$: dieselbe Rechnung mit
+$c=(n_a{+}1)!/v_a>1$ statt $2$.)
+\end{proof}
+
+\section*{Zu Kapitel 6: Asymptotik und Ziffernformel}
+
+\begin{satz}[Asymptotik der Sprungstellen]
+Sei $m_g$ die kleinste Schale mit
+$M_{m-g}(m{+}1)\ge m!$, wobei $M_s=\sum_{d<s}(s{-}d)\ff Xd$ das
+Maximalpolynom ist. Mit
+$c_g=(g{+}2)!\sum_{k\ge1}k/(g{+}k{+}1)!$ gilt
+$(g{+}2)!/c_g\le m_g+1\le(g{+}2)!$ und $c_g=1+O(1/g)$, also
+$m_g/(g{+}2)!\to1$.
+\end{satz}
+
+\begin{proof}
+Umindexieren ($k=s{-}d$, $s=m{-}g$) liefert exakt
+\[
+\frac{M_{m-g}(m{+}1)}{m!}
+=(m{+}1)\sum_{k=1}^{m-g}\frac{k}{(g{+}k{+}1)!}=:F(m).
+\]
+$F$ wächst in $m$ (der Vorfaktor streng, die Summe durch neu
+hinzukommende nichtnegative Terme), die Schwelle ist also
+wohldefiniert. Für $m{+}1\ge(g{+}2)!$ genügt der Term $k{=}1$:
+$F(m)\ge(m{+}1)/(g{+}2)!\ge1$. Umgekehrt ist
+$F(m)\le(m{+}1)\,c_g/(g{+}2)!$, also $F(m)<1$ für
+$m{+}1<(g{+}2)!/c_g$.
+Schließlich ist mit $x=1/(g{+}3)$
+\[
+c_g\le1+\sum_{k\ge2}k\,x^{k-1}
+=1+\frac{x(2-x)}{(1-x)^2}=1+O(1/g). \qedhere
+\]
+\end{proof}
+
+\begin{satz}[Ziffernformel für die Nicht-Springer]
+Sei $d=(d_1,\ldots,d_n)$ die $H_n$-Ziffernfolge von $n!$ und $P$
+die erste Position mit maximaler Ziffer ($d_P=P$), bzw.\ $P=n$,
+falls keine existiert. Dann gilt
+\[
+N(n)=\sum_{p=1}^{P}\min(d_p,p)\cdot\frac{n!}{p!}.
+\]
+\end{satz}
+
+\begin{proof}
+$N(n)$ zählt Ziffernfolgen mit $a_i\le i-1$ und Wert $<n!$. Wir
+zerlegen nach der ersten Position $p$, an der sich $a$ von $d$
+unterscheidet. Der Präfix muss mit $d$ übereinstimmen -- möglich
+nur, solange $d_j\le j-1$, also bis zur ersten maximalen Ziffer
+einschließlich. An der Stelle $p$ muss $a_p<d_p$ und $a_p\le p-1$
+gelten: $\min(d_p,p)$ Möglichkeiten. Der Suffix ist frei innerhalb
+der Kappen: $\prod_{j>p}j=n!/p!$ Möglichkeiten, und jeder solche
+Suffix bleibt strikt unterhalb, weil der volle (ungekappte)
+Suffixraum das Intervall $[0,w_p)$ mit dem Stellengewicht
+$w_p=(n{+}1)!/(p{+}1)!$ bijektiv füllt. Jeder Nicht-Springer wird genau
+einmal gezählt.
+\end{proof}
+
+\begin{satz}[$\beta$-Reduktion]
+$\ln\beta(r,r)=\ln\max_{t}\binom{r-1}{t}^2(r{-}1{-}t)!+O(\log r)$.
+\end{satz}
+
+\begin{proof}
+Untere Schranke: Das Tripel $(p,q,j)=(r{-}1,r{-}1,r{-}1{-}t)$ trägt
+zum Grad $r{-}1{+}t$ den Summanden
+$\binom{r-1}{t}^2(r{-}1{-}t)!$ bei, und alle Beiträge sind
+nichtnegativ. Obere Schranke: Jeder Beitrag ist höchstens
+$r^2\binom{r-1}{j}^2j!$, und pro Grad gibt es höchstens $r^3$
+Tripel; also $\beta\le2r+r^5\max_t(\cdot)$.
+\end{proof}
+
+\begin{satz}[$\beta$-Asymptotik]
+$\ln(\beta(r,r)/r!)=2\sqrt r+O(\log r)$.
+\end{satz}
+
+\begin{proof}
+Nach dem Reduktionssatz genügt die Aussage für den Maximalterm
+$\binom st^2(s-t)!/r!=s!/(r\,t!^2(s-t)!)$ mit $s=r-1$. Nach oben:
+Stirling-Schranken geben $\ln(s!/(t!^2(s-t)!))\le-h(t)+O(\log s)$
+mit $h(t)=2t\ln t-t+(s{-}t)\ln(s{-}t)-s\ln s$; Konkavität liefert
+$h(t)\ge t(2\ln t-\ln s-2)$, und diese Funktion hat ihr Minimum
+$-2\sqrt s$ bei $t=\sqrt s$. Nach unten: $t=\lceil\sqrt s\rceil$
+mit $\binom st\ge(s-t)^t/t!$ ergibt
+$t\ln((s-t)/t^2)+2t-O(\log r)=2\sqrt s-O(\log r)$.
+\end{proof}
+
+\begin{satz}[Ein-Ziffern-Fakultäten]
+$n!$ ist genau dann Einzelziffer in $H_n$, wenn $n=(i{+}1)!/d-1$
+mit $1\le d\le i$; die Ziffer ist $d$ an Position $i$, und pro
+Position gibt es genau $i$ Fälle.
+\end{satz}
+
+\begin{proof}
+Einzelziffer $d$ an Position $i$ heißt $n!=d\,(n+1)!/(i+1)!$, also
+$d=(i+1)!/(n+1)\le i$. Umgekehrt teilt jedes $d\le i$ die Zahl
+$(i+1)!$, und $n+1=(i+1)!/d$ macht die Gleichung exakt; die
+Position existiert, denn aus $n{+}1=(i{+}1)!/d\ge(i{+}1)!/i\ge
+i{+}1$ folgt $i\le n$, und die eindeutige Ziffernentwicklung
+besteht dann aus genau dieser Ziffer.
+$d$ durchläuft bijektiv $1,\ldots,i$.
+\end{proof}
+
+\section*{Zu Kapitel 6 und 8: Interchange-Positivität, Scharfheit,
+Nullzähler}
+
+Für $x<(n{+}1)!$ sei $z_n(x):=P(n{+}2)$ mit
+$P=\operatorname{struct}(x,n)$ -- der Wert nach einer
+Nullerweiterung. Der \emph{Interchange-Defekt} eines Elements
+$h=(n,x)$ ist
+$\Omega(h)=z_n(x)-z_{n+1}(x)$: der Wert nach „erst wachsen, dann
+werttreu liften“ minus der Wert nach „erst liften, dann wachsen“.
+
+\begin{lemma}[Rekursionsformel]
+Für $x=q(n{+}1)+r$, $0\le r\le n$:
+$z_n(x)=r+(n{+}2)\,z_{n-1}(q)$.
+\end{lemma}
+
+\begin{proof}
+Aus der Ziffernrekursion folgt
+$P_{n,x}(X)=r+X\cdot P_{n-1,q}(X{-}1)$, denn der Koeffizientenshift
+um einen Grad ist wegen
+$\ff Xd=X\cdot\ff{(X{-}1)}{d-1}$ die Multiplikation mit $X$ bei
+Argumentverschiebung. Auswerten bei $X=n{+}2$.
+\end{proof}
+
+\begin{lemma}[strikte Monotonie und Superadditivität]
+$z_n(x)<z_n(x{+}1)$, folglich $z_n(y{+}s)\ge z_n(y)+s$.
+\end{lemma}
+
+\begin{proof}
+Induktion über $n$; Basis $n=1$: $z_1(0)=0<1=z_1(1)$. Ohne
+Übertrag wächst $z_n$ um genau 1; beim
+Übertrag ($r=n$) ist
+$z_n(x{+}1)-z_n(x)=(n{+}2)(z_{n-1}(q{+}1)-z_{n-1}(q))-n
+\ge(n{+}2)-n=2$.
+\end{proof}
+
+\begin{lemma}[Multiplikationslemma]
+Für $c\ge\ell{+}2$ und $cy<(\ell{+}1)!$ gilt
+$z_\ell(cy)\ge(c{+}1)\,z_\ell(y)$.
+\end{lemma}
+
+\begin{proof}
+Induktion über $\ell$; Basisfälle leer bzw.\ trivial. Sei
+$y=q(\ell{+}1)+r$ und $cr=s(\ell{+}1)+u$ mit $0\le u\le\ell$; dann
+$cy=(cq{+}s)(\ell{+}1)+u$ und nach der Rekursionsformel
+$z_\ell(cy)=u+(\ell{+}2)\,z_{\ell-1}(cq{+}s)$. Superadditivität und
+Induktionsvoraussetzung (Regime bleibt erhalten:
+$c\ge\ell{+}2>(\ell{-}1){+}2$; Gültigkeit: $cq<\ell!$) geben
+$z_{\ell-1}(cq{+}s)\ge(c{+}1)z_{\ell-1}(q)+s$. Es bleibt
+$u+(\ell{+}2)s\ge(c{+}1)r$: Mit $c=\ell{+}1{+}e$, $e\ge1$, ist
+$u=er\bmod(\ell{+}1)$, und die Ungleichung ist äquivalent zu
+$r(c{-}\ell{-}1)=er\ge er\bmod(\ell{+}1)=u$ -- wahr.
+\end{proof}
+
+\begin{satz}[Interchange-Positivität]
+$\Omega(h)\ge0$ für alle $h\in\Hori$.
+\end{satz}
+
+\begin{proof}
+Nach Definition von $\Omega$ ist zu zeigen:
+$z_{n+1}(x)\le z_n(x)$ für $x<(n{+}1)!$. Sei
+$x=q'(n{+}2)+r'$. Dann
+\[
+z_{n+1}(x)=r'+(n{+}3)\,z_n(q')
+\le r'+z_n\bigl((n{+}2)q'\bigr)
+\le z_n\bigl(q'(n{+}2)+r'\bigr)=z_n(x),
+\]
+erst mit dem Multiplikationslemma ($c=n{+}2$, exakt an der
+Regime-Grenze), dann mit der Superadditivität.
+\end{proof}
+
+\begin{satz}[Gleichheitsfälle; Register S32]
+$\Omega(h)=0$ gilt genau dann, wenn beide Schritte dieser Kette
+scharf sind: das Multiplikationslemma mit $c=n{+}2$ für den
+\emph{scharfen Quotienten} $q'$, also
+$z_n((n{+}2)q')=(n{+}3)\,z_n(q')$, und die Superadditivität
+übertragsfrei, also $z_n((n{+}2)q'+r')=z_n((n{+}2)q')+r'$.
+\end{satz}
+
+\begin{proof}
+$\Omega(h)$ ist die Summe der beiden Abweichungen
+$z_n((n{+}2)q')-(n{+}3)z_n(q')$ und
+$z_n((n{+}2)q'+r')-z_n((n{+}2)q')-r'$; beide sind nach
+Multiplikationslemma bzw.\ Superadditivität nichtnegativ, ihre
+Summe ist also genau dann null, wenn beide null sind.
+\end{proof}
+
+\begin{satz}[Ziffernentfaltung der Scharfheit]
+Für $c\ge\ell+2$, $cy<(\ell+1)!$, $y=q(\ell+1)+r$, $e=c-\ell-1$
+gilt: $z_\ell(cy)=(c{+}1)z_\ell(y)$ genau dann, wenn $er\le\ell$,
+$(cq\bmod\ell)+r\le\ell-1$ und dieselbe Bedingung rekursiv für
+$(\ell{-}1,c,q)$ gilt (Abbruch: für $\ell=0$ ist die Bedingung
+leer).
+\end{satz}
+
+\begin{proof}
+Die Kette $z_\ell(cy)=u+(\ell+2)z_{\ell-1}(cq+s)$ aus dem Beweis
+des Multiplikationslemmas ist genau dann durchgehend scharf: die
+arithmetische Abschätzung bei $er\le\ell$ (dann $s=r$, $u=er$),
+die Superadditivität bei Übertragsfreiheit der $s=r$
+Einzelschritte ab $cq$ -- deren Einerstelle ist $cq\bmod\ell$, die
+Bedingung also $(cq\bmod\ell)+r\le\ell-1$ --, die dritte per
+Definition rekursiv. Exhaustiv verifiziert für $\ell\le7$.
+\end{proof}
+
+\begin{satz}[Nullzähler-Schranke]
+$\#\{\Omega=0\text{ auf }H_n\}\le(n{+}1)^{n+1}/n!$, der Anteil
+fällt also mindestens wie $e^{-(1+o(1))n\ln n}$.
+\end{satz}
+
+\begin{proof}
+Nach dem Gleichheitssatz ist jedes solche Element durch $(q',r')$
+mit scharfem $q'$ bestimmt, und die Übertragsfreiheit erzwingt
+$r'\le n$ (die Einerstelle wächst pro Schritt um eins und muss vor
+jedem Schritt unter ihrem Maximum $n$ bleiben). Die Scharfheit
+erzwingt nach der Ziffernentfaltung auf Ebene $\ell$ die
+Ziffernschranke $r_\ell\le\lfloor\ell/(n{+}1{-}\ell)\rfloor$, und
+$\lfloor\ell/j\rfloor+1\le(n{+}1)/j$ mit $j=n{+}1{-}\ell$ liefert
+für die $q'$ das Produkt $(n{+}1)^n/n!$; zusammen mit den $n{+}1$
+Möglichkeiten für $r'$ folgt die Schranke.
+\end{proof}
+
+\section*{Zu Kapitel 9: die Inversionsfolgen-Einordnung}
+
+\begin{satz}[Register S44]
+$H_n$ steht in Bijektion zu den Inversionsfolgen der Länge $n{+}1$
+und zu $S_{n+1}$. Der Strukturhorizont ist
+$\sigma(P_a)=n-\min_{e_j>0}((j{-}1)-e_j)$ für $a\ne0$ (für $a=0$
+ist $\sigma=0$) mit $e=(0,a_1,\ldots,a_n)$, und
+$|\{a\in H_n:\sigma(P_a)=r\}|=r\cdot r!$ für $1\le r\le n$.
+\end{satz}
+
+\begin{proof}
+Setzt man $e_1=0$ und $e_{i+1}=a_i$, so ist $0\le e_j<j$ für alle
+$j=1,\ldots,n{+}1$ -- die definierende Bedingung einer
+Inversionsfolge; die Abbildung $\pi\mapsto(e_j)_j$ mit
+$e_j=|\{i<j:\pi_i>\pi_j\}|$ ist die klassische Bijektion zu
+$S_{n+1}$, und beide Seiten haben $(n{+}1)!$ Elemente. Für den
+Strukturhorizont: $c_d=a_{n-d}=e_{n-d+1}$, also
+$d+c_d=(n{+}1-j)+e_j$ mit $j=n-d+1$; Maximieren von $d+c_d$ über
+$c_d>0$ ist Minimieren von $(j{-}1)-e_j$ über $e_j>0$, und
+$\max(d+c_d)=n-\min_{e_j>0}((j{-}1)-e_j)$. Zählung: $\sigma(P_a)\le r$
+bedeutet $a_i\le r-(n-i)$ für alle $i$ mit $a_i>0$, äquivalent
+$a\le M$ koordinatenweise für das zu $H_r$ gehörige Maximalprofil;
+die Zahl solcher $a$ in $H_n$ ist $(r{+}1)!$ (die Ziffern oberhalb
+Position $r$ sind erzwungen null, darunter frei bis zur Schranke).
+Also $|\{\sigma\le r\}|=(r{+}1)!$ und
+$|\{\sigma=r\}|=(r{+}1)!-r!=r\cdot r!$. (Exhaustiv bestätigt bis
+$n=6$, \texttt{experiments\_einordnung.py}.)
+\end{proof}

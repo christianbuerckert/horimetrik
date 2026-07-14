@@ -1,0 +1,120 @@
+\chapter{Nine Counting Sequences from Horimetrik}
+\label{ch:zaehlungen}
+
+% Register: D8, D9, S9, S19, S22, S41, V11. Sources: Appendix A.4-A.6,
+% C.6, F.1-F.5, H, oeis/ENTWUERFE.md.
+
+Theories leave fingerprints: number sequences that arise when you
+count their objects. In the course of this project Horimetrik has
+produced nine such sequences, and not one of them appears in the
+OEIS, the great encyclopaedia of integer sequences -- which is no
+proof of novelty, but an indication that nobody has counted here
+before. All nine are being submitted to the OEIS; once the
+A-numbers have been assigned, we will enter them
+here.\footnote{Placeholder: A??????. The submission drafts, with
+jargon-free definitions and programs, are in the project folder
+\texttt{oeis/}.}
+
+\section{The profiles}
+
+\paragraph{The jump positions of the depth law.}
+$3,\ 15,\ 84,\ 533,\ 3883,\ 31998,\ 294875,\ 3006206,\ \ldots$
+The shell in which the commutator depth
+(Theorem~\ref{satz:tiefengesetz}) first reaches $-g$.
+The queen of our sequences: for it an asymptotic law is
+\emph{proved} ($m_g/(g+2)!\to1$), and it has passed three
+prediction tests -- the last one exactly: $m_7=294875$ was
+forecast before it was computed.
+
+\paragraph{The maximal product height of squares.}
+$1,\ 6,\ 22,\ 87,\ 407,\ 2473,\ 19527,\ \ldots$
+How large a horizon can become when you multiply two maximally
+filled shapes of capacity $r$ (register D8). Meanwhile proved: the
+sequence grows like $r!\cdot e^{2\sqrt r+O(\log r)}$ -- a factorial
+times a gently exploding factor (Appendix~\ref{ch:anhang-beweise});
+only the fine structure of the logarithm term is still open.
+
+\paragraph{The shell jumpers.}
+$1,\ 8,\ 60,\ 360,\ 2520,\ 21168,\ 211680,\ 2268000,\ \ldots$
+The number of values that a single leading zero lifts into the
+next factorial shell. This sequence gave us the $n!/2$ debacle
+(Chapter~\ref{ch:sackgassen}): for three terms it looked like a
+half-factorial, at the fourth it no longer did. Its complement,
+the \emph{non-jumpers} $n!-D(n)$
+($5,\ 16,\ 60,\ 360,\ 2520,\ 19152,\ \ldots$), counts as a
+sequence of the collection in its own right -- distinguished by a
+fully proved closed formula, the digit formula from
+Appendix~\ref{ch:anhang-beweise}.
+
+\paragraph{The two-sided fixed points.}
+$4,\ 17,\ 88,\ 540,\ 3960,\ 32760,\ \ldots$
+Numbers whose representation is simultaneously stable under both
+tidying-up operations (Section~\ref{sec:kommutator}); countable as
+$n\cdot n!$ minus shell jumpers, for among the $n\cdot n!$
+value-compact elements of a shell, exactly those without a digit
+at its cap fail structure-compactness -- and those are the jumper
+sequences.
+
+\paragraph{The single-digit factorials.}
+$1,\ 2,\ 5,\ 7,\ 11,\ 23,\ 29,\ 39,\ 59,\ 119,\ 143,\ \ldots$
+The $n$ for which $n!$ is a single digit in its own shell --
+completely characterized as $n=(i+1)!/d-1$ with $1\le d\le i$,
+exactly $i$ of them per position
+(Appendix~\ref{ch:anhang-beweise}); position $i=1$ supplies the
+trivial initial term $n=1$. The only one of our sequences that
+already came with a closed description at the moment of its
+discovery -- and the supplier of nine predictions that came true
+exactly.
+
+\paragraph{The composition explosion.}
+$1,\ 4,\ 23,\ 6541,\ 477\,149\,751,\ 26\,594\,371\,862\,819\,905,\ \ldots$
+How high the capacity can climb when a maximally filled shape of
+capacity $r$ is \emph{substituted} into another of the same kind
+(Chapter~\ref{ch:strukturpolynome}). The youngest and by far the
+fastest-growing sequence of the collection: substitution
+multiplies the degrees and makes the coefficients explode. Thanks
+to the extremal principle it is nevertheless effortless to compute
+-- a single canonical substitution per term. Its asymptotics are
+open.
+
+\paragraph{The interchange maxima and zero count.}
+$0,\ 1,\ 6,\ 43,\ 351,\ 2873,\ 26443,\ 270291,\ \ldots$ and
+$2,\ 5,\ 13,\ 23,\ 61,\ 111,\ 274,\ 564,\ \ldots$
+The two growth operations -- first prepend a zero, then relocate
+value-preservingly, or the other way round -- do not commute. The
+difference is measured by the \emph{interchange defect} $\Omega$:
+the value after ``grow first, then lift'' minus the value after
+``lift first, then grow''. This defect is \emph{never negative}:
+growing first, then lifting never yields less. The smallest
+instructive example is the number three as $10$ in $H_2$. Grow
+first: $010$ in $H_3$ is the \emph{four}; lifted
+value-preservingly it stays the four. Lift first: the three
+becomes $003$; a zero in front is free, it stays the three. Hence
+$\Omega=4-3=1$. This was long a conjecture and is by now a theorem
+-- the proof runs through a multiplication lemma with a sharp
+regime boundary. The equality cases, too, have meanwhile been
+characterized: a number is indifferent to the order exactly when
+both proof steps are sharp -- carry-free plus a sharp lemma -- and
+the zero count obeys a semi-closed counting formula derived from
+this (confirmed exactly for all measured terms).
+
+\section{Why submit sequences?}
+
+For two reasons, a modest one and a strategic one. The modest one:
+it is a small, genuine service to mathematics -- clean
+definitions, programs, a proved law. The strategic one: the OEIS
+is the best novelty detector in the world. Whoever computes
+$3, 15, 84, 533$ in the future, anywhere, in whatever context,
+will find these entries -- and with them this book. Conversely,
+the entries link back here. Should one of the sequences
+nevertheless be unmasked one day as a known quantity in disguise,
+that too is a result: then we finally know precisely which part of
+Horimetrik is old mathematics in new clothes -- and which is not.
+
+\begin{oberflaeche}
+Nine counting questions, nine rows of answers that apparently
+nobody has written down before. Perhaps because they are new.
+Perhaps only because nobody ever asked. The difference between
+these two possibilities is exactly what a submission settles --
+and that is why we submit.
+\end{oberflaeche}

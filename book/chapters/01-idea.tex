@@ -1,0 +1,111 @@
+\chapter{The Idea: Numbers That Know How Much Room They Have}
+\label{ch:idee}
+
+% Level: surface. No displayed formulas, only numbers in running text.
+% Respect the order of discovery: reversed bases -> finiteness ->
+% leading zeros (correction of 13 July 2026).
+
+\section{An ordering nobody questions}
+
+Every positional number system rests on a silent convention. In the
+decimal system the last digit counts ones, the one before it tens,
+then hundreds -- each position weighs ten times its neighbour. The
+binary system does the same in steps of two. And there is a less
+familiar but venerable system in which the bases are not constant
+but grow: the factorial system. There the last digit may only be 0
+or 1, the next one 0 to 2, the one after that 0 to 3, and so on.
+The further left a position sits, the more it may count \emph{and}
+the more it is worth.
+
+In all these systems the same direction points upward: the position
+with the most freedom carries the most weight. This seems so
+self-evident that nobody ever says it out loud.
+
+Horimetrik begins with the question of what happens when you
+reverse exactly that. What if, of all positions, the
+\emph{tightest} one -- the one that knows only 0 and 1 -- gets the
+greatest weight? What if the positions grow ever more generous
+towards the right, while their influence keeps shrinking?
+
+\section{Enforced finiteness}
+
+The first consequence arrives immediately, and it is not a design
+decision but a necessity. An ordinary number system grows leftward
+into infinity: when a number gets too large, you prepend another
+position with an even greater weight -- there is always room. In
+the reversed system this is impossible. On the left already sits
+the tightest position, the one with base two, and below two there
+is nothing. The system is \emph{sealed} on the left.
+
+Whoever works with a fixed number of positions therefore gets a
+finite supply of numbers. With one position there are two, with two
+positions six, with three twenty-four, with four one hundred and
+twenty -- every additional position multiplies the supply, and the
+sizes that arise are precisely the factorials. Once the supply is
+exhausted, no carry will help: you need a \emph{new system} with
+more positions, in which every old digit suddenly carries a
+different weight.
+
+This finite living space of a number is what we call its
+\emph{horizon}. What at first looks like a defect of the reversed
+system -- you cannot simply keep counting -- is in truth its most
+interesting feature: every number here carries not only a value but
+also the information of which space that value lives in. The
+totality of all horizons remains infinite; only each single one is
+finite. Infinity still exists -- but as a staircase, not as a
+straight line.
+
+\section{The second find: the zeros}
+
+The leading zeros came later, and they came as a surprise. In every
+familiar system a prepended zero is pure cosmetics: 012 is 12. In
+the reversed system you prepend a zero -- and thereby change the
+number.
+
+An example with small numbers. In the horizon with two positions
+the digit string 12 means the value five. Prepend a zero and it
+reads 012 -- but now in a horizon with three positions, in which
+all the weights are distributed differently. The value is six. One
+more zero: 0012, value seven. The digits 1 and 2 have not moved,
+and yet the number counts one further with every extension.
+
+This is the moment at which a curiosity becomes an object of study.
+For if a leading zero changes the value, then there are suddenly
+\emph{two different answers} to the most harmless of all questions:
+what does it mean to give a number more room?
+
+\begin{itemize}
+  \item You can hold its \emph{value} fixed -- then its digits must
+        reorganize themselves when moving into the larger horizon.
+  \item You can hold its \emph{shape} fixed -- the digits stay
+        put, a zero is prepended -- then its value shifts.
+\end{itemize}
+
+In the decimal system these are the same operation. Here they are
+two, and they lead into different worlds. Almost everything this
+book studies lives in the gap between these two notions: the two
+identities of a Hori number that are visible at first (a third will
+reveal itself later), the ways of tidying up, the worlds of
+arithmetic, and the tensions between them.
+
+\section{What was actually invented here -- and what was not}
+
+Honesty belongs here from the start: the building blocks of this
+system are all known mathematics. Number systems with mixed bases
+have existed for centuries, the factorial system is well studied,
+and combinatorics has long known that its spaces have factorial
+size. What is new -- at least we have found it nowhere in this form
+-- is the combination: the reversed reading direction inside a
+finite space, the horizon as part of the number, the
+meaning-carrying zeros, and the two competing ways to grow. Whether
+this combination can carry a theory of its own was the bet on which
+this project began. The following chapters lay the cards on the
+table.
+
+\begin{oberflaeche}
+If only one sentence of this chapter is to remain, let it be this:
+Horimetrik did not arise from a wish to write numbers differently,
+but from the question of what an ordering enforces once you reverse
+it. The answer was: finiteness -- and from finiteness everything
+else followed on its own.
+\end{oberflaeche}

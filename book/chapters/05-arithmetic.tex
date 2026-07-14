@@ -1,0 +1,406 @@
+\chapter{Arithmetic with Memory: the Semiring}
+\label{ch:arithmetik}
+
+% Register: D6, S5, S6, S10-S16, V9. Sources: Spec. 8, Appendices A-C.
+
+Up to this point we have only looked at Hori numbers and shifted
+them about. Now we want to compute with them. That sounds harmless,
+but it is the point at which Horimetrik demands its first genuine
+decision: when two Hori numbers are added, which horizon does the
+result receive?
+
+In the ordinary number system this question never arises -- there a
+result has no horizon, only a value. Here, by contrast, the horizon
+is part of the number. A rule of computation must therefore consist
+of two parts: a rule for the value and a rule for the horizon. The
+horizon rule we call a \emph{selector}.
+
+\section{The first failure and what it teaches}
+
+The most obvious selector is the conservative one: the result
+inherits the largest horizon involved, enlarged if necessary to
+what the result value minimally requires. For addition this works
+flawlessly. For multiplication it fails -- and it fails at the most
+innocent of all numbers.
+
+\begin{sackgasse}
+If one multiplies conservatively, then in general
+$(a\htimes b)\htimes c\ne a\htimes(b\htimes c)$ as soon as a zero
+is involved. The zero erases the \emph{value} of every product, but
+the conservative selector keeps dragging along the \emph{horizons}
+of the intermediate steps. Depending on when the zero strikes, the
+result remembers different computational routes -- same value,
+different horizons, no freedom of bracketing. The lesson: a horizon
+carries computational history, and computational history does not
+automatically get along with the laws of arithmetic.
+\end{sackgasse}
+
+\begin{beispiel}
+Concretely, with the conservative multiplication (horizon = maximum
+of those involved, enlarged if necessary): let $a=b=(2,5)$ -- the
+five with horizon 2 -- and $c=(1,0)$ the zero with horizon 1.
+Bracketed on the left: $a\htimes b=(4,25)$, since $25$ needs
+horizon 4; then $(4,25)\htimes c=(4,0)$. Bracketed on the right:
+$b\htimes c=(2,0)$, then $a\htimes(2,0)=(2,0)$. Both routes end at
+the value zero -- but once with horizon 4, once with horizon 2.
+$(4,0)\ne(2,0)$: no associativity.
+\end{beispiel}
+
+\section{The value-side semiring}
+
+The way out is a division of labour: addition may remember,
+multiplication must forget. (One convention in advance, valid for
+the whole book: we call an arithmetic \emph{law-abiding} if both
+operations are associative and commutative, multiplication
+distributes over addition, and an additively neutral element
+exists. A multiplicative identity and absorption by the additive
+zero we do \emph{not} require in general, but only where they are
+explicitly named -- both are about to meet us as genuine
+distinguishing features.)
+
+\begin{satz}[value-side semiring]\label{satz:a3}
+On the Hori space $\Hori=\{(n,x)\mid n\ge\muh(x)\}$ let, in value
+coordinates $(n,x)$,
+\[
+(n,x)\hplus(m,y)=\bigl(\max(n,m,\muh(x+y)),\,x+y\bigr),
+\qquad
+(n,x)\htimes(m,y)=\bigl(\muh(xy),\,xy\bigr).
+\]
+Then $\hplus$ and $\htimes$ are commutative and associative,
+$\htimes$ distributes over $\hplus$, and $(0,0)$ is neutral for
+$\hplus$ and absorbing for $\htimes$.
+\end{satz}
+
+The proof is astonishingly short; its single core is the
+monotonicity of the minimal horizon: more value never needs less
+room (in full in Appendix~\ref{ch:anhang-beweise}).
+What is remarkable is what this semiring \emph{lacks}: an identity.
+There is no element that leaves everything unchanged under
+multiplication. Instead, for the Hori number one -- that is,
+$(1,1)$, the one in its smallest home -- we have the equation
+\[
+h\htimes(1,1)=\KV(h)
+\qquad\text{with}\quad
+\KV(n,x)=(\muh(x),\,x).
+\]
+Multiplication by one is the value
+compactification.\footnote{Terminological warning:
+``compactification'' is not meant topologically here. Formally
+these are idempotent retractions onto the respective minimal
+horizon -- we keep the intuitive word and ask topologically trained
+readers for their indulgence.} The one acts
+not as a neutral element but as a \emph{projector}: it presses
+every Hori number down to its compact form. The compact elements
+form a small semiring of their own underneath, and it is exactly
+the ordinary $\Nn$. The familiar natural numbers thus sit as a
+``corner'' in the Hori space, and the way there is not an extra
+operation but multiplication by one.
+
+\begin{beispiel}
+Let us work through it once. $(3,7)\hplus(2,5)$: value $12$,
+horizon $\max(3,2,\muh(12))=\max(3,2,3)=3$, hence $(3,12)$ -- the
+largest horizon involved survives. $(3,7)\htimes(2,5)$: value $35$,
+horizon $\muh(35)=4$, hence $(4,35)$ -- the past is forgotten. And
+the projector: the seven with an unnecessarily large horizon,
+$(5,7)$, times the one $(1,1)$ gives
+$(\muh(7),7)=(3,7)$ -- multiplication by one has tidied up.
+\end{beispiel}
+
+\begin{oberflaeche}
+What has happened here? We have found an arithmetic in which
+numbers remember their past when added -- the largest horizon
+involved survives -- and are born anew when multiplied. And the
+ordinary arithmetic we have known since primary school is contained
+within it: as the part of the Hori space that carries no past.
+\end{oberflaeche}
+
+\section{Excess: memory acquires a coordinate}
+
+For a long time it looked as though this forgetting multiplication
+had no alternative. The natural conjecture was that the laws of
+arithmetic destroy every other horizon rule. It is false, and the
+refutation is more instructive than a proof would have been.
+
+The horizon of every Hori number splits canonically into two parts:
+\[
+n=\underbrace{\muh(x)}_{\text{obligation}}
+ +\underbrace{\varepsilon}_{\text{excess}} .
+\]
+The obligatory part is the minimum the value needs; the excess is
+memory carried along voluntarily. This decomposition is not a
+convention but is uniquely determined by the factorial shells --
+and it decouples the question of the selector completely: one may
+compute on the excess \emph{independently}.
+
+\begin{satz}[product principle]\label{satz:produktprinzip}
+Every commutative semiring structure on the excesses yields a
+law-abiding Hori arithmetic: values compute in the ordinary way,
+excesses compute in the chosen structure.
+\end{satz}
+
+The product principle thus supplies a whole family of new
+arithmetics. Together with the forgetting semiring already
+constructed in Theorem~\ref{satz:a3} -- which, mind you, is
+\emph{not} a product construction: its addition selector compares
+the horizons themselves, not merely the excesses -- three
+particularly natural arithmetics emerge:
+
+\begin{center}
+\small
+\begin{tabular}{lccc}
+ & memory under $+$ & memory under $\times$ & identity \\
+\hline
+forgetting (Thm.~\ref{satz:a3}; not a product) & maximum (of horizons) & dies & none \\
+preserving (tropical) & maximum & adds up & $(1,1)$ \\
+amplifying (arithmetic) & adds up & multiplies & $(2,1)$ \\
+\end{tabular}
+\end{center}
+
+\begin{beispiel}
+Let $a=(5,7)$ -- obligation $\muh(7)=3$, excess $2$ -- and
+$b=(3,5)$ -- obligation $2$, excess $1$. The product has value $35$
+with obligation $\muh(35)=4$. The three arithmetics differ only in
+the excess of the result: forgetting $(4,35)$ (excess $0$),
+preserving $(4{+}2{+}1,35)=(7,35)$ (excesses add up),
+amplifying $(4{+}2,35)=(6,35)$ (excesses multiply:
+$2\cdot1=2$).
+\end{beispiel}
+
+The preserving arithmetic has a curiosity: its zero does not
+absorb. If one multiplies a Hori number by zero, the value is wiped
+out, but the memory survives. The amplifying arithmetic, by
+contrast, is a fully fledged commutative semiring with identity and
+absorbing zero -- and its multiplication does not erase memory
+wholesale but reckons with it arithmetically. Admittedly it too is
+not entirely faithful to memory: an operand with excess zero
+absorbs the other's memory, since zero times anything remains
+zero -- and exactly this is where its absorbing zero comes from.
+
+\begin{oberflaeche}
+The question ``which horizon does the result receive?'' has turned
+into something far more beautiful: ``what is to happen to the past
+when computation takes place?'' And Horimetrik's answer is: that is
+yours to choose -- forget, preserve, or amplify -- and each choice
+yields a world that is perfectly free of contradiction within
+itself.
+\end{oberflaeche}
+
+\section{The duality: the same one, two projectors}
+
+Up to this point everything computed on the value side. But Hori
+numbers carry, besides their value, their shape as well (and, since
+Chapter~\ref{ch:erweiterungen}, the fraction -- of which more in
+Section~\ref{sec:seitentreue}) -- and the shape side has
+an arithmetic of its own. Instead of the
+values one can add and multiply the \emph{structure polynomials};
+that is digit-wise computation without carries, in which, for
+instance, the structures of $4$ and $5$ directly give rise to the
+structure of $20$.
+
+\begin{satz}[duality theorem]\label{satz:dualitaet}
+The Hori space carries a second, structure-side semiring: addition
+conservative, multiplication compact -- but measured against the
+structure horizon $\sigmah$ instead of the value horizon $\muh$.
+Computation takes place in structure coordinates $(n,P)$; via the
+digit bijection from Chapter~\ref{ch:horizonte}, $(n,x)$ and the
+pair consisting of $n$ and the shape of $x$ denote the same
+element. In this semiring
+\[
+h\boxtimes(1,1)=\KS(h)
+\qquad\text{with}\quad
+\KS(n,P)=(\sigmah(P),\,P),
+\]
+and $\KS$ is compatible with both operations. The corner of this
+semiring is the space of structure polynomials.
+\end{satz}
+
+The punchline deserves a paragraph of its own. It is the
+\emph{same} Hori number $(1,1)$ -- the one -- that carries the
+projector $\KV$ on the value side and the projector $\KS$ on the
+structure side. Two multiplications, one element. And the oldest
+result of this project -- that the two tidying operations do not
+commute; the next section makes this formal -- turns out to be the
+non-commuting of these two multiplications with one and the same
+one.
+
+\section{Tidying up: the commutator and the depth law}
+\label{sec:kommutator}
+
+Because a whole thematic strand of this book rests on them, we now
+place the two projectors side by side (Register D6):
+\[
+\KV(n,x)=(\muh(x),\,x),
+\qquad
+\KS(n,P)=(\sigmah(P),\,P).
+\]
+$\KV$ tidies up \emph{value-compactly}: same value, smallest
+horizon -- the shape is recoded in the process. $\KS$ tidies up
+\emph{structure-compactly}: same shape, smallest horizon -- the
+value migrates downwards with the evaluation point. Both are
+idempotent, but they do not commute, and the deviation is
+measurable. We call
+\[
+\delta(h)=\hor\bigl(\KS\KV(h)\bigr)-\hor\bigl(\KV\KS(h)\bigr)
+\]
+the \emph{compactification commutator}; its negative values are
+called \emph{depth}.
+
+\begin{beispiel}
+The house spirit of this book: $h=(6,6)$, the six in terminal
+representation. $\KV$ first: $(6,6)\mapsto(3,6)$; there the six has
+the shape $X{+}2$ with $\sigmah=2$, hence
+$\KS\KV(h)=(2,5)$ -- horizon~$2$. $\KS$ first: the constant shape
+$6$ is already structure-compact, $\KS(h)=h$, then
+$\KV(h)=(3,6)$ -- horizon~$3$. Hence $\delta(h)=2-3=-1$: the order
+of tidying up decides where you end up -- and as what.
+\end{beispiel}
+
+Upwards, $\delta$ grows comparatively fast; the smallest witness
+for $+2$ is the $720$ as shape $\ff X3$ in horizon $9$
+(the ``single one in the fourth place'' from the last
+interlude). Downwards, by contrast, $\delta$ is factorially
+sluggish, and this sluggishness obeys an exact law. Call
+\[
+g(m)=m-\min\{s\mid M_s(m{+}1)\ge m!\}
+\]
+the \emph{shell gap} of the shell $S_m$: how far below $m$ the
+capacity of a shape may lie whose value nevertheless still reaches
+$S_m$ ($M_s$ is the maximally filled shape from
+Chapter~\ref{ch:strukturpolynome}).
+
+\begin{satz}[depth law, lower side; Register S33]
+\label{satz:tiefengesetz}
+For every shell $m\ge3$ we have
+\[
+\min\{\delta(h)\mid \muh(\val(h))=m\}=-g(m),
+\]
+and an always serviceable witness -- in general not the only
+one -- is the terminal representation of the maximal-polynomial
+value $M_{m-g(m)}(m{+}1)$. The jump positions
+$m_g=\min\{m\mid g(m)\ge g\}$
+form a counting sequence with proven asymptotics
+$m_g/(g{+}2)!\to1$ (proofs in Appendix~\ref{ch:anhang-beweise}).
+\end{satz}
+
+For shell $3$ the witness is exactly the house spirit from above,
+and $m_1=3$: from the third shell onwards depth $-1$ is possible,
+from the fifteenth $-2$, from the eighty-fourth $-3$. The
+\emph{two-sided fixed points}, finally, are the elements that
+tidying up can no longer touch -- fixed by $\KV$
+\emph{and} $\KS$ at once, that is, $n=\muh(x)=\sigmah(P)$. Both
+notions, jump positions and fixed points alike, are counted in
+Chapter~\ref{ch:zaehlungen}.
+
+One fine-grained detail of this non-commutativity deserves mention:
+the transformation monoid generated by $\KV$ and $\KS$ -- the
+\emph{compactification monoid} -- is finite: exactly six elements,
+all of which are idempotent except $\KV\KS$
+(Register S21; proof in Appendix~\ref{ch:anhang-beweise}). The
+witness with the smallest \emph{value} is again the house spirit
+$(6,6)$; in the smallest \emph{world} the idempotence of
+$\KV\KS$ already fails at $(5,25)$.
+
+\section{Side fidelity}
+\label{sec:seitentreue}
+
+Can the two sides be interwoven -- say, adding on the value side
+and multiplying on the structure side? Law-abiding here means, as
+agreed at the outset: both operations commutative and associative,
+multiplication distributes, an additive zero exists. The systematic
+test of all sixteen combinations -- value or shape as payload,
+conservative or compact as selector, for each of the two
+operations -- then gives a clear answer: exactly two \emph{of these
+sixteen} are law-abiding, the value-side semiring and its
+structure-side mirror. (The product family from
+Theorem~\ref{satz:produktprinzip} stands outside this grid -- its
+selectors compute on excesses -- and is law-abiding throughout, but
+stays entirely on the value side.) All eight mixed candidates die
+of distributivity; the remaining six side-pure ones fail at
+neutrality (compact addition forgets the operand's horizon) or at
+associativity (conservative multiplication, the zero problem from
+the beginning of the chapter).
+
+\begin{beispiel}
+The paradigmatic witness, digit by digit. (In this example $\oplus$
+and $\otimes$ denote the mixed candidate arithmetic, not the
+operations from Theorem~\ref{satz:a3}; \emph{value-carried} means:
+the operation reckons with the values, \emph{structure-carried}:
+with the shapes.) Let $a=b=(1,1)$ and
+$c=(2,5)$, whose shape is $X+2$ (digits $12$). Adding
+value-carried, $b\oplus c=(3,6)$; in $H_3$ the six happens to have
+the shape $X+2$ as well (digits $012$). Multiplying now
+structure-carried by $a$ (shape $1$), the shape $X+2$ persists and
+is evaluated compactly at horizon 2: result
+$(2,5)$ -- \emph{the value has dropped from 6 to 5}, because the
+structure multiplication knows only the shape. On the right, by
+contrast: $a\otimes b=(1,1)$, $a\otimes c=(2,5)$, added
+value-carried $(3,6)$. Left $(2,5)$, right $(3,6)$: distributivity
+is dead, and one sees exactly why -- one side honestly keeps
+computing with the value, the other lost it in the change of
+shape.
+\end{beispiel}
+
+\begin{satz}[side fidelity theorem]\label{satz:seitentreue}
+Every law-abiding arithmetic \emph{of the payload-carried form
+considered here} -- the operations carry value, shape,
+or fraction, the horizon rules are arbitrary -- is side-pure:
+addition and multiplication both operate on the value side or
+both on the structure side.
+\end{satz}
+
+The restriction to payload-carried operations is essential: on a
+countable set any semiring structure whatsoever can be defined by
+transport -- the theorem speaks about the arithmetics that
+\emph{respect} value, shape, or fraction, and about these it
+speaks completely.
+
+On its exact reach: depending on the case, the proof needs even
+less than full law-abidingness -- one mixed case dies of left
+distributivity alone, the other of two-sided distributivity (which
+belongs to every semiring, including non-commutative ones): right
+distributivity mirrors the chain construction and replaces
+commutativity. Non-commutative mixed forms are thereby excluded as
+well; all that remains conceivable is a mixed system that is
+distributive on \emph{one side} only -- a curiosity outside any
+semiring axiomatics.
+
+The proof deserves to have its core idea told, for it has a
+punchline (in full in Appendix~\ref{ch:anhang-beweise}). At first things looked bad: individual
+computations that a mixed arithmetic would have to satisfy are in
+fact solvable -- in part via Pell equations, that is, exactly the
+kind of number theory that likes to produce exceptions. A direct
+contradiction seemed out of reach. The decisive weapon is
+astonishingly plain: the \emph{constants}. If one multiplies a
+chain of numbers built up by addition with ever larger constant
+structures, the digit bound drives the evaluation horizons to
+infinity -- and a non-constant polynomial cannot take the same
+value at arbitrarily many points. That forces the chain links to
+be constant. Constants, however, die at the next multiplier,
+because there too the digit bound makes the horizon grow linearly,
+while distributivity demands linear growth of the value. Both mixed
+forms break at the very same spot.
+
+By now the theorem even has a third dimension: the fraction
+identity from Chapter~\ref{ch:erweiterungen} can be interwoven
+neither with the value side nor with the shape side, and it carries
+no arithmetic of its own (its addition can exceed
+one). Side fidelity is a trilogy: three identities,
+two computational worlds, no mixture -- proofs in
+Appendix~\ref{ch:anhang-beweise}.
+
+The punchline: the source of the rigidity is the digit condition
+$0\le a_i\le i$ -- the very first, most innocent rule of this book.
+The rule with which everything began is exactly the rule that
+prevents value and shape from ever merging into one arithmetic. It
+is not the horizon rules that are rigid; rigid are the identities.
+
+\begin{oberflaeche}
+A Hori number has three identities: what it is worth, what it
+looks like, and which fraction it is. This chapter has shown that
+the first two carry fully fledged, mirror-image computational
+worlds, that one and the same one works as doorkeeper in both
+worlds -- and, as a proven theorem: that nobody can compute in two
+worlds at once, while the third carries none of its own. One must
+choose. That is the deepest theorem Horimetrik has to offer:
+consistency has a price, and the price is an identity.
+\end{oberflaeche}

@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# LaTeX-Build (PDFs von buch/ und fachtext/ werden bewusst versioniert)
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+
+# Python
+__pycache__/
+*.pyc
+
+# Temporäres
+*.tmp

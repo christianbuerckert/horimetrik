@@ -1,0 +1,114 @@
+\chapter{Offene Fragen und ein Forschungsprogramm}
+\label{ch:offen}
+
+% Quelle: conjectures.md, Stand Version 0.7.
+
+Bevor das letzte Kapitel die Theorie auf der Landkarte der
+Mathematik verortet, ein ehrlicher Zwischenhalt: nicht, was
+bewiesen wurde -- das haben die vorigen Kapitel getan --, sondern
+was offen ist, und in welcher Reihenfolge es sich zu versuchen
+lohnt.
+
+\section{Die nächstliegenden Fragen}
+
+\paragraph{Die Ziffernbilder der Fakultäten.} Die Ziffernformel für
+die Schalenspringer hat die Frage verschoben: Nicht mehr „wie viele
+Springer gibt es?“, sondern „wie schreibt sich $n!$ in seiner
+eigenen Schale?“. Erste Muster liegen vor: Die Zahl der führenden
+Nullen wächst wie die Umkehrfunktion der Fakultät, und die
+Ein-Ziffern-Fälle sind inzwischen \emph{vollständig}
+charakterisiert: Es sind exakt die $n=(i+1)!/d-1$ mit $1\le d\le i$,
+genau $i$ Stück pro Position, und die Vorhersagen $n=29,39,59,119$
+sowie $143,179,239,359,719$ trafen alle ein
+(Anhang~\ref{ch:anhang-beweise}). Eine vollständige Theorie der
+übrigen Ziffernbilder (Verteilung der Nichtnull-Anzahl, Position der
+ersten Maximalziffer) fehlt weiterhin.
+
+\paragraph{Die Feinstruktur der Interchange-Gleichheit.} Die
+Positivität des Interchange-Defekts und die Charakterisierung der
+Gleichheitsfälle sind bewiesen (Anhang~\ref{ch:anhang-beweise});
+die Zählfolge $2$, $5$, $13$, $23$, $61$, $111$, $274$,
+$564,\ldots$ gehorcht einer semi-geschlossenen Formel über die
+scharfen Quotienten $q'$ aus dem Positivitätsbeweis, und
+deren vollständige Ziffernentfaltung ist inzwischen bewiesen: pro
+Ebene zwei Ungleichungen, ein wachsender Exzess, ein Abstieg
+(Anhang~\ref{ch:anhang-beweise}). Die Asymptotik des
+Nullzähler-Anteils ist inzwischen nach oben geklärt: Gleichgültigkeit gegenüber der Wachstumsreihenfolge ist
+asymptotisch extrem selten -- der Anteil fällt mindestens wie
+$e^{-(1+o(1))\,n\ln n}$, weil die Scharfheit die Ziffern ebenenweise
+abwürgt. Offen bleibt die passende untere Schranke.
+
+\paragraph{Die obere Seite des Tiefengesetzes.} Die untere Seite
+ist inzwischen vollständig bewiesen -- Sprungstellen, Asymptotik
+und, als letztes Stück während der Schlussredaktion, die exakte
+Gleichheit: Die maximale Tiefe in Schale $m$ ist \emph{genau} die
+Schalenlücke, und ein stets tauglicher Zeuge ist die
+Terminaldarstellung des Maximalpolynom-Wertes (für Schale 3: die
+Hausgeist-Zahl $(6,6)$).
+Offen ist nur noch die obere Seite: Wie schnell wächst das
+\emph{Maximum} des Kommutators? Hier ist Vorsicht geboten, und zwar
+methodisch begründete: Exhaustiv gesichert ist nur der erste Sprung
+($+2$ ab der neunten Welt). Alle späteren Schwellen sind bloß nach
+oben beschränkt ($+3$ spätestens ab der vierzehnten, $+4$ spätestens
+ab der zwanzigsten, $+5$ spätestens ab der sechsundzwanzigsten) --
+jede Vertiefung der Zeugensuche hat sie bisher nach vorn verschoben,
+und zwei voreilige Formelhypothesen sind an genau dieser Front
+gestorben, eine davon noch vor ihrer Niederschrift.
+
+\section{Die strukturellen Fragen}
+
+\paragraph{Gekoppelte Arithmetiken.} Der Seitentreue-Satz verbietet
+das Mischen der Identitäten; \emph{innerhalb} einer Seite ist die
+Landschaft aber nicht klassifiziert. Die Produktkonstruktionen über
+den Exzess liefern eine ganze Familie; der konservativ-kompakte
+Halbring ist nachweislich keine davon. Gibt es weitere gekoppelte
+Strukturen? Gibt es eine vollständige Klassifikation pro Seite?
+
+\paragraph{Nachtrag: der nichtkommutative Mischfall ist geschlossen.}
+Auch diese Lücke fiel während der Schlussredaktion: Verlangt man,
+wie in jedem Halbring, \emph{beide} Distributivgesetze, so spiegelt
+die Rechts-Distributivität die Kettenkonstruktion und ersetzt die
+Kommutativität vollständig (Beweis in
+Anhang~\ref{ch:anhang-beweise}). Was übrig bleibt, ist nur die
+Kuriosität eines einseitig distributiven Mischsystems -- außerhalb
+jeder Halbring-Axiomatik, und ehrlicherweise eher eine Fußnote als
+eine Frage.
+
+\paragraph{Nachtrag: die dreiseitige Seitentreue ist bewiesen.}
+Während der Schlussredaktion fiel auch der letzte Fall
+(Gestalt-Addition mit Bruch-Multiplikation): Die Kettengleichung
+erzwingt die polynomiale Identität $2A(Y)=Y^{\underline{k}}$, die
+den Koeffizienten $\tfrac12$ verlangt -- Ziffern sind aber ganz.
+Zusammen mit den zwei zuvor entschiedenen Fällen gilt: Es gibt genau
+zwei Rechenwelten (Wert und Gestalt), und der Bruch trägt keine
+dritte und mischt sich in keine. Details in
+Anhang~\ref{ch:anhang-beweise}. Offen bleibt hier also -- nichts
+mehr; die Frage wandert als bewiesener Satz in
+Kapitel~\ref{ch:arithmetik}.
+
+\paragraph{Formalisierung.} Der Seitentreue-Satz ist elementar
+genug für eine vollständige Formalisierung in Lean; die fallenden
+Fakultäten liegen in Mathlib bereits vor. Das wäre der Goldstandard
+der Absicherung -- und ein Beitrag zur Formal-Methods-Gemeinde
+gleich mit.
+
+\section{Woran sich die Theorie messen lassen will}
+
+Zum Schluss die Frage hinter allen Fragen: Wann wäre die Horimetrik
+\emph{gescheitert}, wann \emph{gelungen}? Gescheitert, wenn sich
+ein bestehender Formalismus findet, in dem Horizont, Dualität und
+Seitentreue nur Umbenennungen sind -- die Literatursuche hat ihn
+nicht gefunden, aber Suchen beweisen nichts. Gelungen, wenn eines
+von dreien eintritt: wenn die Zählfolgen dieses Buchs anderswo
+unabhängig auftauchen; wenn der Seitentreue-Satz oder das
+Tiefengesetz in fremder Sprache neu bewiesen wird; oder wenn
+jemand, der dieses Buch nie gelesen hat, an den Ziffern von $n!$
+in der eigenen Schale dieselbe Freude findet wie wir.
+
+\begin{oberflaeche}
+Eine Theorie ist fertig, wenn sie keine Fragen mehr erzeugt. Nach
+diesem Maßstab ist die Horimetrik erfreulich unfertig -- und genau
+so soll dieser Zwischenhalt enden: nicht mit einem Punkt, sondern
+mit einem Doppelpunkt. Was bleibt, ist die Frage nach der Adresse:
+Wo auf der Landkarte wohnt das alles?
+\end{oberflaeche}

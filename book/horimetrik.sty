@@ -1,0 +1,51 @@
+% Horimetrik macros and environments (English edition)
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{horimetrik}[2026/07/14 Horimetrik notation, English edition]
+
+% Spaces
+\newcommand{\Hn}[1]{H_{#1}}                 % finite horizon
+\newcommand{\Hori}{\mathcal H}              % full Hori space
+\newcommand{\Struk}{\mathcal S}             % structure semiring
+\newcommand{\N}{\mathbb N}
+\newcommand{\Nn}{\mathbb N_0}
+
+% Maps
+\newcommand{\val}{\operatorname{val}}
+\newcommand{\hor}{\operatorname{hor}}
+\newcommand{\enc}[1]{E_{#1}}                % encoding into H_n
+\newcommand{\lift}{L}                       % value-preserving lift
+\newcommand{\zext}{Z}                       % structure-preserving extension
+\newcommand{\KS}{K_S}
+\newcommand{\KV}{K_V}
+\newcommand{\muh}{\mu}                      % minimal horizon of a value
+\newcommand{\sigmah}{\sigma}                % structure horizon
+
+% falling factorial
+\newcommand{\ff}[2]{#1^{\underline{#2}}}
+
+% operations of the conservative-compact semiring
+\newcommand{\hplus}{\oplus}
+\newcommand{\htimes}{\otimes}
+
+% concrete Hori numbers: \hz{0012}{4} -> 0012_{H_4}
+\newcommand{\hz}[2]{#1_{H_{#2}}}
+
+% theorem environments (same environment names as the German original,
+% so the chapter sources stay in one-to-one correspondence)
+\theoremstyle{plain}
+\newtheorem{satz}{Theorem}[chapter]
+\newtheorem{lemma}[satz]{Lemma}
+\newtheorem{vermutung}[satz]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{definition}[satz]{Definition}
+\newtheorem{beispiel}[satz]{Example}
+\theoremstyle{remark}
+\newtheorem{bemerkung}[satz]{Remark}
+\newtheorem*{sackgasse}{Dead end}
+
+% Interlude: back to the surface, deliberately formula-free
+\newenvironment{oberflaeche}
+  {\par\medskip\noindent\textbf{Back to the surface.}\itshape\par}
+  {\par\medskip}
+
+\endinput

@@ -1,0 +1,118 @@
+\chapter{Neun Zählfolgen aus der Horimetrik}
+\label{ch:zaehlungen}
+
+% Register: D8, D9, S9, S19, S22, S41, V11. Quellen: Anhang A.4-A.6,
+% C.6, F.1-F.5, H, oeis/ENTWUERFE.md.
+
+Theorien hinterlassen Fingerabdrücke: Zahlenfolgen, die beim Zählen
+ihrer Objekte entstehen. Die Horimetrik hat im Lauf dieses Projekts
+neun solcher Folgen erzeugt, und keine davon findet sich in der
+OEIS, der großen Enzyklopädie der Zahlenfolgen -- was kein Beweis
+für Neuheit ist, aber ein Indiz, dass hier bisher niemand gezählt
+hat. Alle neun werden bei der OEIS eingereicht; die zugeteilten
+A-Nummern tragen wir nach Vergabe hier nach.\footnote{Platzhalter:
+A??????. Die Einreichungsentwürfe mit jargonfreien Definitionen und
+Programmen liegen im Projektordner \texttt{oeis/}.}
+
+\section{Die Steckbriefe}
+
+\paragraph{Die Sprungstellen des Tiefengesetzes.}
+$3,\ 15,\ 84,\ 533,\ 3883,\ 31998,\ 294875,\ 3006206,\ \ldots$
+Die Schale, in der die Kommutator-Tiefe
+(Satz~\ref{satz:tiefengesetz}) erstmals $-g$ erreicht.
+Die Königin unserer Folgen: Für sie ist ein asymptotisches Gesetz
+\emph{bewiesen} ($m_g/(g+2)!\to1$), und sie hat drei Vorhersagetests
+bestanden -- den letzten exakt: $m_7=294875$ wurde prognostiziert,
+bevor es berechnet war.
+
+\paragraph{Die maximale Produkthöhe von Quadraten.}
+$1,\ 6,\ 22,\ 87,\ 407,\ 2473,\ 19527,\ \ldots$
+Wie groß ein Horizont werden kann, wenn man zwei randvolle
+Gestalten der Kapazität $r$ multipliziert (Register D8). Inzwischen bewiesen: Die Folge wächst wie
+$r!\cdot e^{2\sqrt r+O(\log r)}$ -- eine Fakultät mal einem sanft
+explodierenden Faktor (Anhang~\ref{ch:anhang-beweise}); nur die
+Feinstruktur des Logarithmus-Terms ist noch offen.
+
+\paragraph{Die Schalenspringer.}
+$1,\ 8,\ 60,\ 360,\ 2520,\ 21168,\ 211680,\ 2268000,\ \ldots$
+Die Anzahl der Zahlen, die eine einzige führende Null in die
+nächste Fakultätsschale hebt. Diese Folge hat uns das
+$n!/2$-Debakel beschert (Kapitel~\ref{ch:sackgassen}): Drei Terme
+lang sah sie aus wie eine Halbfakultät, beim vierten nicht mehr.
+Ihr Komplement, die \emph{Nicht-Springer} $n!-D(n)$
+($5,\ 16,\ 60,\ 360,\ 2520,\ 19152,\ \ldots$), zählt als eigene
+Folge der Sammlung -- ausgezeichnet durch eine vollständig
+bewiesene geschlossene Formel, die Ziffernformel aus
+Anhang~\ref{ch:anhang-beweise}.
+
+\paragraph{Die beidseitigen Fixpunkte.}
+$4,\ 17,\ 88,\ 540,\ 3960,\ 32760,\ \ldots$
+Zahlen, deren Darstellung unter beiden Aufräum-Operationen
+gleichzeitig stabil ist (Abschnitt~\ref{sec:kommutator}); zählbar
+als $n\cdot n!$ minus Schalenspringer, denn von den $n\cdot n!$
+wertkompakten Elementen einer Schale scheitern an der
+Strukturkompaktheit genau die ohne Anschlag-Ziffer -- und das sind
+die Springer-Folgen.
+
+\paragraph{Die Ein-Ziffern-Fakultäten.}
+$1,\ 2,\ 5,\ 7,\ 11,\ 23,\ 29,\ 39,\ 59,\ 119,\ 143,\ \ldots$
+Die $n$, für die $n!$ in seiner eigenen Schale eine einzelne Ziffer
+ist -- vollständig charakterisiert als $n=(i+1)!/d-1$ mit
+$1\le d\le i$, genau $i$ Stück pro Position
+(Anhang~\ref{ch:anhang-beweise}); die Position $i=1$ liefert den
+trivialen Anfangsterm $n=1$. Die einzige unserer Folgen, die
+schon bei ihrer Entdeckung eine geschlossene Beschreibung mitbrachte
+-- und der Lieferant von neun exakt eingetroffenen Vorhersagen.
+
+\paragraph{Die Kompositions-Explosion.}
+$1,\ 4,\ 23,\ 6541,\ 477\,149\,751,\ 26\,594\,371\,862\,819\,905,\ \ldots$
+Wie hoch die Kapazität klettern kann, wenn man eine randvolle
+Gestalt der Kapazität $r$ in eine ebensolche \emph{einsetzt}
+(Kapitel~\ref{ch:strukturpolynome}). Die jüngste und mit weitem
+Abstand am schnellsten wachsende Folge der Sammlung: Einsetzen
+multipliziert die Grade und lässt die Koeffizienten explodieren.
+Dank Extremalprinzip trotzdem mühelos berechenbar -- ein einziges
+kanonisches Einsetzen pro Term. Ihre Asymptotik ist offen.
+
+\paragraph{Die Interchange-Maxima und -Nullzähler.}
+$0,\ 1,\ 6,\ 43,\ 351,\ 2873,\ 26443,\ 270291,\ \ldots$ und
+$2,\ 5,\ 13,\ 23,\ 61,\ 111,\ 274,\ 564,\ \ldots$
+Die beiden Wachstumsoperationen -- erst Null voran, dann werttreu
+umziehen, oder umgekehrt -- vertauschen nicht. Den Unterschied
+misst der \emph{Interchange-Defekt} $\Omega$: der Wert nach „erst
+wachsen, dann liften“ minus der Wert nach „erst liften, dann
+wachsen“. Dieser Defekt ist \emph{niemals negativ}: Erst wachsen,
+dann liften liefert nie weniger. Das kleinste
+lehrreiche Beispiel ist die Drei als $10$ in $H_2$: Erst wachsen:
+$010$ in $H_3$ ist die \emph{Vier}; werttreu geliftet bleibt es die
+Vier. Erst liften: die Drei wird zu $003$; eine Null davor ist
+gratis, es bleibt die Drei. Also $\Omega=4-3=1$. Das war lange Vermutung und ist inzwischen
+Satz -- der Beweis läuft über ein Multiplikationslemma mit scharfer
+Regime-Grenze. Auch die Gleichheitsfälle sind inzwischen
+charakterisiert: gleichgültig gegenüber der Reihenfolge ist eine
+Zahl genau dann, wenn beide Beweisschritte scharf sind --
+übertragsfrei plus scharfes Lemma -- und der Nullzähler gehorcht
+einer daraus abgeleiteten semi-geschlossenen Zählformel (exakt
+bestätigt für alle gemessenen Terme).
+
+\section{Warum Folgen einreichen?}
+
+Aus zwei Gründen, einem bescheidenen und einem strategischen. Der
+bescheidene: Es ist ein kleiner, echter Dienst an der Mathematik --
+saubere Definitionen, Programme, ein bewiesenes Gesetz. Der
+strategische: Die OEIS ist der beste Neuheitsdetektor der Welt.
+Wer irgendwo, in welchem Kontext auch immer, künftig
+$3, 15, 84, 533$ ausrechnet, findet diese Einträge -- und damit
+dieses Buch. Umgekehrt verlinken die Einträge hierher. Sollte eine
+der Folgen doch eines Tages als bekannte Größe in Verkleidung
+enttarnt werden, ist auch das ein Ergebnis: Dann wissen wir endlich
+präzise, welcher Teil der Horimetrik alte Mathematik in neuen
+Kleidern ist -- und welcher nicht.
+
+\begin{oberflaeche}
+Neun Zählfragen, neun Antwortreihen, die offenbar noch niemand
+aufgeschrieben hat. Vielleicht, weil sie neu sind. Vielleicht nur,
+weil nie jemand gefragt hat. Der Unterschied zwischen diesen beiden
+Möglichkeiten ist genau das, was eine Einreichung klärt -- und
+darum reichen wir ein.
+\end{oberflaeche}

@@ -1,0 +1,33 @@
+%I
+%S 1,2,5,16,60,360,2520,19152,151200,1360800,13305600,159667200,1997835840,25427001600,
+%T 359610451200,5304897438976,85957795123200,1440534083788800,25342729251840000,
+%U 493338462769152000,9729848120952960000,200057757401069568000,4308669456480829440000
+%N a(n) is the number of digit sequences (d_1,...,d_n) with 0 <= d_i <= i-1 for all i and Sum_{i=1..n} d_i*(n+1)!/(i+1)! < n!.
+%C In the Horimetrik framework (see LINKS) these are the "non-jumpers" (Nicht-Springer).
+%C Equivalently: the number of x < n! NOT pushed into the next factorial shell by prepending a zero digit in the mixed-radix system with decreasing bases. Complement of the shell jumpers within the n! capped digit sequences.
+%C The closed digit formula (see FORMULA) is proved; terms verified independently by exhaustive enumeration for n <= 10.
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik/blob/main/buch/main.pdf">Horimetrik - Zahlen mit Horizont (book PDF, in German)</a>
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik/blob/main/book/main.pdf">Horimetrik - Numbers with a Horizon (book PDF, English translation)</a>
+%H Christian Felix Bürckert, <a href="https://doi.org/10.5281/zenodo.21400755">Horimetrik - Zahlen mit Horizont / Numbers with a Horizon (archived books and paper, Zenodo)</a>
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik">Horimetrik (proofs, programs, and b-files)</a>
+%F a(n) = Sum_{p=1..P} min(d_p, p)*n!/p!, where (d_1,...,d_n) is the digit sequence of n! at horizon n and P is the least p with d_p = p, or n if no maximal digit exists.
+%e For n=3: 3! = 6 has digits (0,1,2) at horizon 3, no digit is at its cap, so P=3 and a(3) = 0*6/1! + 1*6/2! + 2*6/3! = 0 + 3 + 2 = 5. Indeed exactly (0,0,0), (0,0,1), (0,0,2), (0,1,0), (0,1,1) - values 0, 1, 2, 4, 5 - stay below 6.
+%o (Python)
+%o from math import factorial
+%o def N(n):
+%o     x, digits = factorial(n), []
+%o     for base in range(n+1, 1, -1):
+%o         x, r = divmod(x, base)
+%o         digits.append(r)
+%o     d = digits[::-1]
+%o     P = n
+%o     for p in range(1, n+1):
+%o         if d[p-1] == p:
+%o             P = p
+%o             break
+%o     return sum(min(d[p-1], p)*factorial(n)//factorial(p) for p in range(1, P+1))
+%o a = N
+%Y Cf. A000142.
+%K nonn
+%O 1,2
+%A _Christian Felix Bürckert_, Jul 14 2026

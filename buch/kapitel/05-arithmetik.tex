@@ -1,0 +1,408 @@
+\chapter{Arithmetik mit Gedächtnis: der Halbring}
+\label{ch:arithmetik}
+
+% Register: D6, S5, S6, S10-S16, V9. Quellen: Spez. 8, Anhang A-C.
+
+Bis hierher haben wir Hori-Zahlen nur betrachtet und verschoben.
+Jetzt wollen wir mit ihnen rechnen. Das klingt harmlos,
+ist aber die Stelle, an der die Horimetrik ihre erste echte
+Entscheidung verlangt: Wenn zwei Hori-Zahlen addiert werden, welchen
+Horizont bekommt das Ergebnis?
+
+Im gewöhnlichen Zahlensystem stellt sich diese Frage nicht -- dort hat
+ein Ergebnis keinen Horizont, nur einen Wert. Hier dagegen ist der
+Horizont Teil der Zahl. Eine Rechenvorschrift muss deshalb aus zwei
+Teilen bestehen: einer Regel für den Wert und einer Regel für den
+Horizont. Die Horizontregel nennen wir einen \emph{Selektor}.
+
+\section{Der erste Fehlschlag und was er lehrt}
+
+Der naheliegendste Selektor ist der konservative: Das Ergebnis erbt
+den größten beteiligten Horizont, notfalls vergrößert um das, was der
+Ergebniswert mindestens braucht. Für die Addition funktioniert das
+tadellos. Für die Multiplikation scheitert es -- und zwar an der
+unschuldigsten aller Zahlen.
+
+\begin{sackgasse}
+Multipliziert man konservativ, dann gilt im Allgemeinen
+$(a\htimes b)\htimes c\ne a\htimes(b\htimes c)$, sobald eine Null
+beteiligt ist. Die Null löscht den \emph{Wert} jedes Produkts, aber
+der konservative Selektor schleppt die \emph{Horizonte} der
+Zwischenschritte weiter mit. Je nachdem, wann die Null zuschlägt,
+erinnert sich das Ergebnis an verschiedene Rechenwege -- gleicher
+Wert, verschiedene Horizonte, keine Klammerfreiheit. Lehre: Ein
+Horizont trägt Rechengeschichte, und Rechengeschichte verträgt sich
+nicht automatisch mit den Rechengesetzen.
+\end{sackgasse}
+
+\begin{beispiel}
+Konkret, mit der konservativen Multiplikation (Horizont = Maximum
+der Beteiligten, notfalls vergrößert): Es sei $a=b=(2,5)$ -- die
+Fünf mit Horizont 2 -- und $c=(1,0)$ die Null mit Horizont 1. Links
+geklammert: $a\htimes b=(4,25)$, denn $25$ braucht Horizont 4;
+danach $(4,25)\htimes c=(4,0)$. Rechts geklammert:
+$b\htimes c=(2,0)$, danach $a\htimes(2,0)=(2,0)$. Beide Wege enden
+beim Wert null -- aber einmal mit Horizont 4, einmal mit Horizont 2.
+$(4,0)\ne(2,0)$: keine Assoziativität.
+\end{beispiel}
+
+\section{Der wertseitige Halbring}
+
+Der Ausweg ist eine Arbeitsteilung: Die Addition darf sich erinnern,
+die Multiplikation muss vergessen. (Eine Konvention vorweg, die für
+das ganze Buch gilt: \emph{Gesetzestreu} nennen wir eine Arithmetik,
+wenn beide Operationen assoziativ und kommutativ sind, die
+Multiplikation über die Addition distribuiert und ein additiv
+neutrales Element existiert. Eine multiplikative Eins und das
+Schlucken durch die additive Null verlangen wir \emph{nicht}
+grundsätzlich, sondern nur dort, wo sie ausdrücklich genannt
+werden -- beides wird uns gleich als echte Unterscheidungsmerkmale
+begegnen.)
+
+\begin{satz}[wertseitiger Halbring]\label{satz:a3}
+Auf dem Horiraum $\Hori=\{(n,x)\mid n\ge\muh(x)\}$ seien, in
+Wertkoordinaten $(n,x)$,
+\[
+(n,x)\hplus(m,y)=\bigl(\max(n,m,\muh(x+y)),\,x+y\bigr),
+\qquad
+(n,x)\htimes(m,y)=\bigl(\muh(xy),\,xy\bigr).
+\]
+Dann sind $\hplus$ und $\htimes$ kommutativ und assoziativ,
+$\htimes$ distribuiert über $\hplus$, $(0,0)$ ist neutral für
+$\hplus$ und absorbierend für $\htimes$.
+\end{satz}
+
+Der Beweis ist erstaunlich kurz; sein einziger Kern ist die
+Monotonie des Minimalhorizonts: mehr Wert braucht nie weniger Platz
+(vollständig in Anhang~\ref{ch:anhang-beweise}).
+Bemerkenswert ist, was diesem Halbring \emph{fehlt}: eine Eins. Es
+gibt kein Element, das bei Multiplikation alles unverändert lässt.
+Stattdessen gilt für die Hori-Zahl Eins -- also $(1,1)$, die Eins in
+ihrem kleinsten Zuhause -- die Gleichung
+\[
+h\htimes(1,1)=\KV(h)
+\qquad\text{mit}\quad
+\KV(n,x)=(\muh(x),\,x).
+\]
+Multiplikation mit der Eins ist die
+Wertkompaktifizierung.\footnote{Terminologische Warnung:
+„Kompaktifizierung“ ist hier nicht topologisch gemeint. Formal
+handelt es sich um idempotente Retraktionen auf den jeweiligen
+Minimalhorizont -- wir behalten das anschauliche Wort bei und bitten
+topologisch geschulte Leser um Nachsicht.} Die Eins
+wirkt nicht als neutrales Element, sondern als \emph{Projektor}: Sie
+drückt jede Hori-Zahl auf ihre kompakte Form. Die kompakten Elemente
+bilden darunter einen eigenen kleinen Halbring, und dieser ist exakt
+das gewöhnliche $\Nn$. Die vertrauten natürlichen Zahlen sitzen also
+als „Eck“ im Horiraum, und der Weg dorthin ist keine Zusatzoperation,
+sondern Multiplikation mit der Eins.
+
+\begin{beispiel}
+Rechnen wir einmal durch. $(3,7)\hplus(2,5)$: Wert $12$, Horizont
+$\max(3,2,\muh(12))=\max(3,2,3)=3$, also $(3,12)$ -- der größte
+beteiligte Horizont überlebt. $(3,7)\htimes(2,5)$: Wert $35$,
+Horizont $\muh(35)=4$, also $(4,35)$ -- die Vergangenheit ist
+vergessen. Und der Projektor: Die Sieben mit unnötig großem
+Horizont, $(5,7)$, mal die Eins $(1,1)$ ergibt
+$(\muh(7),7)=(3,7)$ -- die Multiplikation mit Eins hat aufgeräumt.
+\end{beispiel}
+
+\begin{oberflaeche}
+Was ist hier passiert? Wir haben eine Arithmetik gefunden, in der
+Zahlen sich beim Addieren an ihre Vergangenheit erinnern -- der
+größte beteiligte Horizont überlebt -- und beim Multiplizieren neu
+geboren werden. Und das gewöhnliche Rechnen, das wir seit der
+Grundschule kennen, ist darin enthalten: als der Teil des Horiraums,
+der keine Vergangenheit mit sich trägt.
+\end{oberflaeche}
+
+\section{Exzess: das Gedächtnis bekommt eine Koordinate}
+
+Lange sah es so aus, als sei diese vergessende Multiplikation
+alternativlos. Die Vermutung lag nahe, dass die Rechengesetze jede
+andere Horizontregel zerstören. Sie ist falsch, und die Widerlegung
+ist lehrreicher als ein Beweis es gewesen wäre.
+
+Der Horizont jeder Hori-Zahl zerfällt kanonisch in zwei Anteile:
+\[
+n=\underbrace{\muh(x)}_{\text{Pflicht}}
+ +\underbrace{\varepsilon}_{\text{Exzess}} .
+\]
+Der Pflichtanteil ist das Minimum, das der Wert braucht; der Exzess
+ist freiwillig mitgeführtes Gedächtnis. Diese Zerlegung ist keine
+Konvention, sondern durch die Fakultätsschalen eindeutig bestimmt --
+und sie entkoppelt die Frage nach dem Selektor vollständig: Man darf
+auf dem Exzess \emph{eigenständig} rechnen.
+
+\begin{satz}[Produktprinzip]\label{satz:produktprinzip}
+Jede kommutative Halbringstruktur auf den Exzessen liefert eine
+gesetzestreue Hori-Arithmetik: Werte rechnen gewöhnlich,
+Exzesse rechnen in der gewählten Struktur.
+\end{satz}
+
+Das Produktprinzip liefert damit eine ganze Familie neuer
+Arithmetiken. Zusammen mit dem schon konstruierten vergessenden
+Halbring aus Satz~\ref{satz:a3} -- der, wohlgemerkt, \emph{keine}
+Produktkonstruktion ist: Sein Additions-Selektor vergleicht die
+Horizonte selbst, nicht nur die Exzesse -- ergeben sich drei
+besonders natürliche Arithmetiken:
+
+\begin{center}
+\begin{tabular}{lccc}
+ & Gedächtnis bei $+$ & Gedächtnis bei $\times$ & Eins \\
+\hline
+vergessend (Satz~\ref{satz:a3}; kein Produkt) & Maximum (der Horizonte) & stirbt & keine \\
+bewahrend (tropisch) & Maximum & addiert sich & $(1,1)$ \\
+verstärkend (arithmetisch) & addiert sich & multipliziert sich & $(2,1)$ \\
+\end{tabular}
+\end{center}
+
+\begin{beispiel}
+Es sei $a=(5,7)$ -- Pflicht $\muh(7)=3$, Exzess $2$ -- und
+$b=(3,5)$ -- Pflicht $2$, Exzess $1$. Das Produkt hat den Wert $35$
+mit Pflicht $\muh(35)=4$. Die drei Arithmetiken unterscheiden sich
+nur im Exzess des Ergebnisses: vergessend $(4,35)$ (Exzess $0$),
+bewahrend $(4{+}2{+}1,35)=(7,35)$ (Exzesse addieren sich),
+verstärkend $(4{+}2,35)=(6,35)$ (Exzesse multiplizieren sich:
+$2\cdot1=2$).
+\end{beispiel}
+
+Die bewahrende Arithmetik hat eine Kuriosität: Ihre Null schluckt
+nicht. Multipliziert man eine Hori-Zahl mit null, wird der Wert
+ausgelöscht, aber das Gedächtnis überlebt. Die verstärkende dagegen
+ist ein vollwertiger kommutativer Halbring mit Eins und schluckender
+Null -- und ihre Multiplikation löscht das Gedächtnis nicht
+pauschal, sondern verrechnet es arithmetisch. Ganz gedächtnistreu
+ist freilich auch sie nicht: Ein Operand mit Exzess null absorbiert
+das Gedächtnis des anderen, denn null mal irgendetwas bleibt null --
+genau daher rührt ihre schluckende Null.
+
+\begin{oberflaeche}
+Die Frage „welchen Horizont bekommt das Ergebnis?“ hat sich in
+etwas viel Schöneres verwandelt: „Was soll mit der Vergangenheit
+geschehen, wenn gerechnet wird?“ Und die Antwort der Horimetrik ist:
+Das darfst du wählen -- vergessen, bewahren oder verstärken -- und
+jede Wahl ergibt eine in sich vollkommen widerspruchsfreie Welt.
+\end{oberflaeche}
+
+\section{Die Dualität: dieselbe Eins, zwei Projektoren}
+
+Bis hierher rechnete alles auf der Wertseite. Aber Hori-Zahlen
+tragen neben dem Wert auch ihre Gestalt (und, seit
+Kapitel~\ref{ch:erweiterungen}, den Bruch -- von dem in
+Abschnitt~\ref{sec:seitentreue} noch die Rede sein wird) -- und die Gestaltseite hat
+ihre eigene Arithmetik. Man
+kann statt der Werte die \emph{Strukturpolynome} addieren und
+multiplizieren; das ist das ziffernweise Rechnen ohne Überträge, bei
+dem etwa aus den Strukturen von $4$ und $5$ direkt die Struktur von
+$20$ entsteht.
+
+\begin{satz}[Dualitätssatz]\label{satz:dualitaet}
+Der Horiraum trägt einen zweiten, strukturseitigen Halbring: Addition
+konservativ, Multiplikation kompakt -- aber gemessen am
+Strukturhorizont $\sigmah$ statt am Werthorizont $\muh$. Gerechnet
+wird in Strukturkoordinaten $(n,P)$; über die Ziffern-Bijektion aus
+Kapitel~\ref{ch:horizonte} bezeichnen $(n,x)$ und das Paar aus $n$
+und der Gestalt von $x$ dasselbe Element. In ihm gilt
+\[
+h\boxtimes(1,1)=\KS(h)
+\qquad\text{mit}\quad
+\KS(n,P)=(\sigmah(P),\,P),
+\]
+und $\KS$ ist mit beiden Operationen verträglich. Das Eck dieses
+Halbrings ist der Strukturpolynomraum.
+\end{satz}
+
+Die Pointe verdient einen eigenen Absatz. Es ist \emph{dieselbe}
+Hori-Zahl $(1,1)$ -- die Eins --, die auf der Wertseite den Projektor
+$\KV$ und auf der Strukturseite den Projektor $\KS$ trägt. Zwei
+Multiplikationen, ein Element. Und das älteste Ergebnis dieses
+Projekts -- dass die beiden Aufräum-Operationen nicht vertauschen;
+der nächste Abschnitt macht das formal -- entpuppt sich als das
+Nichtkommutieren dieser zwei Multiplikationen mit ein und derselben
+Eins.
+
+\section{Aufräumen: der Kommutator und das Tiefengesetz}
+\label{sec:kommutator}
+
+Weil auf ihnen ein ganzer Themenstrang dieses Buchs ruht, stellen
+wir die beiden Projektoren jetzt nebeneinander (Register D6):
+\[
+\KV(n,x)=(\muh(x),\,x),
+\qquad
+\KS(n,P)=(\sigmah(P),\,P).
+\]
+$\KV$ räumt \emph{wertkompakt} auf: gleicher Wert, kleinster
+Horizont -- die Gestalt wird dabei neu codiert. $\KS$ räumt
+\emph{strukturkompakt} auf: gleiche Gestalt, kleinster Horizont --
+der Wert wandert dabei mit dem Auswertungspunkt nach unten. Beide
+sind idempotent, aber sie kommutieren nicht, und die Abweichung ist
+messbar. Wir nennen
+\[
+\delta(h)=\hor\bigl(\KS\KV(h)\bigr)-\hor\bigl(\KV\KS(h)\bigr)
+\]
+den \emph{Kompaktifizierungs-Kommutator}; seine negativen Werte
+heißen \emph{Tiefe}.
+
+\begin{beispiel}
+Der Hausgeist dieses Buchs: $h=(6,6)$, die Sechs in
+Terminaldarstellung. $\KV$ zuerst: $(6,6)\mapsto(3,6)$; dort hat
+die Sechs die Gestalt $X{+}2$ mit $\sigmah=2$, also
+$\KS\KV(h)=(2,5)$ -- Horizont~$2$. $\KS$ zuerst: Die konstante
+Gestalt $6$ ist schon strukturkompakt, $\KS(h)=h$, danach
+$\KV(h)=(3,6)$ -- Horizont~$3$. Also $\delta(h)=2-3=-1$: Die
+Reihenfolge des Aufräumens entscheidet, wo man landet -- und als
+was.
+\end{beispiel}
+
+Nach oben wächst $\delta$ vergleichsweise schnell; der kleinste
+Zeuge für $+2$ ist die $720$ als Gestalt $\ff X3$ im Horizont $9$
+(die „einzelne Eins an der vierten Stelle“ aus dem letzten
+Interludium). Nach unten dagegen ist $\delta$ fakultätisch träge,
+und diese Trägheit gehorcht einem exakten Gesetz. Nenne
+\[
+g(m)=m-\min\{s\mid M_s(m{+}1)\ge m!\}
+\]
+die \emph{Schalenlücke} der Schale $S_m$: wie weit unter $m$ die
+Kapazität einer Gestalt liegen darf, deren Wert trotzdem noch $S_m$
+erreicht ($M_s$ ist die maximal gefüllte Gestalt aus
+Kapitel~\ref{ch:strukturpolynome}).
+
+\begin{satz}[Tiefengesetz, untere Seite; Register S33]
+\label{satz:tiefengesetz}
+Für jede Schale $m\ge3$ gilt
+\[
+\min\{\delta(h)\mid \muh(\val(h))=m\}=-g(m),
+\]
+und ein stets tauglicher Zeuge -- im Allgemeinen nicht der
+einzige -- ist die Terminaldarstellung des Maximalpolynom-Wertes
+$M_{m-g(m)}(m{+}1)$. Die Sprungstellen $m_g=\min\{m\mid g(m)\ge g\}$
+bilden eine Zählfolge mit bewiesener Asymptotik
+$m_g/(g{+}2)!\to1$ (Beweise in Anhang~\ref{ch:anhang-beweise}).
+\end{satz}
+
+Für Schale $3$ ist der Zeuge genau der Hausgeist von oben, und
+$m_1=3$: Ab der dritten Schale ist Tiefe $-1$ möglich, ab der
+fünfzehnten $-2$, ab der vierundachtzigsten $-3$. Die
+\emph{beidseitigen Fixpunkte} schließlich sind die Elemente, denen
+das Aufräumen nichts mehr anhaben kann -- fixiert von $\KV$
+\emph{und} $\KS$ zugleich, also $n=\muh(x)=\sigmah(P)$. Beide
+Begriffe, Sprungstellen wie Fixpunkte, werden in
+Kapitel~\ref{ch:zaehlungen} gezählt.
+
+Erwähnt sei noch das Feinkorn dieser Nicht-Kommutativität: Das von
+$\KV$ und $\KS$ erzeugte Transformationsmonoid -- das
+\emph{Kompaktifizierungsmonoid} -- ist endlich: genau sechs
+Elemente, von denen alle außer $\KV\KS$ idempotent sind
+(Register S21; Beweis in Anhang~\ref{ch:anhang-beweise}). Der
+Zeuge mit dem kleinsten \emph{Wert} ist wieder der Hausgeist
+$(6,6)$; in der kleinsten \emph{Welt} scheitert die Idempotenz von
+$\KV\KS$ schon an $(5,25)$.
+
+\section{Seitentreue}
+\label{sec:seitentreue}
+
+Kann man die beiden Seiten verweben -- etwa wertseitig addieren und
+strukturseitig multiplizieren? Gesetzestreu heißt dabei, wie
+eingangs vereinbart: beide Operationen kommutativ und assoziativ,
+die Multiplikation distribuiert, eine additive Null existiert. Der
+systematische Test aller sechzehn Kombinationen -- Wert oder
+Gestalt als Payload, konservativ oder kompakt als Selektor, für
+jede der beiden Operationen -- gibt dann eine klare Antwort: Genau
+zwei \emph{dieser sechzehn} sind gesetzestreu, der wertseitige
+Halbring und sein strukturseitiger Spiegel. (Die Produktfamilie aus
+Satz~\ref{satz:produktprinzip} steht außerhalb dieses Rasters --
+ihre Selektoren rechnen auf Exzessen -- und ist durchweg
+gesetzestreu, bleibt aber ganz auf der Wertseite.) Alle acht gemischten
+Kandidaten sterben an der Distributivität; die übrigen sechs
+seitenreinen scheitern an der Neutralität (kompakte Addition
+vergisst den Horizont des Operanden) oder an der Assoziativität
+(konservative Multiplikation, das Nullproblem vom Kapitelanfang).
+
+\begin{beispiel}
+Der paradigmatische Zeuge, Ziffer für Ziffer. ($\oplus$ und
+$\otimes$ bezeichnen in diesem Beispiel die gemischte
+Kandidaten-Arithmetik, nicht die Operationen aus
+Satz~\ref{satz:a3}; \emph{wertgetragen} heißt: die Operation
+verrechnet die Werte, \emph{strukturgetragen}: die Gestalten.)
+Es seien $a=b=(1,1)$ und
+$c=(2,5)$, dessen Gestalt $X+2$ ist (Ziffern $12$). Addiert man
+wertgetragen, ist $b\oplus c=(3,6)$; die Sechs hat in $H_3$
+zufällig ebenfalls die Gestalt $X+2$ (Ziffern $012$). Multipliziert
+man nun strukturgetragen mit $a$ (Gestalt $1$), bleibt die Gestalt
+$X+2$ und wird kompakt bei Horizont 2 ausgewertet: Ergebnis
+$(2,5)$ -- \emph{der Wert ist von 6 auf 5 gefallen}, weil die
+Strukturmultiplikation nur die Gestalt kennt. Rechts dagegen:
+$a\otimes b=(1,1)$, $a\otimes c=(2,5)$, wertgetragen addiert
+$(3,6)$. Links $(2,5)$, rechts $(3,6)$: Die Distributivität ist
+tot, und man sieht genau, woran -- die eine Seite rechnet mit dem
+Wert ehrlich weiter, die andere hat ihn beim Gestaltwechsel
+verloren.
+\end{beispiel}
+
+\begin{satz}[Seitentreue-Satz]\label{satz:seitentreue}
+Jede gesetzestreue Arithmetik \emph{der hier betrachteten
+payload-getra\-genen Form} -- die Operationen tragen Wert, Gestalt
+oder Bruch, die Horizontregeln sind beliebig -- ist seitenrein:
+Addition und Multiplikation operieren beide auf der Wertseite oder
+beide auf der Strukturseite.
+\end{satz}
+
+Die Einschränkung auf payload-getragene Operationen ist wesentlich:
+Auf einer abzählbaren Menge lässt sich per Transport jede beliebige
+Halbringstruktur definieren -- der Satz spricht über die
+Arithmetiken, die Wert, Gestalt oder Bruch \emph{respektieren},
+und über diese vollständig.
+
+Zur genauen Reichweite: Der Beweis braucht je nach Fall sogar
+weniger als die volle Gesetzestreue -- ein Mischfall stirbt an der
+Links-Distributivität allein, der andere an der beidseitigen
+Distributivität (die zu jedem, auch nichtkommutativen, Halbring
+gehört): Die Rechts-Distributivität spiegelt die Kettenkonstruktion
+und ersetzt die Kommutativität. Auch nichtkommutative Mischformen
+sind damit ausgeschlossen; denkbar bleibt allein ein nur
+\emph{einseitig} distributives Mischsystem -- eine Kuriosität
+außerhalb jeder Halbring-Axiomatik.
+
+Der Beweis verdient es, in seiner Grundidee erzählt zu werden, denn
+er hat eine Pointe (vollständig in Anhang~\ref{ch:anhang-beweise}). Zunächst sah es schlecht aus: Einzelne
+Rechnungen, die eine gemischte Arithmetik erfüllen müsste, sind
+tatsächlich lösbar -- teils über Pell-Gleichungen, also genau die
+Sorte Zahlentheorie, die gerne Ausnahmen produziert. Ein direkter
+Widerspruch schien unerreichbar. Die entscheidende Waffe ist
+verblüffend schlicht: die \emph{Konstanten}. Multipliziert man eine
+per Addition aufgebaute Kette von Zahlen mit immer größeren
+konstanten Strukturen, dann treibt die Ziffernschranke die
+Auswertungshorizonte ins Unendliche -- und ein nicht-konstantes
+Polynom kann denselben Wert nicht an beliebig vielen Stellen
+annehmen. Das zwingt die Kettenglieder, konstant zu sein. Konstanten
+aber sterben am nächsten Multiplikator, weil auch dort die
+Ziffernschranke den Horizont linear anwachsen lässt, während die
+Distributivität lineares Wertwachstum verlangt. Beide Mischformen
+zerbrechen an derselben Stelle.
+
+Der Satz hat inzwischen sogar eine dritte Dimension: Auch die
+Bruch-Identität aus Kapitel~\ref{ch:erweiterungen} lässt sich weder
+mit der Wert- noch mit der Gestaltseite verweben, und eine eigene
+Arithmetik trägt sie nicht (ihre Addition kann die Eins
+überschreiten). Die Seitentreue ist eine Trilogie: drei Identitäten,
+zwei Rechenwelten, keine Mischung -- Beweise in
+Anhang~\ref{ch:anhang-beweise}.
+
+Die Pointe: Die Quelle der Starrheit ist die Ziffernbedingung
+$0\le a_i\le i$ -- die allererste, unschuldigste Regel dieses Buchs.
+Die Regel, mit der alles begann, ist genau die Regel, die verhindert,
+dass Wert und Gestalt jemals in einer Arithmetik verschmelzen. Starr
+sind nicht die Horizontregeln; starr sind die Identitäten.
+
+\begin{oberflaeche}
+Eine Hori-Zahl hat drei Identitäten: was sie wert ist, wie sie
+aussieht, und welcher Bruch sie ist. Dieses Kapitel hat gezeigt,
+dass die ersten beiden vollwertige, spiegelbildliche Rechenwelten
+tragen, dass ein und dieselbe Eins in beiden Welten als Türsteher
+arbeitet -- und, als bewiesener Satz: dass niemand in zwei Welten
+gleichzeitig rechnen kann, während die dritte gar keine eigene
+trägt. Man muss sich entscheiden. Das ist der tiefste Satz, den die
+Horimetrik zu bieten hat: Konsistenz hat einen Preis, und der Preis
+ist eine Identität.
+\end{oberflaeche}

@@ -1,0 +1,754 @@
+\chapter{The Proofs}
+\label{ch:anhang-beweise}
+
+The chapters of this book tell the ideas behind the proofs; here are
+the proofs themselves, ordered by chapter. Notation as in the main
+text; $E_n$ denotes the encoding $V_n^{-1}$, $\mu(x)$ the minimal
+horizon, and $\sigma(P)=\max_{c_d>0}(d+c_d)$ (with $\sigma(0)=0$)
+the structure horizon.
+
+\section*{On Chapter 3: the limit-space theorems}
+
+\begin{satz}[Theorem~\ref{satz:grenzen}, complete]
+$\varinjlim(H_n,Z_n)\cong\Struk$ and
+$\varinjlim(H_n,L_n)\cong\Nn$.
+\end{satz}
+
+\begin{proof}
+\emph{Structure-preserving.} For $m\ge n$ let $Z_{n,m}$ be the
+prepending of $m-n$ zeros; evidently
+$Z_{m,k}\circ Z_{n,m}=Z_{n,k}$, the system is directed. In the
+direct limit, $a\in H_n$ and $b\in H_m$ (w.l.o.g.\ $n\le m$) count
+as equal if they have the same image in a common later horizon,
+i.e.\ $0^{k-n}a=0^{k-m}b$, which is equivalent to $b=0^{m-n}a$. The
+classes are thus digit sequences modulo leading zeros. The map
+$[a]\mapsto P_a$ is well defined (a leading zero adds the
+coefficient $0$ at the highest degree), injective (the digit
+sequence in $H_n$ is the coefficient sequence read from the right
+and padded to length $n$; equal polynomials therefore force
+$b=0^{m-n}a$) and surjective (every $P\in\Struk$ is representable
+from $H_{\sigma(P)}$ onwards).
+
+\emph{Value-preserving.} Let $L_{n,m}=E_m\circ V_n$. Since
+$V_m\circ E_m=\mathrm{id}$, we have
+$L_{m,k}\circ L_{n,m}=E_k\circ V_n=L_{n,k}$. Two elements are
+identified if and only if $E_k(V_n(a))=E_k(V_m(b))$ for some $k$,
+and since $E_k$ is injective, exactly when $V_n(a)=V_m(b)$: the
+classes are the fibres of the value map. $[a]\mapsto V_n(a)$ is
+well defined, injective and surjective (every $x$ occurs as
+$V_{\mu(x)}(E_{\mu(x)}(x))$).
+\end{proof}
+
+\section*{On Chapter 3: the third staircase}
+
+\begin{satz}[Cantor coordinate and right extension]
+With $F(a)=\sum_i a_i/(i+1)!$ we have $V_n(a)=(n+1)!\cdot F(a)$.
+Appending on the right, $R(a_1,\ldots,a_n)=(a_1,\ldots,a_n,0)$, is
+fraction-preserving, scales the value by exactly $n+2$, and
+$\varinjlim(H_n,R_n)$ is the set of finite factorial fractions
+in $[0,1)$.
+\end{satz}
+
+\begin{proof}
+Term by term, $a_i\,(n+1)!/(i+1)!=(n+1)!\cdot a_i/(i+1)!$, hence
+the factorization. Under right appending all digits keep their
+position and denominator, and the new zero contributes nothing:
+$F$ is invariant; the value is $(n+2)!\,F=(n+2)\cdot(n+1)!\,F$. In
+the limit, exactly those digit sequences are identified that
+differ by appended zeros; each class carries exactly one finite
+fraction, and every finite factorial fraction occurs.
+\end{proof}
+
+\section*{On Chapter 4: the horizon derivative}
+
+\begin{satz}[$\Delta$ calculus]
+The change in value under a structure-preserving extension is
+$\Delta P(n+1)$ with $\Delta P(X)=P(X{+}1)-P(X)$ and
+$\Delta\,\ff Xd=d\,\ff X{d-1}$; a leading zero is value-neutral
+if and only if $P$ is constant.
+\end{satz}
+
+\begin{proof}
+Under $Z$, $P$ is preserved and the evaluation point moves from
+$n{+}1$ to $n{+}2$; the change is by definition
+$\Delta P(n{+}1)$. For the difference formula:
+$\ff{(X{+}1)}d=(X{+}1)\,X\cdots(X{-}d{+}2)$ and
+$\ff Xd=X\cdots(X{-}d{+}2)\,(X{-}d{+}1)$ share the common factor
+$X(X{-}1)\cdots(X{-}d{+}2)=\ff X{d-1}$; the remaining factors are
+$X{+}1$ and $X{-}d{+}1$ respectively, their difference is $d$,
+hence $\Delta\,\ff Xd=d\,\ff X{d-1}$.
+Value neutrality: $\Delta P=0$ at all evaluation points in the
+admissible range forces, since polynomials with infinitely many
+roots vanish, $\Delta P\equiv0$, hence $P$ constant; the converse
+is clear. For the single step: $\Delta P(n{+}1)=0$ with
+nonnegative coefficients of $\Delta P$ (all basis differences
+have nonnegative coefficients) and evaluation point in the
+positive range -- since
+$\deg\Delta P\le n-2$, all $\ff{(n{+}1)}d$ are strictly positive
+there -- likewise forces $\Delta P=0$.
+\end{proof}
+
+\section*{On Chapter 4: the horizon calculus}
+
+We write $P\preceq Q$ if every coefficient of $P$ in the falling
+factorial basis is at most the corresponding coefficient of $Q$,
+and $M_r(X)=\sum_{d=0}^{r-1}(r{-}d)\,\ff Xd$ for the maximally
+filled shape of horizon $r$.
+
+\begin{satz}[extremal principle; Register S39]
+Let $T$ be a $k$-ary operator on the structure semiring that is
+coefficient-monotone in each argument ($P\preceq P'$ implies
+$T(\ldots,P,\ldots)\preceq T(\ldots,P',\ldots)$). Then
+\[
+\Gamma_T(r_1,\ldots,r_k)
+:=\max\{\sigma(T(P_1,\ldots,P_k)) \mid \sigma(P_i)\le r_i\}
+=\sigma\bigl(T(M_{r_1},\ldots,M_{r_k})\bigr).
+\]
+Every operator composed from addition, multiplication and $\Delta$
+is coefficient-monotone.
+\end{satz}
+
+\begin{proof}
+$\sigma(P)=\max_{c_d>0}(d+c_d)$ is monotone with respect to
+$\preceq$, and $\sigma(P)\le r$ is equivalent to the
+coefficientwise bound $c_d\le r-d$, i.e.\ to $P\preceq M_r$.
+Monotonicity of $T$ yields
+$T(P_1,\ldots,P_k)\preceq T(M_{r_1},\ldots,M_{r_k})$ and hence
+$\sigma(T(P_1,\ldots,P_k))\le\sigma(T(M_{r_1},\ldots,M_{r_k}))$;
+since $\sigma(M_{r_i})=r_i$, the bound is attained. For the
+additional claim: addition and $\Delta$ are coefficientwise linear
+with nonnegative constants ($\Delta\,\ff Xd=d\,\ff X{d-1}$); for
+multiplication, the linearization coefficients
+$\binom pj\binom qj\,j!$ of the product formula are nonnegative,
+and bilinearity transfers the monotonicity. Compositions of
+monotone operators are monotone.
+\end{proof}
+
+\begin{satz}[difference overflow; Register S40]
+For $r\ge2$,
+$\Gamma_\Delta(r)=\bigl\lfloor(r+1)^2/4\bigr\rfloor-1$,
+attained at the single-digit shape $P=(r{-}d)\,\ff Xd$ with
+$d=\lfloor(r+1)/2\rfloor$.
+\end{satz}
+
+\begin{proof}
+By the extremal principle, $\Gamma_\Delta(r)=\sigma(\Delta M_r)$.
+$\Delta M_r$ has the coefficients $b_k=(k{+}1)(r{-}k{-}1)$ for
+$k=0,\ldots,r{-}2$, hence
+\[
+\sigma(\Delta M_r)
+=\max_{0\le k\le r-2}\bigl[k+(k{+}1)(r{-}k{-}1)\bigr]
+=\max_{0\le k\le r-2}(k{+}1)(r{-}k)\;-\;1 .
+\]
+With $u=k{+}1\in\{1,\ldots,r{-}1\}$, $u(r{+}1{-}u)$ is the product
+of two numbers with fixed sum $r{+}1$, maximal at
+$u=\lfloor(r{+}1)/2\rfloor$ with value
+$\lfloor(r{+}1)^2/4\rfloor$; the range is nonempty for $r\ge2$.
+The single-digit shape $P=(r{-}d)\,\ff Xd$ has $\sigma(P)=r$ and
+$\sigma(\Delta P)=d-1+d(r{-}d)=d(r{+}1{-}d)-1$, maximal at the
+same $d$ with the same value. (Confirmed exhaustively for all
+$(r{+}1)!$ shapes up to $r=8$: values $1,3,5,8,11,15,19$.)
+\end{proof}
+
+\begin{satz}[composition closure; Register S41]
+For $P,Q$ with nonnegative integer coefficients in the falling
+factorial basis, $P\circ Q$ also has nonnegative integer
+coefficients. Composition is coefficient-monotone in both
+arguments; by the extremal principle,
+$\Gamma_\circ(r,s)=\sigma(M_r\circ M_s)$.
+\end{satz}
+
+\begin{proof}
+Since $P\circ Q=\sum_d c_d(P)\,(Q)^{\underline d}$ with
+$(Q)^{\underline d}=Q(Q{-}1)\cdots(Q{-}d{+}1)$, it suffices to
+show that $(Q)^{\underline d}$ is an admissible shape. Write
+$Q=\sum_k a_k\ff Xk$ and choose pairwise disjoint sets $T_k$ with
+$|T_k|=a_k$ (\emph{templates of arity $k$}). Let a
+\emph{$Q$-structure} on $[x]$ be a pair $(t,\varphi)$ consisting
+of a template $t\in T_k$ and an injection
+$\varphi\colon[k]\hookrightarrow[x]$; their number is
+$\sum_k a_k\,\ff xk=Q(x)$. Hence $Q(x)^{\underline d}$ counts the
+$d$-tuples of pairwise distinct $Q$-structures on $[x]$.
+
+Classify the tuples by the union $U\subseteq[x]$ of the images of
+all injections involved. The number $N_m$ of tuples whose image
+union entirely exhausts a fixed $m$-set depends only on $m$, and
+for all $x\in\Nn$ the polynomial identity
+$Q(x)^{\underline d}=\sum_m N_m\binom xm$ holds. The symmetric
+group $S_m$ acts on the exhausting tuples by renaming the ground
+set, $\pi\cdot(t,\varphi)=(t,\pi\circ\varphi)$, and this action is
+\emph{free}: if $\pi$ fixes every member of the tuple, then $\pi$
+fixes every image pointwise, hence by exhaustion all of $[m]$,
+i.e.\ $\pi=\mathrm{id}$. (Templates of arity 0 do no harm: they
+contribute nothing to the union.) Thus $m!\mid N_m$, and
+$(Q)^{\underline d}=\sum_m(N_m/m!)\,\ff Xm$ has coefficients in
+$\Nn$ -- positivity and integrality in one stroke.
+
+Monotonicity in $P$: an $\Nn$-linear combination of the
+$(Q)^{\underline d}$. Monotonicity in $Q$: $a_k\le a_k'$ yields
+$T_k\subseteq T_k'$; every tuple of $Q$-structures is one of
+$Q'$-structures with the same image union, hence $N_m\le N_m'$
+term by term. (Closure and extremal principle confirmed
+computationally and exhaustively for $r,s\le4$, the closure
+additionally for 300 random pairs up to $\sigma=8$.)
+\end{proof}
+
+\begin{satz}[shift overflow; Register S42]
+For $E\,P(X)=P(X{+}1)$,
+$\Gamma_E(r)=r+\lfloor r^2/4\rfloor=\Gamma_\Delta(r{+}1)$.
+\end{satz}
+
+\begin{proof}
+$E$ is linear with nonnegative constants
+($\ff{(X{+}1)}d=\ff Xd+d\,\ff X{d-1}$), so the extremal principle
+applies: $\Gamma_E(r)=\sigma(E\,M_r)$ with coefficients
+$c_k=(r{-}k)+(k{+}1)(r{-}k{-}1)$ for $k\le r{-}2$ and $c_{r-1}=1$;
+thus $k+c_k=r+(k{+}1)(r{-}k{-}1)$, and the product of two numbers
+with sum $r$ is at most $\lfloor r^2/4\rfloor$. The second
+equality is the identity
+$r+\lfloor r^2/4\rfloor=\lfloor(r{+}2)^2/4\rfloor-1$.
+\end{proof}
+
+\begin{satz}[Hori \#P theorem; Register S43]
+If $f\in\#\mathrm P$ and $P$ is a shape (nonnegative integer
+coefficients in the falling factorial basis), then
+$P\circ f\in\#\mathrm P$.
+\end{satz}
+
+\begin{proof}
+Let $f(x)$ be the number of witnesses of $x$ under a polynomial
+verifier $V$, and $P=\sum_{d=0}^m c_d\ff Xd$. New machine on input
+$x$: guess $d\in\{0,\ldots,m\}$, guess a variant
+$\ell\in\{1,\ldots,c_d\}$, guess $d$ witness candidates
+$w_1,\ldots,w_d$; accept if and only if $V$ accepts all $w_i$ and
+the $w_i$ are pairwise distinct. Since $m$ and all $c_d$ are fixed
+constants, the machine remains polynomial, and its number of
+accepting paths is exactly
+$\sum_d c_d\,f(x)^{\underline d}=P(f(x))$, since
+$f(x)^{\underline d}$ counts the ordered $d$-tuples of pairwise
+distinct witnesses. (By $\ff Xd=d!\binom Xd$ the statement also
+follows from the known characterization of the
+\emph{binomial-good} polynomials as \#P closure operations,
+Ikenmeyer--Pak, FOCS 2022; the proof above is self-contained.)
+\end{proof}
+
+\section*{On Chapter 5: the two semirings and the duality}
+
+\begin{satz}[Theorem~\ref{satz:a3}, complete]
+With $(n,x)\hplus(m,y)=(\max(n,m,\muh(x{+}y)),x{+}y)$ and
+$(n,x)\htimes(m,y)=(\muh(xy),xy)$, $\Hori$ is a commutative
+semiring without identity; $(0,0)$ is neutral and absorbing;
+$h\htimes(1,1)=\KV(h)$; the value-compact elements form a
+subsemiring isomorphic to $(\Nn,+,\cdot)$ with identity $(1,1)$.
+\end{satz}
+
+\begin{proof}
+Preliminary remark: $\muh$ is monotone. \emph{Associativity of
+$\hplus$:} both bracketings of $(n,x)$, $(m,y)$, $(k,z)$ yield
+the value $x{+}y{+}z$ and the horizons
+$\max(n,m,k,\muh(x{+}y),\muh(x{+}y{+}z))$ and, respectively, with
+$\muh(y{+}z)$; since $x{+}y\le x{+}y{+}z$ and
+$y{+}z\le x{+}y{+}z$, $\muh(x{+}y{+}z)$ absorbs the inner terms.
+\emph{Associativity of $\htimes$:} both sides equal
+$(\muh(xyz),xyz)$.
+\emph{Distributivity:} the left-hand side is
+$(n,x)\htimes\bigl((m,y)\hplus(k,z)\bigr)
+=(\muh(xy{+}xz),\,xy{+}xz)$, the right-hand side
+$(\max(\muh(xy),\muh(xz),\muh(xy{+}xz)),\,xy{+}xz)$; since
+$xy\le xy{+}xz$ and $xz\le xy{+}xz$, $\muh(xy{+}xz)$ again
+absorbs the inner terms.
+\emph{Neutral/absorbing:} $(n,x)\hplus(0,0)=(\max(n,0,\muh(x)),x)
+=(n,x)$ since $n\ge\muh(x)$; $(n,x)\htimes(0,0)=(0,0)$.
+\emph{No identity:} a neutral $(k,e)$ would require $xe=x$ for
+all $x$, hence $e=1$, and $\muh(x)=n$ for all elements -- this
+fails at $(1,0)$. \emph{Projector:}
+$(n,x)\htimes(1,1)=(\muh(x),x)=\KV(n,x)$. \emph{Corner:} for
+value-compact operands,
+$\max(\muh(x),\muh(y),\muh(x{+}y))=\muh(x{+}y)$; under $\htimes$
+the result is value-compact by definition; $(1,1)$ is neutral
+there, and $x\mapsto(\muh(x),x)$ is the isomorphism.
+\end{proof}
+
+\begin{lemma}[$\sigma$ addition monotonicity]\label{lem:app-sigma}
+$\sigma(P{+}Q)\ge\max(\sigma P,\sigma Q)$.
+\end{lemma}
+
+\begin{proof}
+At the maximizing position $d^*$ of $P$,
+$c_{d^*}(P{+}Q)\ge c_{d^*}(P)>0$, hence
+$\sigma(P{+}Q)\ge d^*+c_{d^*}(P{+}Q)\ge\sigma(P)$.
+\end{proof}
+
+\begin{satz}[Theorem~\ref{satz:dualitaet}, complete]
+With $(n,P)\boxplus(m,Q)=(\max(n,m,\sigmah(P{+}Q)),P{+}Q)$ and
+$(n,P)\boxtimes(m,Q)=(\sigmah(PQ),PQ)$, $\Hori$ is a commutative
+semiring without identity; $(0,0)$ is neutral and absorbing;
+$h\boxtimes(1,1)=\KS(h)$; $\KS$ is a homomorphism for both
+operations; the structure-compact elements form a subsemiring
+isomorphic to $\Struk$.
+\end{satz}
+
+\begin{proof}
+Word for word the mirror image of the previous proof, with
+Lemma~\ref{lem:app-sigma} in place of the monotonicity of $\muh$.
+In addition, the homomorphism property of $\KS$: for $\boxplus$,
+$\KS(a)\boxplus\KS(b)=(\max(\sigmah P,\sigmah Q,\sigmah(P{+}Q)),P{+}Q)
+=(\sigmah(P{+}Q),P{+}Q)=\KS(a\boxplus b)$ by the lemma; for
+$\boxtimes$, both sides equal $(\sigmah(PQ),PQ)$. No
+$\boxtimes$-neutral element: it would require $PE=P$, hence $E=1$,
+and $\sigmah(P)=n$ for all elements -- this fails at $(2,1)$,
+since $\sigmah(1)=1$.
+\end{proof}
+
+\begin{satz}[product principle, Theorem~\ref{satz:produktprinzip}]
+Every commutative semiring structure $(\uplus,\odot)$ on the
+excesses yields, via
+$(x,\varepsilon)\oplus(y,\delta)=(x{+}y,\varepsilon\uplus\delta)$,
+$(x,\varepsilon)\otimes(y,\delta)=(xy,\varepsilon\odot\delta)$,
+a law-abiding arithmetic on $\Hori$.
+\end{satz}
+
+\begin{proof}
+The map $(n,x)\mapsto(x,\,n-\muh(x))$ is a bijection
+$\Hori\to\Nn\times\Nn$ (the condition $n\ge\muh(x)$ is exactly
+$\varepsilon\ge0$; the inverse is
+$(x,\varepsilon)\mapsto(\muh(x){+}\varepsilon,x)$). The operations
+are defined componentwise, with $(\Nn,+,\cdot)$ in the value
+factor; a product of two commutative semirings satisfies all laws
+componentwise. The selectors are valid, since the resulting
+horizon is $\muh(\text{value})+\text{excess}\ge\muh$.
+\end{proof}
+
+\begin{satz}[compactification monoid]
+$\KS$ preserves value-compactness. Consequently
+$\KV\KS\KV=\KS\KV$, and the transformation monoid generated by
+$\KS,\KV$ has exactly six elements -- $\mathrm{id}$,
+$\KS$, $\KV$, $\KS\KV$, $\KV\KS$ and $\KS\KV\KS$ -- of which
+all except $\KV\KS$ are idempotent.
+\end{satz}
+
+\begin{proof}
+\emph{Stability:} let $(m,P)$ be value-compact; the element
+$(0,0)$ is fixed by $\KS$, so let $m\ge1$ and hence
+$P(m{+}1)\ge m!$. Let $s=\sigmah(P)$; suppose we had
+$P(s{+}1)<s!$. For $s\le t<m$, each term $c_d\ff Xd$ grows from
+$t{+}1$ to $t{+}2$ by the factor $(t{+}2)/(t{+}2{-}d)$, hence,
+since $d\le s{-}1\le t{-}1$, by at most $(t{+}2)/3$; thus
+$P(t{+}2)<t!\,(t{+}2)/3\le(t{+}1)!$, and induction yields
+$P(m{+}1)<m!$ -- contradiction.
+\emph{Relation:} for every $h$, $\KV(h)$ is value-compact, by
+stability so is $\KS(\KV(h))$, hence $\KV$ fixes this element.
+\emph{Six elements:} every alternating word of length $\ge4$
+contains $\KV\KS\KV$ and reduces; squares reduce by idempotence
+-- at most six. Pairwise distinctness by explicit separating
+witnesses (finite enumeration); in particular $h=(6,6)$
+separates: $\KV\KS(h)=(3,6)$, but $\KS\KV\KS(h)=(2,5)$. Hence
+$(\KV\KS)^2=\KS\KV\KS\ne\KV\KS$: not idempotent; the idempotence
+of the remaining five is verified using the relation.
+\end{proof}
+
+\section*{On Chapter 5: the depth law}
+
+\begin{satz}[Theorem~\ref{satz:tiefengesetz}, complete; Register S33]
+For every shell $m\ge3$,
+$\min\{\delta(h)\mid\muh(\val(h))=m\}=-g(m)$ with
+$g(m)=m-s_{\min}(m)$,
+$s_{\min}(m)=\min\{s\mid M_s(m{+}1)\ge m!\}$; the terminal
+representation of $x^*=M_{s_{\min}}(m{+}1)$ is a witness.
+\end{satz}
+
+\begin{proof}
+\emph{Bound.} Let $h=(n,x)$ with $\muh(x)=m$, so $x\ge m!$.
+Left: $\KV(h)=(m,x)$, and for $P=\operatorname{struct}(x,m)$ we
+have $P\preceq M_{\sigma(P)}$ coefficientwise, hence
+$x=P(m{+}1)\le M_{\sigma(P)}(m{+}1)$; since $x\ge m!$ it follows
+that $\sigma(P)\ge s_{\min}$ and thus
+$\hor(\KS\KV(h))=\sigma(P)\ge s_{\min}$. Right: for
+$P_n=\operatorname{struct}(x,n)$ the evaluation is monotone
+(nonnegative coefficients), hence
+$\val(\KS(h))=P_n(\sigma(P_n){+}1)\le P_n(n{+}1)=x<(m{+}1)!$ and
+thus $\hor(\KV\KS(h))\le m$. Together
+$\delta(h)\ge s_{\min}-m=-g(m)$.
+
+\emph{Attainment.} We have
+$x^*=M_{s_{\min}}(m{+}1)\in[m!,(m{+}1)!)$
+-- the lower bound by the definition of $s_{\min}$, the upper
+since $M_{s_{\min}}\preceq M_m$ and $M_m(m{+}1)=(m{+}1)!-1$. Let
+$h^*=(x^*,x^*)$ be the terminal representation. $\KS$ fixes $h^*$
+(constant shape), hence
+$\hor(\KV\KS(h^*))=\muh(x^*)=m$. On the other hand, $M_{s_{\min}}$
+is a valid digit sequence in horizon $m$
+($c_d\le s_{\min}-d\le m-d$) with value $x^*$, hence by the
+bijection from Chapter~\ref{ch:horizonte} \emph{the} digit
+sequence: $\operatorname{struct}(x^*,m)=M_{s_{\min}}$, and
+$\hor(\KS\KV(h^*))=\sigma(M_{s_{\min}})=s_{\min}$. Thus
+$\delta(h^*)=s_{\min}-m=-g(m)$.
+\end{proof}
+
+\section*{On Chapter 5: the side-fidelity theorem}
+
+\begin{satz}[Theorem~\ref{satz:seitentreue}, value-shape cases]
+\emph{(A)} If $\oplus$ is value-carried and $\otimes$
+structure-carried, then already left distributivity is
+unsatisfiable for every choice of horizon rules. \emph{(B)} If
+$\oplus$ is structure-carried and $\otimes$ value-carried, then
+left distributivity and commutativity of $\otimes$ are jointly
+unsatisfiable.
+\end{satz}
+
+\begin{proof}
+\emph{(A).} Let $u=(1,1)$ (structure $1$), $e_1=u$,
+$e_m=e_{m-1}\oplus u$; since $\oplus$ is value-carried, we have
+$\val(e_m)=m$, and the structure $Q_m$ of $e_m$ is some valid
+representation of $m$. Left distributivity yields inductively
+\begin{equation}\label{eq:app-kette}
+\val(a\otimes e_m)=m\cdot\val(a\otimes u).
+\end{equation}
+\emph{Step 1: $Q_m$ is constant.} For $c\ge1$, $a_c=(c,c)$ has
+the constant structure $c$ (terminal representation); constants
+evaluate to themselves everywhere, so $\val(a_c\otimes u)=c$. With
+\eqref{eq:app-kette} it follows that $c\,Q_m(y_c{+}1)=mc$, hence
+$Q_m(y_c{+}1)=m$, where $y_c$, the horizon of $a_c\otimes e_m$,
+grows without bound because
+$y_c\ge\sigmah(cQ_m)=\max_d(d+c\,q_d)\ge c$
+($Q_m\ne0$, since $\val(e_m)=m\ge1$).
+All evaluation points lie in the strictly monotone range
+(arguments $\ge\sigmah+1\ge\deg+2$; falling factorials are
+strictly increasing there). If $\deg Q_m\ge1$, $Q_m$ would take
+the value $m$ at most once -- contradiction. Hence $Q_m$ is
+constant, and with $a=u$ it follows that $Q_m=m$.
+\emph{Step 2: constants die.} Let $g=(2,3)$ (structure $X$), let
+$t_g$ be the horizon of $g\otimes u$ and
+$r=\val(g\otimes u)=t_g{+}1\ge\sigmah(X)+1=3$ fixed. By
+Step~1, $g\otimes e_m$ has the structure $X\cdot m=mX$ with
+$\sigmah(mX)=m{+}1$; on its horizon $T_m\ge m{+}1$ we therefore
+have $\val(g\otimes e_m)=m(T_m{+}1)\ge m(m{+}2)$; by
+\eqref{eq:app-kette} this value is $mr$ -- contradiction for
+$m>r-2$.
+
+\emph{(B).} Now structures add and values multiply. Let $f_1=u$,
+$f_m=f_{m-1}\oplus u$; then $f_m$ has the constant structure $m$
+and the value $m$. Let $A$ be the structure of $g\otimes u$.
+Inductively, $g\otimes f_m$ has the structure $mA$; as a
+$\otimes$-result of value $3m$, realized on its horizon $T_m$,
+the validity of the representation (digit bound) gives
+$\sigmah(mA)\le T_m$, hence $T_m\ge m$, and
+$A(T_m{+}1)=3$ at unboundedly many points. As in Step~1, $A$ is
+constant, so $A=3$. Consider $f_2'=g\oplus g$ with structure
+$2X$, horizon $H\ge\sigmah(2X)=3$, value $2(H{+}1)\ge8$.
+Left distributivity and commutativity give
+$u\otimes(g\oplus g)=(g\otimes u)\oplus(g\otimes u)$ with
+structure $2\cdot3=6$ (a constant), hence value $6$; but the
+left-hand side is $1\cdot2(H{+}1)\ge8$. Contradiction.
+\end{proof}
+
+\begin{satz}[noncommutative case]
+If $\oplus$ is structure-carried and $\otimes$ value-carried and
+both distributive laws hold, then the system is unsatisfiable --
+without commutativity, associativity, or neutral elements.
+\end{satz}
+
+\begin{proof}
+Right distributivity yields inductively
+$P_{f_m\otimes a}=m\cdot P_{u\otimes a}$; since $f_m\otimes a$ has
+the value $m\cdot\val(a)$ and the horizon
+$\ge\sigma(m\,P_{u\otimes a})\ge m$ grows, $P_{u\otimes a}$ is
+constant equal to $\val(a)$ (monotonicity argument as above).
+In particular $P_{u\otimes g}=3$; the $g\oplus g$ finale then runs
+word for word as in the commutative case via left distributivity.
+\end{proof}
+
+\section*{On Chapters 5 and 8: the three-sided side fidelity}
+
+\begin{satz}[trilogy]
+Fraction-carried addition is never total; value-carried addition
+with fraction-carried multiplication, as well as
+structure-carried addition with fraction-carried multiplication,
+are unsatisfiable for every choice of selectors (left
+distributivity suffices).
+\end{satz}
+
+\begin{proof}
+\emph{Totality:} $F(u)+F(u)=\tfrac12+\tfrac12=1\notin[0,1)$, and
+every element has fraction $<1$.
+
+\emph{Value $\oplus$, fraction $\otimes$:} chains $e_m$ with
+$\val(e_m)=m$, horizon $N_m\ge\mu(m)$, fraction $m/(N_m{+}1)!$.
+Distributivity gives $\val(u\otimes e_m)=m\,w$ with
+$w=\val(u\otimes u)$ -- an integer and $\ge1$, since the fraction
+of $u\otimes u$ is $\tfrac14>0$. On the other hand, with $h_m$ the
+horizon of $u\otimes e_m$,
+$\val(u\otimes e_m)=\tfrac12\cdot\frac{m}{(N_m+1)!}(h_m{+}1)!$,
+hence $(h_m{+}1)!/(N_m{+}1)!=2w>1$ constant -- but a
+factorial quotient $>1$ is at least $N_m{+}2\to\infty$.
+
+\emph{Structure $\oplus$, fraction $\otimes$:} chains $f_m$ with
+constant structure $m$, horizon $N_m\ge m$, fraction
+$m/(N_m{+}1)!$. Distributivity gives $P_{u\otimes f_m}=m\,A$ with
+$A=P_{u\otimes u}$, $\deg A=:d$; comparing fractions on the
+horizon $T_m$ of $u\otimes f_m$ yields, after cancelling $m$,
+\[
+2\,A(T_m{+}1)=(T_m{+}1)^{\underline{\,k_m}},\qquad
+k_m=T_m-N_m\ge1 .
+\]
+The product on the right is at least $(N_m+k_m/2)^{k_m/2}$, the
+left-hand side at most $C(N_m{+}k_m{+}1)^d$; since $N_m\to\infty$,
+$k_m\le2d{+}1$ for large $m$, some value $k^*$ occurs infinitely
+often, and $2A(Y)=Y^{\underline{k^*}}$ holds as a polynomial
+identity. Then $A$ would have the coefficient $\tfrac12$ --
+digits are integers. (General multipliers $a$: the same
+computation with $c=(n_a{+}1)!/v_a>1$ instead of $2$.)
+\end{proof}
+
+\section*{On Chapter 6: asymptotics and digit formula}
+
+\begin{satz}[asymptotics of the jump positions]
+Let $m_g$ be the smallest shell with
+$M_{m-g}(m{+}1)\ge m!$, where $M_s=\sum_{d<s}(s{-}d)\ff Xd$ is the
+maximal polynomial. With
+$c_g=(g{+}2)!\sum_{k\ge1}k/(g{+}k{+}1)!$ we have
+$(g{+}2)!/c_g\le m_g+1\le(g{+}2)!$ and $c_g=1+O(1/g)$, hence
+$m_g/(g{+}2)!\to1$.
+\end{satz}
+
+\begin{proof}
+Reindexing ($k=s{-}d$, $s=m{-}g$) yields exactly
+\[
+\frac{M_{m-g}(m{+}1)}{m!}
+=(m{+}1)\sum_{k=1}^{m-g}\frac{k}{(g{+}k{+}1)!}=:F(m).
+\]
+$F$ grows in $m$ (the prefactor strictly, the sum through newly
+arriving nonnegative terms), so the threshold is well defined.
+For $m{+}1\ge(g{+}2)!$ the term $k{=}1$ suffices:
+$F(m)\ge(m{+}1)/(g{+}2)!\ge1$. Conversely,
+$F(m)\le(m{+}1)\,c_g/(g{+}2)!$, hence $F(m)<1$ for
+$m{+}1<(g{+}2)!/c_g$.
+Finally, with $x=1/(g{+}3)$,
+\[
+c_g\le1+\sum_{k\ge2}k\,x^{k-1}
+=1+\frac{x(2-x)}{(1-x)^2}=1+O(1/g). \qedhere
+\]
+\end{proof}
+
+\begin{satz}[digit formula for the non-jumpers]
+Let $d=(d_1,\ldots,d_n)$ be the $H_n$ digit sequence of $n!$ and
+$P$ the first position with maximal digit ($d_P=P$), or $P=n$
+if none exists. Then
+\[
+N(n)=\sum_{p=1}^{P}\min(d_p,p)\cdot\frac{n!}{p!}.
+\]
+\end{satz}
+
+\begin{proof}
+$N(n)$ counts digit sequences with $a_i\le i-1$ and value $<n!$.
+We decompose by the first position $p$ at which $a$ differs from
+$d$. The prefix must agree with $d$ -- possible only as long as
+$d_j\le j-1$, i.e.\ up to and including the first maximal digit.
+At position $p$ we need $a_p<d_p$ and $a_p\le p-1$:
+$\min(d_p,p)$ possibilities. The suffix is free within the caps:
+$\prod_{j>p}j=n!/p!$ possibilities, and every such suffix stays
+strictly below, because the full (uncapped) suffix space fills
+the interval $[0,w_p)$ with the place weight
+$w_p=(n{+}1)!/(p{+}1)!$ bijectively. Every non-jumper is counted
+exactly once.
+\end{proof}
+
+\begin{satz}[$\beta$ reduction]
+$\ln\beta(r,r)=\ln\max_{t}\binom{r-1}{t}^2(r{-}1{-}t)!+O(\log r)$.
+\end{satz}
+
+\begin{proof}
+Lower bound: the triple $(p,q,j)=(r{-}1,r{-}1,r{-}1{-}t)$
+contributes to degree $r{-}1{+}t$ the summand
+$\binom{r-1}{t}^2(r{-}1{-}t)!$, and all contributions are
+nonnegative. Upper bound: each contribution is at most
+$r^2\binom{r-1}{j}^2j!$, and per degree there are at most $r^3$
+triples; hence $\beta\le2r+r^5\max_t(\cdot)$.
+\end{proof}
+
+\begin{satz}[$\beta$ asymptotics]
+$\ln(\beta(r,r)/r!)=2\sqrt r+O(\log r)$.
+\end{satz}
+
+\begin{proof}
+By the reduction theorem it suffices to prove the statement for
+the maximal term
+$\binom st^2(s-t)!/r!=s!/(r\,t!^2(s-t)!)$ with $s=r-1$. From
+above: Stirling bounds give
+$\ln(s!/(t!^2(s-t)!))\le-h(t)+O(\log s)$
+with $h(t)=2t\ln t-t+(s{-}t)\ln(s{-}t)-s\ln s$; concavity yields
+$h(t)\ge t(2\ln t-\ln s-2)$, and this function has its minimum
+$-2\sqrt s$ at $t=\sqrt s$. From below: $t=\lceil\sqrt s\rceil$
+with $\binom st\ge(s-t)^t/t!$ gives
+$t\ln((s-t)/t^2)+2t-O(\log r)=2\sqrt s-O(\log r)$.
+\end{proof}
+
+\begin{satz}[single-digit factorials]
+$n!$ is a single digit in $H_n$ if and only if $n=(i{+}1)!/d-1$
+with $1\le d\le i$; the digit is $d$ at position $i$, and per
+position there are exactly $i$ cases.
+\end{satz}
+
+\begin{proof}
+A single digit $d$ at position $i$ means $n!=d\,(n+1)!/(i+1)!$,
+hence $d=(i+1)!/(n+1)\le i$. Conversely, every $d\le i$ divides
+$(i+1)!$, and $n+1=(i+1)!/d$ makes the equation exact; the
+position exists, since $n{+}1=(i{+}1)!/d\ge(i{+}1)!/i\ge
+i{+}1$ implies $i\le n$, and the unique digit expansion then
+consists of exactly this digit.
+$d$ runs bijectively through $1,\ldots,i$.
+\end{proof}
+
+\section*{On Chapters 6 and 8: interchange positivity, sharpness,
+zero count}
+
+For $x<(n{+}1)!$ let $z_n(x):=P(n{+}2)$ with
+$P=\operatorname{struct}(x,n)$ -- the value after one zero
+extension. The \emph{interchange defect} of an element
+$h=(n,x)$ is
+$\Omega(h)=z_n(x)-z_{n+1}(x)$: the value after ``grow first, then
+lift value-preservingly'' minus the value after ``lift first, then
+grow''.
+
+\begin{lemma}[recursion formula]
+For $x=q(n{+}1)+r$, $0\le r\le n$:
+$z_n(x)=r+(n{+}2)\,z_{n-1}(q)$.
+\end{lemma}
+
+\begin{proof}
+From the digit recursion it follows that
+$P_{n,x}(X)=r+X\cdot P_{n-1,q}(X{-}1)$, since the coefficient
+shift by one degree is, by
+$\ff Xd=X\cdot\ff{(X{-}1)}{d-1}$, multiplication by $X$ with a
+shift of argument. Evaluate at $X=n{+}2$.
+\end{proof}
+
+\begin{lemma}[strict monotonicity and superadditivity]
+$z_n(x)<z_n(x{+}1)$, consequently $z_n(y{+}s)\ge z_n(y)+s$.
+\end{lemma}
+
+\begin{proof}
+Induction on $n$; base $n=1$: $z_1(0)=0<1=z_1(1)$. Without a
+carry, $z_n$ grows by exactly 1; with a
+carry ($r=n$),
+$z_n(x{+}1)-z_n(x)=(n{+}2)(z_{n-1}(q{+}1)-z_{n-1}(q))-n
+\ge(n{+}2)-n=2$.
+\end{proof}
+
+\begin{lemma}[multiplication lemma]
+For $c\ge\ell{+}2$ and $cy<(\ell{+}1)!$,
+$z_\ell(cy)\ge(c{+}1)\,z_\ell(y)$.
+\end{lemma}
+
+\begin{proof}
+Induction on $\ell$; the base cases are empty and trivial,
+respectively. Let
+$y=q(\ell{+}1)+r$ and $cr=s(\ell{+}1)+u$ with $0\le u\le\ell$;
+then $cy=(cq{+}s)(\ell{+}1)+u$ and, by the recursion formula,
+$z_\ell(cy)=u+(\ell{+}2)\,z_{\ell-1}(cq{+}s)$. Superadditivity
+and the induction hypothesis (the regime is preserved:
+$c\ge\ell{+}2>(\ell{-}1){+}2$; validity: $cq<\ell!$) give
+$z_{\ell-1}(cq{+}s)\ge(c{+}1)z_{\ell-1}(q)+s$. It remains to show
+$u+(\ell{+}2)s\ge(c{+}1)r$: with $c=\ell{+}1{+}e$, $e\ge1$, we
+have $u=er\bmod(\ell{+}1)$, and the inequality is equivalent to
+$r(c{-}\ell{-}1)=er\ge er\bmod(\ell{+}1)=u$ -- true.
+\end{proof}
+
+\begin{satz}[interchange positivity]
+$\Omega(h)\ge0$ for all $h\in\Hori$.
+\end{satz}
+
+\begin{proof}
+By the definition of $\Omega$ it must be shown that
+$z_{n+1}(x)\le z_n(x)$ for $x<(n{+}1)!$. Let
+$x=q'(n{+}2)+r'$. Then
+\[
+z_{n+1}(x)=r'+(n{+}3)\,z_n(q')
+\le r'+z_n\bigl((n{+}2)q'\bigr)
+\le z_n\bigl(q'(n{+}2)+r'\bigr)=z_n(x),
+\]
+first by the multiplication lemma ($c=n{+}2$, exactly at the
+regime boundary), then by superadditivity.
+\end{proof}
+
+\begin{satz}[equality cases; Register S32]
+$\Omega(h)=0$ holds if and only if both steps of this chain are
+sharp: the multiplication lemma with $c=n{+}2$ for the
+\emph{sharp quotient} $q'$, i.e.\
+$z_n((n{+}2)q')=(n{+}3)\,z_n(q')$, and superadditivity
+carry-free, i.e.\ $z_n((n{+}2)q'+r')=z_n((n{+}2)q')+r'$.
+\end{satz}
+
+\begin{proof}
+$\Omega(h)$ is the sum of the two deviations
+$z_n((n{+}2)q')-(n{+}3)z_n(q')$ and
+$z_n((n{+}2)q'+r')-z_n((n{+}2)q')-r'$; both are nonnegative by
+the multiplication lemma and superadditivity respectively, so
+their sum is zero if and only if both are zero.
+\end{proof}
+
+\begin{satz}[digit unfolding of sharpness]
+For $c\ge\ell+2$, $cy<(\ell+1)!$, $y=q(\ell+1)+r$, $e=c-\ell-1$
+we have: $z_\ell(cy)=(c{+}1)z_\ell(y)$ if and only if $er\le\ell$,
+$(cq\bmod\ell)+r\le\ell-1$, and the same condition holds
+recursively for
+$(\ell{-}1,c,q)$ (termination: for $\ell=0$ the condition is
+empty).
+\end{satz}
+
+\begin{proof}
+The chain $z_\ell(cy)=u+(\ell+2)z_{\ell-1}(cq+s)$ from the proof
+of the multiplication lemma is sharp throughout exactly then: the
+arithmetic estimate when $er\le\ell$ (then $s=r$, $u=er$),
+superadditivity when the $s=r$ single steps starting from $cq$
+are carry-free -- their units digit is $cq\bmod\ell$, the
+condition therefore $(cq\bmod\ell)+r\le\ell-1$ --, the third
+recursively by definition. Verified exhaustively for $\ell\le7$.
+\end{proof}
+
+\begin{satz}[zero-count bound]
+$\#\{\Omega=0\text{ on }H_n\}\le(n{+}1)^{n+1}/n!$, so the
+proportion falls at least like $e^{-(1+o(1))n\ln n}$.
+\end{satz}
+
+\begin{proof}
+By the equality theorem, every such element is determined by
+$(q',r')$ with sharp $q'$, and carry-freeness forces
+$r'\le n$ (the units digit grows by one per step and must stay
+below its maximum $n$ before each step). By the digit unfolding,
+sharpness forces at level $\ell$ the
+digit bound $r_\ell\le\lfloor\ell/(n{+}1{-}\ell)\rfloor$, and
+$\lfloor\ell/j\rfloor+1\le(n{+}1)/j$ with $j=n{+}1{-}\ell$ yields
+the product $(n{+}1)^n/n!$ for the $q'$; together with the
+$n{+}1$ possibilities for $r'$ the bound follows.
+\end{proof}
+
+\section*{On Chapter 9: the inversion-sequence classification}
+
+\begin{satz}[Register S44]
+$H_n$ is in bijection with the inversion sequences of length
+$n{+}1$ and with $S_{n+1}$. The structure horizon is
+$\sigma(P_a)=n-\min_{e_j>0}((j{-}1)-e_j)$ for $a\ne0$ (for $a=0$,
+$\sigma=0$) with $e=(0,a_1,\ldots,a_n)$, and
+$|\{a\in H_n:\sigma(P_a)=r\}|=r\cdot r!$ for $1\le r\le n$.
+\end{satz}
+
+\begin{proof}
+Setting $e_1=0$ and $e_{i+1}=a_i$, we get $0\le e_j<j$ for all
+$j=1,\ldots,n{+}1$ -- the defining condition of an inversion
+sequence; the map $\pi\mapsto(e_j)_j$ with
+$e_j=|\{i<j:\pi_i>\pi_j\}|$ is the classical bijection to
+$S_{n+1}$, and both sides have $(n{+}1)!$ elements. For the
+structure horizon: $c_d=a_{n-d}=e_{n-d+1}$, hence
+$d+c_d=(n{+}1-j)+e_j$ with $j=n-d+1$; maximizing $d+c_d$ over
+$c_d>0$ is minimizing $(j{-}1)-e_j$ over $e_j>0$, and
+$\max(d+c_d)=n-\min_{e_j>0}((j{-}1)-e_j)$. Counting:
+$\sigma(P_a)\le r$
+means $a_i\le r-(n-i)$ for all $i$ with $a_i>0$, equivalently
+$a\le M$ coordinatewise for the maximal profile belonging to
+$H_r$; the number of such $a$ in $H_n$ is $(r{+}1)!$ (the digits
+above position $r$ are forced to be zero, below they are free up
+to the bound). Hence $|\{\sigma\le r\}|=(r{+}1)!$ and
+$|\{\sigma=r\}|=(r{+}1)!-r!=r\cdot r!$. (Confirmed exhaustively
+up to $n=6$, \texttt{experiments\_einordnung.py}.)
+\end{proof}

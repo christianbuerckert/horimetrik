@@ -1,0 +1,40 @@
+%I
+%S 1,4,23,6541,477149751,26594371862819905,2459443656914751799341550307,
+%T 704493743642841887982266957869120341803011,
+%U 1038937998037120725999400773289378882897395371144700639316071
+%N a(r) is the maximum of max_d (d + c_d(P o Q)) over all polynomials P, Q with nonnegative integer coefficients in the falling factorial basis satisfying max_d (d + c_d) <= r for both; equivalently a(r) = max_d (d + c_d(M_r o M_r)) with M_r(X) = Sum_{d=0}^{r-1} (r-d)*X_(d).
+%C In the Horimetrik framework (see LINKS) this is the "maximal composition height" (maximale Kompositionshoehe).
+%C Proved: the semiring of polynomials with nonnegative integer falling-factorial coefficients is closed under composition (via a free symmetric-group action: the count N_m of tuples of injections covering an m-set is divisible by m!). Composition is coefficientwise monotone in both arguments, so the maximum is attained at the componentwise maximal polynomial M_r.
+%C Empirical (no proof): growth appears to be of order log(a(r)) ~ r^2*log(r).
+%C The analogous maxima for addition and forward difference are r+s (trivial) and floor((r+1)^2/4)-1 respectively.
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik/blob/main/buch/main.pdf">Horimetrik - Zahlen mit Horizont (book PDF, in German)</a>
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik/blob/main/book/main.pdf">Horimetrik - Numbers with a Horizon (book PDF, English translation)</a>
+%H Christian Felix Bürckert, <a href="https://doi.org/10.5281/zenodo.21400755">Horimetrik - Zahlen mit Horizont / Numbers with a Horizon (archived books and paper, Zenodo)</a>
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik">Horimetrik (proofs, programs, and b-files)</a>
+%F a(r) = max_d (d + c_d(M_r o M_r)).
+%e For r=2: M_2(X) = X + 2 and (M_2 o M_2)(X) = (X+2) + 2 = X + 4, so a(2) = max(0+4, 1+1) = 4.
+%o (Python)
+%o from math import factorial, comb
+%o def mul(A, B):
+%o     out = {}
+%o     for p, x in A.items():
+%o         for q, y in B.items():
+%o             for j in range(min(p, q)+1):
+%o                 d = p+q-j
+%o                 out[d] = out.get(d, 0) + x*y*comb(p,j)*comb(q,j)*factorial(j)
+%o     return {d: c for d, c in out.items() if c}
+%o def a(r):
+%o     M = {d: r-d for d in range(r)}
+%o     out, FF = {}, {0: 1}
+%o     for d in range(r):
+%o         c = M.get(d, 0)
+%o         for deg, co in FF.items():
+%o             out[deg] = out.get(deg, 0) + c*co
+%o         if d < r-1:
+%o             Qm = dict(M); Qm[0] = Qm.get(0, 0) - d
+%o             FF = mul(FF, Qm)
+%o     return max(d+c for d, c in out.items() if c > 0)
+%Y Cf. A000142.
+%K nonn
+%O 1,2
+%A _Christian Felix Bürckert_, Jul 14 2026

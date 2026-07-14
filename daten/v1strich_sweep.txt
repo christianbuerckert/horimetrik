@@ -1,0 +1,24 @@
+40319 Kandidatenstrukturen (sigma <= 7)
+n=9: max delta (Kandidaten) = +2
+n=10: max delta (Kandidaten) = +2
+n=11: max delta (Kandidaten) = +2
+n=12: max delta (Kandidaten) = +2
+n=13: max delta (Kandidaten) = +2
+n=14: max delta (Kandidaten) = +3
+n=15: max delta (Kandidaten) = +3
+n=16: max delta (Kandidaten) = +3
+n=17: max delta (Kandidaten) = +3
+n=18: max delta (Kandidaten) = +3
+n=19: max delta (Kandidaten) = +3
+n=20: max delta (Kandidaten) = +4
+n=21: max delta (Kandidaten) = +4
+n=22: max delta (Kandidaten) = +4
+n=23: max delta (Kandidaten) = +4
+n=24: max delta (Kandidaten) = +4
+n=25: max delta (Kandidaten) = +4
+n=26: max delta (Kandidaten) = +4
+n=27: max delta (Kandidaten) = +4
+n=28: max delta (Kandidaten) = +4
+n=29: max delta (Kandidaten) = +4
+n=30: max delta (Kandidaten) = +5
+Schwellen: {2: 9, 3: 14, 4: 20, 5: 30}

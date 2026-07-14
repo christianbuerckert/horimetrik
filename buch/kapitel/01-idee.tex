@@ -1,0 +1,110 @@
+\chapter{Die Idee: Zahlen, die wissen, wie viel Platz sie haben}
+\label{ch:idee}
+
+% Ebene: Oberfläche. Keine abgesetzten Formeln, nur Zahlen im Fließtext.
+% Entstehungsreihenfolge beachten: umgedrehte Basen -> Endlichkeit ->
+% führende Nullen (Korrektur vom 13.07.2026).
+
+\section{Eine Ordnung, die niemand hinterfragt}
+
+Jedes Stellenwertsystem beruht auf einer stillen Vereinbarung. Im
+Dezimalsystem zählt die hinterste Ziffer Einer, die davor Zehner, dann
+Hunderter -- jede Stelle wiegt das Zehnfache ihrer Nachbarin. Im
+Binärsystem dasselbe mit Zweierschritten. Und es gibt ein weniger
+bekanntes, aber altehrwürdiges System, in dem die Basen nicht konstant
+sind, sondern wachsen: das Fakultätssystem. Dort darf die hinterste
+Ziffer nur 0 oder 1 sein, die nächste 0 bis 2, die übernächste 0 bis 3,
+und so weiter. Je weiter links eine Stelle steht, desto mehr darf sie
+zählen \emph{und} desto mehr ist sie wert.
+
+In allen diesen Systemen zeigt dieselbe Richtung nach oben: Die Stelle
+mit dem meisten Spielraum trägt das meiste Gewicht. Das wirkt so
+selbstverständlich, dass man es nie ausspricht.
+
+Die Horimetrik beginnt mit der Frage, was passiert, wenn man genau das
+umdreht. Was, wenn ausgerechnet die \emph{engste} Stelle -- die, die
+nur 0 oder 1 kennt -- das größte Gewicht bekommt? Wenn die Stellen
+nach rechts hin immer großzügiger werden, ihr Einfluss aber immer
+kleiner?
+
+\section{Die erzwungene Endlichkeit}
+
+Die erste Konsequenz kommt sofort, und sie ist keine Designentscheidung,
+sondern ein Zwang. Ein gewöhnliches Zahlensystem wächst nach links ins
+Unendliche: Wird eine Zahl zu groß, stellt man eine weitere Stelle
+voran, mit noch größerem Gewicht -- Platz ist immer. Im umgedrehten
+System geht das nicht. Links steht bereits die engste Stelle, die mit
+der Basis zwei, und unterhalb von zwei gibt es nichts mehr. Das System
+ist nach links \emph{versiegelt}.
+
+Wer mit einer festen Stellenzahl arbeitet, bekommt deshalb einen
+endlichen Vorrat an Zahlen. Mit einer Stelle sind es zwei, mit zweien
+sechs, mit dreien vierundzwanzig, mit vieren hundertzwanzig -- jede
+zusätzliche Stelle multipliziert den Vorrat, und die Größen, die dabei
+entstehen, sind genau die Fakultäten. Ist der Vorrat aufgebraucht,
+hilft kein Übertrag: Man braucht ein \emph{neues System} mit mehr
+Stellen, in dem jede alte Ziffer plötzlich ein anderes Gewicht trägt.
+
+Diesen endlichen Lebensraum einer Zahl nennen wir ihren
+\emph{Horizont}. Was zunächst wie ein Defekt des umgedrehten Systems
+aussieht -- man kann nicht einfach weiterzählen --, ist in Wahrheit
+sein interessantester Zug: Jede Zahl trägt hier nicht nur einen Wert,
+sondern auch die Information, in welchem Raum dieser Wert lebt. Die
+Gesamtheit aller Horizonte bleibt dabei unendlich; nur jeder einzelne
+ist endlich. Unendlichkeit gibt es weiterhin -- aber als Treppe, nicht
+als Gerade.
+
+\section{Der zweite Fund: die Nullen}
+
+Die führenden Nullen kamen erst später, und sie kamen als Überraschung.
+In jedem gewohnten System ist eine vorangestellte Null reine Kosmetik:
+012 ist 12. Im umgedrehten System stellt man eine Null voran -- und
+verändert damit die Zahl.
+
+Ein Beispiel mit kleinen Zahlen. Im Horizont mit zwei Stellen bedeutet
+die Ziffernfolge 12 den Wert fünf. Stellt man eine Null davor, steht
+dort 012 -- aber jetzt in einem Horizont mit drei Stellen, in dem alle
+Gewichte anders verteilt sind. Der Wert ist sechs. Noch eine Null:
+0012, Wert sieben. Die Ziffern 1 und 2 haben sich nicht bewegt, und
+doch zählt die Zahl bei jeder Verlängerung eins weiter.
+
+Das ist der Moment, in dem aus einer Kuriosität ein
+Untersuchungsgegenstand wird. Denn wenn eine führende Null den Wert
+verändert, dann gibt es plötzlich \emph{zwei verschiedene Antworten}
+auf die harmloseste aller Fragen: Was heißt es, einer Zahl mehr Platz
+zu geben?
+
+\begin{itemize}
+  \item Man kann ihren \emph{Wert} festhalten -- dann müssen sich beim
+        Umzug in den größeren Horizont ihre Ziffern umorganisieren.
+  \item Man kann ihre \emph{Gestalt} festhalten -- die Ziffern bleiben
+        stehen, eine Null kommt davor -- dann verschiebt sich ihr Wert.
+\end{itemize}
+
+Im Dezimalsystem sind das dieselbe Operation. Hier sind es zwei, und
+sie führen in verschiedene Welten. Fast alles, was dieses Buch
+untersucht, lebt in der Lücke zwischen diesen beiden Begriffen: die
+beiden zunächst sichtbaren Identitäten einer Hori-Zahl (eine dritte
+wird sich später zeigen), die Arten aufzuräumen, die Rechenwelten
+und die Spannungen zwischen ihnen.
+
+\section{Was hier eigentlich erfunden wurde -- und was nicht}
+
+Ehrlichkeit gehört von Anfang an dazu: Die Bausteine dieses Systems
+sind sämtlich bekannte Mathematik. Zahlensysteme mit gemischten Basen
+gibt es seit Jahrhunderten, das Fakultätssystem ist gut untersucht,
+und dass seine Räume Fakultätsgröße haben, weiß die Kombinatorik
+lange. Neu -- jedenfalls haben wir es in dieser Form nirgends gefunden
+-- ist die Kombination: die umgedrehte Leserichtung in einem endlichen
+Raum, der Horizont als Bestandteil der Zahl, die bedeutungstragenden
+Nullen und die beiden konkurrierenden Arten zu wachsen. Ob diese
+Kombination eine eigenständige Theorie trägt, war die Wette, mit der
+dieses Projekt begann. Die folgenden Kapitel legen die Karten offen.
+
+\begin{oberflaeche}
+Falls von diesem Kapitel nur ein Satz bleiben soll, dann dieser: Die
+Horimetrik entstand nicht aus dem Wunsch, Zahlen anders zu schreiben,
+sondern aus der Frage, was eine Ordnung erzwingt, wenn man sie
+umdreht. Die Antwort war: Endlichkeit -- und aus der Endlichkeit
+folgte alles Weitere von selbst.
+\end{oberflaeche}

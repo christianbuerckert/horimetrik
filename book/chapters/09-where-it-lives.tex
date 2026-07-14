@@ -1,0 +1,124 @@
+\chapter{Where Horimetrik Lives}
+\label{ch:einordnung}
+
+% Register: S44, V13. Sources: Appendix J, experiments_einordnung.py.
+% Closing chapter: first the frontiers (Ch. 8), then the map.
+
+A book about a new theory owes its readers an address at the end:
+where on the map of mathematics does all of this live? The answer
+only assembled itself completely at the very end of the work, and
+it is better than we dared to hope. There are, after all, three
+possible outcomes for a project like this one. An \emph{unknown}
+ground space would be suspicious -- most likely one had simply
+searched badly. A \emph{known and complete theory} would be the
+end -- one would have repainted old mathematics. The best case is
+the third: a known ground space carrying new operations and new
+theorems. That is exactly where we have landed.
+
+\section{The inhabitants are old acquaintances}
+
+Prepend a leading zero to the digits of a Hori number,
+$e=(0,a_1,\ldots,a_n)$, and every position satisfies $0\le e_j<j$
+-- and that is, word for word, the definition of an
+\emph{inversion sequence} of length $n{+}1$. Inversion sequences
+are in classical bijection with permutations: $e_j$ counts how
+many earlier entries of a permutation are larger than the $j$-th.
+Hence:
+
+\begin{satz}[Register S44]
+$H_n$ is in bijection with the inversion sequences of length
+$n{+}1$ and thus with the permutations of $n{+}1$ elements.
+Through this lens the structure horizon becomes the permutation
+statistic
+\[
+\sigma(P_a)=n-\min_{e_j>0}\bigl((j{-}1)-e_j\bigr),
+\]
+and its distribution is known exactly: on each level $1\le r\le n$
+there are precisely $r\cdot r!$ elements (the formula holds for
+$a\ne0$; zero has $\sigma=0$).
+\end{satz}
+
+So the factorial size of the horizons was never a coincidence: the
+inhabitants of the Hori worlds \emph{are} permutation codes. This
+takes nothing away from the theory -- it says precisely what the
+theory is: Horimetrik studies how these well-known codes change
+their \emph{value}, their \emph{shape}, and their \emph{identity}
+when their space grows. Relocations, projectors, side fidelity,
+capacity -- all of that is new on the old ground space.
+
+The statistic itself has a pretty reading: $(j{-}1)-e_j$ is the
+distance of a digit from its upper bound. The literature knows the
+extreme cases as \emph{tight entries} (digits sitting right at the
+top); the structure horizon refines this into a measure: how close
+does \emph{any} digit come to its stop? Whether this statistic
+corresponds, under the bijection, to a classical permutation
+statistic is open (Register V13) -- its distribution $r\cdot r!$
+is, at any rate, almost suspiciously clean.
+
+\section{The order: a lattice that already exists}
+
+Comparing digit sequences position by position turns every horizon
+into a product of finite chains -- a \emph{distributive lattice}.
+In this order the maximally filled shape $M_r$ is an ordinary
+element, and the capacity class
+$\mathcal F_r=\{P:\sigma(P)\le r\}$ is simply the
+\emph{principal ideal} below it: everything that lies under $M_r$.
+This is the cleanest abstract description of the structure horizon
+we know: $\sigma(P)$ is the first step of the chain
+$M_0\le M_1\le M_2\le\cdots$ (with $M_0=0$) whose principal ideal
+contains $P$ -- and the extremal principle of
+Chapter~\ref{ch:strukturpolynome} becomes, in this language,
+almost a tautology. The same positionwise order on inversion
+sequences was recently studied as the \emph{middle order} on
+permutations, between the weak and the Bruhat order. Whether our
+projectors $K_V$, $K_S$ are monotone in this lattice, whether the
+commutator is an order defect -- these are fully formulated
+follow-up questions addressed to an existing field.
+
+\section{The calculus: old operators, new bookkeeping}
+
+The falling factorials are the house basis of the \emph{finite
+operator calculus}: there $\Delta$ plays the role of the
+derivative, and the umbral algebra has been studying delta
+operators and their basic sequences for decades. Structure
+polynomials and the horizon derivative are therefore very well
+placed. What Horimetrik adds is a question that is not centre
+stage there: not \emph{how} an operator changes a polynomial, but
+\emph{how much minimal structure capacity} that costs. The horizon
+calculus -- $\Gamma_+$, $\Gamma_\times$, $\Gamma_\Delta$,
+$\Gamma_E$, $\Gamma_\circ$, all exact and all attained at the same
+canonical object -- is a capacity bookkeeping on top of an
+established operator framework. Together with the counting-width
+reading from Chapter~\ref{ch:strukturpolynome}, this is the
+candidate for a self-contained research paper entirely without the
+Hori narrative.
+
+\section{The research programme behind it}
+
+Three further neighbourhoods we have sighted but not entered; let
+them be recorded as a programme. \emph{First:} replacing the digit
+bounds $0\le a_i\le i$ by arbitrary capacity profiles
+$0\le a_i<s_i$ yields the $s$-inversion sequences studied in
+combinatorics, together with their geometry (lecture hall
+polytopes). An \emph{$s$-Horimetrik} would be a second theory --
+which profiles admit a polynomial basis, a value--shape duality, a
+side fidelity, is completely open. \emph{Second:} rook theory
+writes its polynomials in exactly our basis; which shapes are rook
+polynomials of boards, and whether $M_r$ possesses a natural
+board, would be a combinatorial route to our product formulas.
+\emph{Third:} the counting semantics of the shapes -- coloured
+ordered injections -- is the raw material of combinatorial
+species; a common language for all the interpretations of this
+book might be found there.
+
+\begin{oberflaeche}
+The book's conclusion, in three lines: the inhabitants of
+Horimetrik are known objects -- permutation codes in a known
+lattice, described in the house basis of the calculus of finite
+differences. The operations on them -- two ways of growing, two
+ways of tidying up, a capacity bookkeeping, a counting width --
+are new, and so are the theorems about them. A known ground space
+with new operations and new theorems: for a small theory that
+began with the reversal of a digit ordering in the dark, that is
+probably the best address the map has to offer.
+\end{oberflaeche}

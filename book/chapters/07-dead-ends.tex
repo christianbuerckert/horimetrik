@@ -1,0 +1,149 @@
+\chapter{Dead Ends: What Did Not Work, and Why}
+\label{ch:sackgassen}
+
+% Sources: verworfen.md X1-X9, counterexamples.md, lab notes.
+% Tone: narrative, honest, one clear lesson per dead end.
+
+Research reports like to tell only the hits. This chapter does the
+opposite: it collects the roads we walked down and walked back up
+again. Not out of contrition, but because the dead ends of this
+project have revealed more about Horimetrik than many a theorem --
+and because at least one of them later turned out to be a detour
+rather than a wrong turn.
+
+\section{The $n!/2$ debacle, or: three data points are not a pattern}
+
+\begin{sackgasse}
+\emph{Idea:} At $n=5,6,7$ the shell-jumper sequence showed the
+values $60, 360, 2520$ -- exactly $n!/2$. A formula!
+\emph{Obstacle:} The fourth data point: $21168\ne20160$.
+\emph{Lesson:} Patterns built from a few terms are hypotheses, not
+results.
+\end{sackgasse}
+
+This story has a remarkable epilogue: much later, an exact digit
+formula for the same sequence fell out of the sky -- and it
+explains in hindsight \emph{why} the false formula held for three
+terms. For all three hits the digit formula collapses to a single
+summand, and that summand equals exactly $n!/2$: for $120$ and
+$5040$ because they have single-digit representations in their own
+shells, for $720$ because the first maximal digit cuts the formula
+off right after its first contributing summand. The coincidence was
+not noise but a genuine structural feature -- only one of the
+digits of $n!$, not of the sequence itself. This is how dead ends
+sometimes rehabilitate themselves: yesterday's mistake became the
+footnote of a theorem.
+
+\section{The small-world trap, six times over}
+
+The same trap caught us six times in the course of this project, in
+ever new disguises: a bound on the compactification commutator
+looked like $\pm1$ up to the seventh world (in truth it is
+unbounded on both sides); its successor, a one-sided bound,
+withstood random sampling up to the twenty-first world and fell
+only to \emph{constructed} witnesses; an element of the
+compactification monoid acted idempotent up to the fourth world,
+and the smallest counterexample lives in the fifth; and the $n!/2$
+pattern you already know. Cases five and six happened at the upper
+side of the depth law within a single evening: first a pretty
+triangular-number hypothesis died on its own candidate sweep,
+before it was even written down -- then the threshold that this
+sweep delivered turned out, in its turn, to be an artefact of too
+shallow a search. The common lesson is more precise than the usual
+``test more'':
+
+\begin{center}
+\emph{In the Hori space the interesting counterexamples grow
+factorially slowly.\\ Whoever claims bounds must construct, not
+sample.}
+\end{center}
+
+Incidentally, the same number haunts several of these stories: the
+six -- target of the smallest shell jump (the five, extended by one
+zero, becomes the six), the value-smallest separating witness of
+the monoid, the start of the first interesting shell. It is the
+house spirit of this book.
+
+\section{Discarded application dreams}
+
+\begin{sackgasse}
+\emph{Idea:} Hori addresses instead of IPv6, Hori heaps instead of
+binary heaps.
+\emph{Obstacle:} Within a single horizon the Hori space is
+structurally rigid -- address spaces need local elasticity, and the
+heap pays for the growing branching factor with expensive child
+comparisons.
+\emph{Lesson:} The system's strength is the global factorial
+ordering, not local flexibility. Applications must fit the
+structure, not the other way round.
+\end{sackgasse}
+
+\begin{sackgasse}
+\emph{Idea:} Cardinality arguments -- is the Hori space ``bigger''
+than the natural numbers?
+\emph{Obstacle:} It is countable; any enumeration flattens it.
+\emph{Lesson:} The added value lies not in cardinality but in
+structure per value. A chessboard does not become more interesting
+when you number its squares -- and not more boring either.
+\end{sackgasse}
+
+The third application dream came from outside, was the most
+ambitious -- and died on the very first theorem of this book.
+
+\begin{sackgasse}
+\emph{Idea:} Cryptography from capacity (an external proposal, July
+2026). A secret shape is pushed through $k$ leading zeros and
+evaluated value-compactly; only the bare value is published. The
+attacker, so the hope went, founders on the difference overflow --
+the way back via antidifferences blows the capacity -- and the side
+fidelity theorem blocks every hybrid shortcut.
+\emph{Obstacle:} The way back needs neither antidifferences nor
+mixed arithmetic. From $y=P(N)$, repeated division with remainder
+pulls the digits down one by one: $c_0=y\bmod N$ is \emph{exact}
+(since $c_0\le r<N$), then $y_1=(y-c_0)/N$ delivers the next round
+with divisor $N{-}1$, and so on -- a handful of divisions, and the
+``secret'' shape lies in the open. This is no ingenious attack but
+the bijection from Chapter~\ref{ch:horizonte} at a shifted
+evaluation point: the weights $1,N,N(N{-}1),\ldots$ again form a
+mixed-radix system, and the digit bounds stay obediently below the
+divisors.
+\emph{Lesson:} The factorial ordering does not scramble, it
+\emph{sorts} -- the very bijectivity that makes the system so clean
+forbids it cryptographic hardness. Two clarifications for the
+record: the side fidelity theorem forbids mixed \emph{semirings},
+not mixed \emph{algorithms} -- an attacker may divide, tabulate,
+and switch representations without ever mixing an arithmetic. And a
+one-way function needs a secret; Horimetrik has none, it is
+deliberately bright everywhere. What remains is the more modest
+role: the horizon calculus of
+Chapter~\ref{ch:strukturpolynome} works as a \emph{measuring
+instrument} for capacity and noise growth in other people's
+constructions -- not as a source of hardness of its own.
+\end{sackgasse}
+
+\section{The tropical mirage -- and its resolution}
+
+The most instructive dead end deserves the finale. Early on it was
+noticed that under addition the horizons \emph{want} to behave like
+a maximum, and under multiplication like a sum -- the behaviour of
+so-called tropical algebra. The direct attempt to compute that way
+failed on an overflow problem: the value sum can burst the maximum
+horizon. Discarded.
+
+Months later -- in this project's reckoning of time: hours -- the
+idea returned through the back door. The horizon splits into a
+mandatory part and a freely chosen surplus, and \emph{on the
+surplus} the tropical arithmetic works flawlessly: the mandatory
+part absorbs all overflows, the memory computes with maximum and
+sum. The idea was never wrong. It merely stood in the wrong
+coordinate system.
+
+\begin{oberflaeche}
+If this chapter has one message, it is this: discarding is not
+defeat, it is bookkeeping. Of our nine documented dead ends (the
+working register lists them as X1 through X9), one later became a
+theorem -- the tropical one --, one became the footnote of a
+theorem -- the $n!/2$ debacle --, and the rest became precise
+warning signs. None of that would have happened had we deleted our
+failed attempts instead of dating them.
+\end{oberflaeche}

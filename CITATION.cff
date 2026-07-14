@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: >-
+  If you use this work, please cite it as below. The German book is
+  the authoritative version; an English translation is included.
+title: "Horimetrik — Zahlen mit Horizont"
+type: software
+authors:
+  - family-names: "Bürckert"
+    given-names: "Christian Felix"
+    email: "christian@buerckert.eu"
+abstract: >-
+  A book and reference implementation on a positional number system
+  with decreasing bases: finite factorial horizons, meaning-carrying
+  leading zeros, a value/shape duality with two projectors to the
+  same identity element, a side fidelity theorem forbidding mixed
+  arithmetics, a horizon calculus with exact growth laws, and nine
+  integer sequences submitted to the OEIS. Text CC BY 4.0, programs
+  MIT. Written with mathematical collaboration by Claude (Anthropic)
+  and ideas contributed by GPT (OpenAI).
+keywords:
+  - mathematics
+  - combinatorics
+  - number systems
+  - mixed radix
+  - factorial number system
+  - inversion sequences
+  - integer sequences
+  - OEIS
+license: CC-BY-4.0
+doi: 10.5281/zenodo.21400755
+repository-code: "https://github.com/christianbuerckert/horimetrik"
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.21400755
+    description: "Zenodo archive (books and paper)"
+date-released: "2026-07-14"
+version: "0.27"

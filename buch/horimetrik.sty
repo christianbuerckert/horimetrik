@@ -1,0 +1,50 @@
+% Makros und Umgebungen der Horimetrik
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{horimetrik}[2026/07/13 Horimetrik-Notation]
+
+% Räume
+\newcommand{\Hn}[1]{H_{#1}}                 % endlicher Horizont
+\newcommand{\Hori}{\mathcal H}              % vollständiger Horiraum
+\newcommand{\Struk}{\mathcal S}             % Strukturhalbring
+\newcommand{\N}{\mathbb N}
+\newcommand{\Nn}{\mathbb N_0}
+
+% Abbildungen
+\newcommand{\val}{\operatorname{val}}
+\newcommand{\hor}{\operatorname{hor}}
+\newcommand{\enc}[1]{E_{#1}}                % Codierung in H_n
+\newcommand{\lift}{L}                       % werttreuer Lift
+\newcommand{\zext}{Z}                       % strukturtreue Erweiterung
+\newcommand{\KS}{K_S}
+\newcommand{\KV}{K_V}
+\newcommand{\muh}{\mu}                      % Minimalhorizont eines Wertes
+\newcommand{\sigmah}{\sigma}                % Strukturhorizont
+
+% fallende Fakultät
+\newcommand{\ff}[2]{#1^{\underline{#2}}}
+
+% Operationen des konservativ-kompakten Halbrings (Satz S11)
+\newcommand{\hplus}{\oplus}
+\newcommand{\htimes}{\otimes}
+
+% konkrete Hori-Zahlen: \hz{0012}{4} -> 0012_{H_4}
+\newcommand{\hz}[2]{#1_{H_{#2}}}
+
+% Satzumgebungen
+\theoremstyle{plain}
+\newtheorem{satz}{Satz}[chapter]
+\newtheorem{lemma}[satz]{Lemma}
+\newtheorem{vermutung}[satz]{Vermutung}
+\theoremstyle{definition}
+\newtheorem{definition}[satz]{Definition}
+\newtheorem{beispiel}[satz]{Beispiel}
+\theoremstyle{remark}
+\newtheorem{bemerkung}[satz]{Bemerkung}
+\newtheorem*{sackgasse}{Sackgasse}
+
+% Interludium: Rückkehr an die Oberfläche, bewusst formelfrei
+\newenvironment{oberflaeche}
+  {\par\medskip\noindent\textbf{Zurück an die Oberfläche.}\itshape\par}
+  {\par\medskip}
+
+\endinput

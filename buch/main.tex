@@ -1,0 +1,49 @@
+\documentclass[11pt,a4paper]{book}
+
+\usepackage{fontspec}
+\usepackage[ngerman]{babel}
+\usepackage[a4paper,top=2.5cm,bottom=2.8cm,inner=2.6cm,outer=2.2cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{parskip} % kein Absatzeinzug, stattdessen kleiner Abstand
+\usepackage{emptypage} % Leerseiten wirklich leer (keine Kolumnentitel/Seitenzahlen)
+\setlength{\emergencystretch}{1.5em} % Notdehnung nur für sonst überlaufende Absätze
+\usepackage{horimetrik}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Horimetrik — Zahlen mit Horizont},
+  pdfauthor={Christian Felix Bürckert},
+  pdfsubject={Wert, Struktur und Horizont in einem Zahlensystem mit fallenden Basen},
+  pdfkeywords={Horimetrik, Fakultätszahlensystem, Mischbasen, Halbring, Seitentreue}}
+
+\title{Horimetrik\\\large Zahlen mit Horizont}
+\author{Christian Felix Bürckert, M.\,Sc.\\[4pt]
+\normalsize unter mathematischer Mitarbeit von Claude (Anthropic)\\
+\normalsize und Ideenbeiträgen von GPT (OpenAI)}
+\date{Arbeitsstand \today\\[4pt]
+\normalsize Lizenz: CC\,BY\,4.0 (Text) --- Begleitprogramme: MIT}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\input{kapitel/00-vorwort}
+\input{kapitel/01-idee}
+\input{kapitel/02-horizonte}
+\input{kapitel/i1-oberflaeche}
+\input{kapitel/03-zwei-erweiterungen}
+\input{kapitel/04-strukturpolynome}
+\input{kapitel/i2-oberflaeche}
+\input{kapitel/05-arithmetik}
+\input{kapitel/06-zaehlungen}
+\input{kapitel/07-sackgassen}
+\input{kapitel/08-offene-fragen}
+\input{kapitel/09-einordnung}
+\input{kapitel/literatur}
+
+\appendix
+\input{kapitel/a1-referenz}
+\input{kapitel/a2-beweise}
+
+\end{document}

@@ -1,0 +1,29 @@
+%I
+%S 1,6,22,87,407,2473,19527,170720,1643913,18042957,233850057,3239053262,47820134904,
+%T 750414817981,12481922930743,223531510857897,4466575128428831,93400807563852114,
+%U 2040785359707595829,46522111241274345703,1104851095392088611659,27297549612899248588570
+%N a(n) = max over d of (d + c_d), where Sum_d c_d*X_(d) is the square of M_n(X) = Sum_{d=0}^{n-1} (n-d)*X_(d), expanded in the falling factorial basis X_(d) = X*(X-1)*...*(X-d+1).
+%C In the Horimetrik framework (see LINKS) this is the "maximal product height of squares" beta(n,n) (maximale Produkthoehe von Quadraten).
+%C M_n is the coefficientwise largest polynomial with d + c_d <= n at all occupied positions. a(n) answers: how large a capacity can the product of two capacity-n structures require. Proved: multiplication is coefficientwise monotone, so the maximum over all pairs is attained at (M_n, M_n). Products via X_(p)*X_(q) = Sum_j binomial(p,j)*binomial(q,j)*j!*X_(p+q-j).
+%C Proved: log(a(n)/n!) = 2*sqrt(n) + O(log n).
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik/blob/main/buch/main.pdf">Horimetrik - Zahlen mit Horizont (book PDF, in German)</a>
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik/blob/main/book/main.pdf">Horimetrik - Numbers with a Horizon (book PDF, English translation)</a>
+%H Christian Felix Bürckert, <a href="https://doi.org/10.5281/zenodo.21400755">Horimetrik - Zahlen mit Horizont / Numbers with a Horizon (archived books and paper, Zenodo)</a>
+%H Christian Felix Bürckert, <a href="https://github.com/christianbuerckert/horimetrik">Horimetrik (proofs, programs, and b-files)</a>
+%F a(n) = n! * exp(2*sqrt(n) + O(log n)).
+%e For n=2: M_2(X) = X + 2 and (X+2)^2 = X^2 + 4X + 4 = X_(2) + 5*X_(1) + 4, so a(2) = max(0+4, 1+5, 2+1) = 6.
+%o (Python)
+%o from math import factorial, comb
+%o def a(n):
+%o     M = {d: n-d for d in range(n)}
+%o     prod = {}
+%o     for p, x in M.items():
+%o         for q, y in M.items():
+%o             for j in range(min(p, q)+1):
+%o                 d = p+q-j
+%o                 prod[d] = prod.get(d, 0) + x*y*comb(p,j)*comb(q,j)*factorial(j)
+%o     return max(d+c for d, c in prod.items() if c > 0)
+%Y Cf. A000142.
+%K nonn
+%O 1,2
+%A _Christian Felix Bürckert_, Jul 14 2026

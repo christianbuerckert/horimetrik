@@ -1,0 +1,120 @@
+\chapter{Finite Horizons and Factorial Shells}
+\label{ch:horizonte}
+
+% Register: D1, D2, S1. Examples first, then the definition.
+
+\section{An afternoon in a world of 24 numbers}
+
+Before we define, we calculate. We take three places. The first may
+be 0 or 1, the second 0, 1, or 2, the third 0 to 3. The weights run
+from the right: the last place counts units, the middle one counts
+fours (because the last place becomes ``full'' with its four possible
+values before the middle one advances), the first counts twelves.
+Whoever writes down all the permitted combinations in order counts
+from 0 to 23:
+
+\begin{center}
+\begin{tabular}{cccc}
+$000=0$ & $001=1$ & $002=2$ & $003=3$\\
+$010=4$ & $011=5$ & $012=6$ & $013=7$\\
+$020=8$ & $021=9$ & $022=10$ & $023=11$\\
+$100=12$ & $101=13$ & $102=14$ & $103=15$\\
+$110=16$ & $111=17$ & $112=18$ & $113=19$\\
+$120=20$ & $121=21$ & $122=22$ & $123=23$\\
+\end{tabular}
+\end{center}
+
+No gap, no duplicate: exactly $2\cdot3\cdot4=24$ numbers. At $123$
+everything stops -- every place stands at its maximum, and building
+on to the left is impossible, because below base two there is
+nothing. We call this world of 24 places the horizon $H_3$. Whoever
+wants to reach 24 needs a new world: $H_4$ with
+$2\cdot3\cdot4\cdot5=120$ places, in which all the weights are
+different.
+
+\section{The definitions}
+
+\begin{definition}[Horizon; Register D1]
+For $n\in\Nn$ let
+$\Hn{n}=\{(a_1,\ldots,a_n)\mid 0\le a_i\le i\}$.
+Place $i$ has base $i+1$; hence
+$|\Hn{n}|=2\cdot3\cdots(n{+}1)=(n+1)!$.
+\end{definition}
+
+\begin{definition}[Value; Register D2]
+$V_n(a)=\sum_{i=1}^{n}a_i\,\dfrac{(n+1)!}{(i+1)!}$, equivalently
+recursively $v_0=0$ and $v_i=(i{+}1)v_{i-1}+a_i$ from left to
+right, with $V_n(a)=v_n$.
+\end{definition}
+
+\begin{satz}[Register S1]
+$V_n\colon\Hn{n}\to\{0,\ldots,(n+1)!-1\}$ is bijective.
+\end{satz}
+
+\begin{proof}
+Induction on $n$. For $n=0$ there is nothing to show. The recursion
+yields
+\[
+V_n(a)=(n{+}1)\,V_{n-1}(a_1,\ldots,a_{n-1})+a_n,
+\qquad 0\le a_n\le n;
+\]
+division with remainder by $n+1$ therefore determines $a_n$
+and the remaining digits uniquely (injectivity). The largest value
+is $(n{+}1)(n!-1)+n=(n{+}1)!-1$, and since domain and codomain both
+have $(n+1)!$ elements, surjectivity follows.
+\end{proof}
+
+The inverse map $E_n$ -- decomposing a value into its digits -- is
+repeated division with remainder by $n{+}1, n, \ldots, 2$, that is,
+exactly the algorithm by which one breaks seconds down into days,
+hours, and minutes, only with regularly growing rather than
+arbitrarily mixed bases.
+
+\section{Factorial shells}
+
+Every natural number $x$ has a smallest home: the
+\emph{minimal horizon} $\mu(x)=\min\{n:x<(n+1)!\}$. The natural
+numbers thereby split into \emph{shells} $S_n=\{x:\mu(x)=n\}$ --
+and these are conceptually different from the horizons: the
+horizon $\Hn{n}$ is the whole space and houses the shells
+$S_0$ to $S_n$; the shell $S_n$ is its \emph{new territory}, the
+values that only become possible with it.
+
+\begin{center}
+\begin{tabular}{lll}
+Shell & Range & New values\\
+\hline
+$S_0$ & only the $0$ & $1$\\
+$S_1$ & only the $1$ & $1$\\
+$S_2$ & $2$ to $5$ & $4$\\
+$S_3$ & $6$ to $23$ & $18$\\
+$S_4$ & $24$ to $119$ & $96$\\
+$S_5$ & $120$ to $719$ & $600$\\
+$S_6$ & $720$ to $5039$ & $4320$\\
+\end{tabular}
+\end{center}
+
+The shell boundaries are number-theoretically striking places: for
+$n\ge1$ the lower boundary of the shell $S_n$ is the factorial $n!$
+-- divisible by \emph{every} number from $1$ to $n$. The number
+directly before it, $n!-1$, is divisible by \emph{no} number from
+$2$ to $n$. The step from $719$ to $720$ thus switches, within a
+single successor, from maximal coprimality to maximal divisibility
+-- and at precisely this point Horimetrik forces the move into a
+new world.
+
+\begin{beispiel}
+The number $7$ lives minimally in $H_3$ (since $6\le7<24$) and is
+written there as $013$. In $H_4$ it is written $0012$, in $H_5$ as
+$00011$, in $H_6$ as $000010$ -- and from $H_7$ onwards stably as
+$0\cdots07$: as soon as the horizon is large enough, the whole
+number fits into the last digit, and further leading zeros are at
+last genuinely harmless. We tell this life story at leisure in an
+interlude of its own later on.
+\end{beispiel}
+
+With that the foundation is laid: finite worlds of factorial size,
+a bijection between digits and values, and shells with striking
+boundaries. What is still missing is the true protagonist -- the
+second identity of every number. It steps onto the stage in the
+next chapter.

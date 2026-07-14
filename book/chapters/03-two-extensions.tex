@@ -1,0 +1,153 @@
+\chapter{Two Ways to Grow: Shape or Value}
+\label{ch:erweiterungen}
+
+% Register: D5, S8. Sources: spec. sections 5 and 6.
+
+\section{The moment of the fork}
+
+Take the seven in its home $H_4$: there it is written $0012$. Now
+we give it one more place. What is that supposed to mean?
+
+The first answer is the naive one: we put a zero in front.
+\[
+0012 \;\longmapsto\; 00012 .
+\]
+The digits stay put -- but in $H_5$ every place except the last
+carries a different weight, and the value slips from $7$ to $8$.
+The \emph{shape} was preserved, the value was not.
+
+The second answer is the cautious one: we want the number to stay
+the same, and we re-encode the $7$ in $H_5$:
+\[
+0012 \;\longmapsto\; 00011 .
+\]
+The \emph{value} was preserved, the shape was not.
+
+In the decimal system both answers are the same operation -- which
+is why we never noticed that they are two questions. In Hori space
+they part ways, and we give them names: the structure-preserving
+-- equivalently we say: shape-preserving -- extension $Z$ puts the
+zero in front, the value-preserving lift $L$ re-encodes.
+
+\begin{definition}[Register D5]
+$Z_n(a_1,\ldots,a_n)=(0,a_1,\ldots,a_n)$ and
+$L_n(a)=E_{n+1}(V_n(a))$, where $E_{n+1}$ is the encoding into
+$\Hn{n+1}$. We have $V_{n+1}(L_n(a))=V_n(a)$, whereas $Z_n$ in
+general changes the value.
+\end{definition}
+
+\section{Two staircases, two skies}
+
+Both operations join the finite horizons into an infinite
+staircase -- but they are \emph{different} staircases, and they
+lead to different places. The question in each case is: which
+elements of consecutive horizons count as ``the same''?
+
+Under $L$ two representations count as the same if they have the
+same value: $013$ in $H_3$, $0012$ in $H_4$, $00011$ in $H_5$ are
+a single object -- the seven. Under $Z$ they count as the same if
+they have the same shape: $12$, $012$, $0012$ are a single object
+-- the pattern ``one-two'', whose value wanders from step to step.
+
+\begin{satz}[Register S8]\label{satz:grenzen}
+The limit space of the staircase under $L$ is $\Nn$, the set of
+ordinary natural numbers. The limit space under $Z$ is the space
+of all shapes -- formally: the semiring of polynomials with
+non-negative integer coefficients in the basis of falling
+factorials, which the next chapter introduces.
+\end{satz}
+
+\begin{proof}[Proof idea]
+Under $L$ precisely the representations of the same value are
+identified (the encoding is injective), and every value occurs --
+the classes \emph{are} the natural numbers. Under $Z$ precisely
+those digit strings are identified that differ by leading zeros,
+and every shape occurs from its smallest admissible horizon
+onwards -- the classes are the shapes. The complete proof via
+directed systems is given in Appendix~\ref{ch:anhang-beweise}.
+\end{proof}
+
+\begin{beispiel}
+The two staircases, side by side. Preserving value, the seven
+remains itself and changes shape; preserving shape, the pattern
+``one-two'' remains and changes value:
+\begin{center}
+\begin{tabular}{l|llll}
+World & $H_2$ & $H_3$ & $H_4$ & $H_5$\\
+\hline
+value-preserving (always 7) & --- & $013$ & $0012$ & $00011$\\
+shape-preserving (always ``12'') & $12=5$ & $012=6$ & $0012=7$ & $00012=8$\\
+\end{tabular}
+\end{center}
+Note the crossing: $0012$ appears in both rows -- once as the
+seven's second home, once as the pattern's third life. The same
+element, two readings.
+\end{beispiel}
+
+This is the first theorem in this book that one may read
+philosophically: \emph{the same finite spaces generate different
+infinities, depending on which notion of consistency one chooses
+between the steps.} The familiar number line is one of these
+infinities -- the value-preserving one. The other, the
+shape-preserving one, is mathematically just as legitimate; only,
+in the ordinary number system nobody has ever been able to tell it
+apart from the first, because there the two staircases coincide.
+
+\section{The third staircase}
+
+For a long time we thought there were exactly two ways to grow.
+Then an outside mathematician read a short description of this
+system -- and inadvertently anchored the ladder of bases at the
+other end. Out of his ``misunderstanding'' fell a third staircase.
+
+For one can also append a zero to a number \emph{on the right}.
+All digits then keep their position counted from the left, and a
+strikingly clean rule holds: the value does not multiply out of
+control but scales \emph{exactly} by the factor $n+2$ --
+$12$ in $H_2$ (value $5$) becomes $120$ in $H_3$ (value $20$).
+What stays invariant is neither the value nor the shape but a
+third quantity: the \emph{factorial fraction}
+$F=\sum_i a_i/(i+1)!$, since we always have
+\[
+V_n(a)=(n+1)!\cdot F(a).
+\]
+Every Hori number is thus also a fraction between zero and one,
+times the size of its world -- and this fraction system is an old
+acquaintance: it is Cantor's factorial base for fractions, a good
+century and a half old.
+
+With that, Hori space has three staircases, three invariants,
+three skies:
+
+\begin{center}
+\begin{tabular}{l|lll}
+Extension & Invariant & Value & Limit space\\
+\hline
+value-preserving ($L$) & value & $\times1$ & natural numbers\\
+shape-preserving ($Z$, left) & polynomial & uneven & structure space\\
+fraction-preserving ($R$, right) & fraction $F$ & $\times(n+2)$ & Cantor fractions\\
+\end{tabular}
+\end{center}
+
+And the objection ``but this has been known since Cantor'' thereby
+receives a precise answer: it hits the third staircase completely
+-- and the other two, together with everything this book proves
+about their interplay, not at all.
+
+\section{The eigenhorizon: where the fork heals}
+
+For every single number there is a point at which the difference
+between $Z$ and $L$ vanishes. If the entire value sits in the last
+digit -- the number $n$ as $0\cdots0n$; we call this shape its
+\emph{terminal representation}, and it becomes possible from the
+horizon $H_n$ onwards --, then the zero extension is
+value-neutral: shape and value grow together from there on. We
+call $H_n$ the \emph{eigenhorizon} of $n$. Below it the number is
+rebuilt at every move; from there on it only grows quietly to the
+left. One can compute exactly when a leading zero is
+value-neutral: precisely when all digits except the last are zero
+-- and the next chapter turns this into a one-liner using the
+horizon derivative.
+
+What this feels like for a concrete number is told in the
+interlude ``The life story of the number seven''.

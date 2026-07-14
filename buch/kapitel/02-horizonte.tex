@@ -1,0 +1,119 @@
+\chapter{Endliche Horizonte und Fakultätsschalen}
+\label{ch:horizonte}
+
+% Register: D1, D2, S1. Erst Beispiele, dann Definition.
+
+\section{Ein Nachmittag in einer Welt mit 24 Zahlen}
+
+Bevor wir definieren, rechnen wir. Wir nehmen drei Stellen. Die erste
+darf 0 oder 1 sein, die zweite 0, 1 oder 2, die dritte 0 bis 3. Die
+Gewichte laufen von rechts: Die letzte Stelle zählt Einer, die
+mittlere zählt Vierer (denn die letzte Stelle wird mit ihren vier
+möglichen Werten „voll“, bevor die mittlere weiterschaltet), die
+erste zählt Zwölfer. Wer alle erlaubten Kombinationen der Reihe nach
+aufschreibt, zählt von 0 bis 23:
+
+\begin{center}
+\begin{tabular}{cccc}
+$000=0$ & $001=1$ & $002=2$ & $003=3$\\
+$010=4$ & $011=5$ & $012=6$ & $013=7$\\
+$020=8$ & $021=9$ & $022=10$ & $023=11$\\
+$100=12$ & $101=13$ & $102=14$ & $103=15$\\
+$110=16$ & $111=17$ & $112=18$ & $113=19$\\
+$120=20$ & $121=21$ & $122=22$ & $123=23$\\
+\end{tabular}
+\end{center}
+
+Keine Lücke, keine Doppelung: genau $2\cdot3\cdot4=24$ Zahlen. Bei
+$123$ ist Schluss -- jede Stelle steht auf ihrem Maximum, und links
+anbauen geht nicht, weil es unter der Basis zwei nichts gibt. Diese
+Welt mit 24 Plätzen nennen wir den Horizont $H_3$. Wer die 24
+erreichen will, braucht eine neue Welt: $H_4$ mit
+$2\cdot3\cdot4\cdot5=120$ Plätzen, in der alle Gewichte andere sind.
+
+\section{Die Definitionen}
+
+\begin{definition}[Horizont; Register D1]
+Für $n\in\Nn$ sei
+$\Hn{n}=\{(a_1,\ldots,a_n)\mid 0\le a_i\le i\}$.
+Die Stelle $i$ besitzt die Basis $i+1$; damit ist
+$|\Hn{n}|=2\cdot3\cdots(n{+}1)=(n+1)!$.
+\end{definition}
+
+\begin{definition}[Wert; Register D2]
+$V_n(a)=\sum_{i=1}^{n}a_i\,\dfrac{(n+1)!}{(i+1)!}$, gleichwertig
+rekursiv $v_0=0$ und $v_i=(i{+}1)v_{i-1}+a_i$ von links nach
+rechts, mit $V_n(a)=v_n$.
+\end{definition}
+
+\begin{satz}[Register S1]
+$V_n\colon\Hn{n}\to\{0,\ldots,(n+1)!-1\}$ ist bijektiv.
+\end{satz}
+
+\begin{proof}
+Induktion über $n$. Für $n=0$ ist nichts zu zeigen. Die Rekursion
+liefert
+\[
+V_n(a)=(n{+}1)\,V_{n-1}(a_1,\ldots,a_{n-1})+a_n,
+\qquad 0\le a_n\le n;
+\]
+Division mit Rest durch $n+1$ bestimmt also $a_n$
+und den Rest der Ziffern eindeutig (Injektivität). Der größte Wert
+ist $(n{+}1)(n!-1)+n=(n{+}1)!-1$, und da Definitionsbereich und
+Zielbereich beide $(n+1)!$ Elemente haben, folgt die Surjektivität.
+\end{proof}
+
+Die Umkehrabbildung $E_n$ -- einen Wert in seine Ziffern zerlegen --
+ist die fortgesetzte Division mit Rest durch $n{+}1, n, \ldots, 2$,
+also genau der Algorithmus, mit dem man Sekunden in Tage, Stunden,
+Minuten zerlegt, nur mit regelmäßig wachsenden statt willkürlich
+gemischten Basen.
+
+\section{Fakultätsschalen}
+
+Jede natürliche Zahl $x$ hat ein kleinstes Zuhause: den
+\emph{Minimalhorizont} $\mu(x)=\min\{n:x<(n+1)!\}$. Die natürlichen
+Zahlen zerfallen dadurch in \emph{Schalen} $S_n=\{x:\mu(x)=n\}$ --
+und die sind begrifflich etwas anderes als die Horizonte: Der
+Horizont $\Hn{n}$ ist der ganze Raum und beherbergt die Schalen
+$S_0$ bis $S_n$; die Schale $S_n$ ist sein \emph{Neuland}, also die
+Werte, die erst mit ihm möglich werden.
+
+\begin{center}
+\begin{tabular}{lll}
+Schale & Bereich & neue Werte\\
+\hline
+$S_0$ & nur die $0$ & $1$\\
+$S_1$ & nur die $1$ & $1$\\
+$S_2$ & $2$ bis $5$ & $4$\\
+$S_3$ & $6$ bis $23$ & $18$\\
+$S_4$ & $24$ bis $119$ & $96$\\
+$S_5$ & $120$ bis $719$ & $600$\\
+$S_6$ & $720$ bis $5039$ & $4320$\\
+\end{tabular}
+\end{center}
+
+Die Schalengrenzen sind zahlentheoretisch markante Orte: Für
+$n\ge1$ ist die untere Grenze der Schale $S_n$ die Fakultät $n!$ --
+durch \emph{jede} Zahl von $1$ bis $n$ teilbar. Die Zahl direkt
+davor, $n!-1$, ist durch \emph{keine} Zahl von $2$ bis $n$ teilbar.
+Der Schritt von $719$ auf $720$ wechselt also mit einem einzigen
+Nachfolger von maximaler Teilerfremdheit zu maximaler Teilbarkeit --
+und genau an dieser Stelle erzwingt die Horimetrik den Umzug in eine
+neue Welt.
+
+\begin{beispiel}
+Die Zahl $7$ wohnt minimal in $H_3$ (denn $6\le7<24$) und schreibt
+sich dort $013$. In $H_4$ schreibt sie sich $0012$, in $H_5$ als
+$00011$, in $H_6$ als $000010$ -- und ab $H_7$ stabil als
+$0\cdots07$: Sobald der Horizont groß genug ist, passt die ganze
+Zahl in die letzte Ziffer, und weitere führende Nullen sind endlich
+wirklich harmlos. Diese Lebensgeschichte erzählen wir später in
+einem eigenen Interludium in Ruhe.
+\end{beispiel}
+
+Damit steht das Fundament: endliche Welten mit Fakultätsgröße, eine
+Bijektion zwischen Ziffern und Werten, und Schalen mit markanten
+Grenzen. Was noch fehlt, ist der eigentliche Hauptdarsteller -- die
+zweite Identität jeder Zahl. Sie betritt im nächsten Kapitel die
+Bühne.

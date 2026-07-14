@@ -1,0 +1,673 @@
+\documentclass[11pt]{article}
+
+\usepackage{fontspec}
+\usepackage[ngerman]{babel}
+\usepackage[a4paper,margin=2.6cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{microtype}
+\usepackage{booktabs}
+\setlength{\emergencystretch}{1.5em}
+
+\newtheorem{satz}{Satz}[section]
+\newtheorem{lemma}[satz]{Lemma}
+\newtheorem{korollar}[satz]{Korollar}
+\newtheorem{vermutung}[satz]{Vermutung}
+\theoremstyle{definition}
+\newtheorem{definition}[satz]{Definition}
+\newtheorem{beispiel}[satz]{Beispiel}
+\theoremstyle{remark}
+\newtheorem{bemerkung}[satz]{Bemerkung}
+
+\newcommand{\Hori}{\mathcal H}
+\newcommand{\Struk}{\mathcal S}
+\newcommand{\NN}{\mathbb N_0}
+\newcommand{\val}{\operatorname{val}}
+\newcommand{\ff}[2]{#1^{\underline{#2}}}
+\newcommand{\KV}{K_V}
+\newcommand{\KS}{K_S}
+
+\title{Die Horimetrik:\\
+Wert und Struktur in einem Zahlensystem\\
+mit endlichen Fakultätshorizonten}
+\author{Christian Felix Bürckert, M.\,Sc.\\[2pt]
+\normalsize unter mathematischer Mitarbeit von Claude (Anthropic)\\
+\normalsize und Ideenbeiträgen von GPT (OpenAI)}
+\date{14. Juli 2026 --- Arbeitsstand, Version 0.16\\[4pt]
+\normalsize Lizenz: CC\,BY\,4.0 --- Begleitprogramme: MIT\\
+\normalsize\texttt{github.com/christianbuerckert/horimetrik}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Wir untersuchen ein Mischbasen-Stellenwertsystem, dessen Basen zur
+signifikantesten Stelle hin \emph{fallen}: Eine Ziffernfolge
+$a_1\cdots a_n$ mit $0\le a_i\le i$ bezeichnet den Wert
+$\sum_i a_i\,(n+1)!/(i+1)!$. Ein solches System ist nach links
+versiegelt; jede Zahl lebt in einem endlichen \emph{Horizont} der
+Größe $(n+1)!$, und eine führende Null verändert den Wert. Jedes
+Element trägt dadurch zwei Identitäten: seinen \emph{Wert} und seine
+\emph{Struktur} (ein Polynom mit nichtnegativen Koeffizienten in der
+Basis der fallenden Fakultäten). Wir zeigen: (1)~Die wert- bzw.\
+strukturtreuen Einbettungen der endlichen Horizonte erzeugen zwei
+verschiedene direkte Grenzräume, $\NN$ und den positiven
+Strukturhalbring. (2)~Der Raum trägt zwei spiegelbildliche
+kommutative Halbringe; in beiden wirkt dieselbe ausgezeichnete Eins
+als Projektor auf die jeweilige kanonische Kopie. (3)~Ein
+\emph{Seitentreue-Satz}: Keine kommutative Halbring-Arithmetik mit
+wert- bzw.\ strukturgetragenen Operationen kann die beiden
+Identitäten mischen, unabhängig von der Wahl der Horizontregeln;
+das Hindernis ist genau die Ziffernschranke des Systems. Ergänzend
+beweisen wir ein asymptotisches Gesetz für den Kommutator der beiden
+Kompaktifizierungen, ein Extremalprinzip mit exakten
+Wachstumsgesetzen des Strukturhorizonts unter Addition,
+Multiplikation, endlicher Differenz und Komposition (der
+Kompositionsabschluss des positiven Halbrings selbst ist Teil des
+Resultats), und dokumentieren neun offenbar unbekannte Zählfolgen. Der Text erhebt keinen Neuheitsanspruch über einen
+dokumentierten Suchbefund hinaus.
+\end{abstract}
+
+\section{Die Idee}
+
+Gewöhnliche Stellenwertsysteme lassen die signifikanteste Stelle am
+weitesten zählen. Dieser Text untersucht die umgekehrte Konvention.
+Für festes $n$ bezeichne eine Ziffernfolge $a_1a_2\cdots a_n$ mit
+$0\le a_i\le i$ den Wert
+\[
+V_n(a)=\sum_{i=1}^n a_i\,\frac{(n+1)!}{(i+1)!}\,;
+\]
+die linke Stelle ist binär, trägt aber das größte Gewicht. Zwei
+Konsequenzen: Das System ist \emph{nach links versiegelt} --- unter
+der Basis $2$ gibt es nichts, mit $n$ Stellen sind genau $(n+1)!$
+Werte darstellbar, und mehr Platz erfordert ein neues
+Koordinatensystem. Und \emph{führende Nullen sind semantisch}:
+$12\mapsto012\mapsto0012$ bezeichnet nacheinander $5,6,7$.
+
+Jede Zahl trägt hier also zweierlei: einen Wert und eine Gestalt.
+Die Mathematik dieses Doppelcharakters ist der Gegenstand des
+Textes. Die Idee entstand aus der Frage, was passiert, wenn man die
+Exponentenordnung einer Zahldarstellung umdreht; die Endlichkeit der
+Horizonte ist dabei kein Designziel, sondern eine Zwangsläufigkeit.
+
+\section{Der Horiraum}
+
+\begin{definition}
+Für $n\ge0$ sei $H_n=\{(a_1,\dots,a_n):0\le a_i\le i\}$, also
+$|H_n|=(n+1)!$, mit der Wertabbildung $V_n$ wie oben und der
+Codierung $E_n=V_n^{-1}$. Ferner sei
+$\mu(x)=\min\{n:x<(n+1)!\}$ der \emph{Minimalhorizont} von
+$x\in\NN$.
+\end{definition}
+
+\begin{satz}\label{satz:bij}
+$V_n\colon H_n\to\{0,\dots,(n+1)!-1\}$ ist bijektiv.
+\end{satz}
+
+\begin{proof}
+Induktion über $n$ mittels
+$V_n(a)=(n+1)V_{n-1}(a_1,\dots,a_{n-1})+a_n$ und $0\le a_n\le n$:
+Division mit Rest durch $n+1$ liefert Eindeutigkeit; der Wertebereich
+ist $[0,(n+1)!-1]$, und beide Seiten haben Mächtigkeit $(n+1)!$.
+\end{proof}
+
+\begin{definition}
+Mit $\ff Xd=X(X-1)\cdots(X-d+1)$ sei
+$\Struk=\bigl\{\sum_d c_d\ff Xd:c_d\in\NN\bigr\}$ und
+$\sigma\bigl(\sum c_d\ff Xd\bigr)=\max_{c_d>0}(d+c_d)$,
+$\sigma(0)=0$. Das \emph{Strukturpolynom} von $a\in H_n$ ist
+$P_a=\sum_{d=0}^{n-1}a_{n-d}\ff Xd$; es gilt $V_n(a)=P_a(n+1)$, und
+$P\in\Struk$ ist genau dann in $H_n$ darstellbar, wenn
+$\sigma(P)\le n$. Der \emph{Horiraum} ist
+$\Hori=\{(n,P):P\in\Struk,\ n\ge\sigma(P)\}$, gleichwertig
+$\{(n,x):n\ge\mu(x)\}$.
+\end{definition}
+
+$\Struk$ ist unter Addition und Multiplikation abgeschlossen (die
+Produktformel der fallenden Fakultäten hat nichtnegative
+Strukturkonstanten) und damit ein kommutativer Halbring.
+
+\section{Erstes Hauptresultat: zwei Grenzräume}
+
+Es gibt zwei natürliche Arten, einem Element mehr Platz zu geben:
+die \emph{strukturtreue Erweiterung} $Z(n,P)=(n+1,P)$ (führende
+Null; die Gestalt bleibt, der Wert wird zu $P(n+2)$) und der
+\emph{werttreue Lift} $L(n,P)=(n+1,E_{n+1}(P(n+1)))$ (der Wert
+bleibt, die Gestalt wird neu codiert). Im Dezimalsystem fallen beide
+zusammen; hier nicht.
+
+\begin{satz}\label{satz:limits}
+Als gerichtete Systeme gilt
+\[
+\varinjlim(H_n,Z_n)\cong\Struk,
+\qquad
+\varinjlim(H_n,L_n)\cong\NN .
+\]
+\end{satz}
+
+\begin{proof}
+Unter $Z$ werden genau Ziffernfolgen identifiziert, die sich um
+führende Nullen unterscheiden; jede Klasse trägt genau ein
+Strukturpolynom, und jedes $P\in\Struk$ tritt (ab $H_{\sigma(P)}$)
+auf. Unter $L$ gilt $L_{m,k}\circ L_{n,m}=L_{n,k}$ wegen
+$V\circ E=\mathrm{id}$, und zwei Elemente werden genau dann
+identifiziert, wenn ihre Werte übereinstimmen; jeder Wert tritt auf.
+\end{proof}
+
+Dieselben endlichen Räume erzeugen also, je nach Konsistenzbegriff
+zwischen den Horizonten, zwei verschiedene unendliche Welten:
+die Werte $\NN$ und die Strukturen $\Struk$. Alles Weitere handelt
+vom Verhältnis dieser beiden Welten.
+
+\begin{bemerkung}[dritte Erweiterung; Cantor-Koordinate]
+Es gibt eine dritte natürliche Erweiterung: das \emph{Anhängen}
+einer Null rechts, $R(a_1,\ldots,a_n)=(a_1,\ldots,a_n,0)$. Wegen
+$V_n(a)=(n+1)!\cdot F(a)$ mit dem Fakultätsbruch
+$F(a)=\sum_i a_i/(i+1)!\in[0,1)$ ist $R$ \emph{bruchtreu} und
+skaliert den Wert exakt mit $n+2$; der zugehörige Grenzraum ist die
+Menge der endlichen Cantor-Fakultätsbrüche. Der naheliegende Einwand
+,,im Kern seit Cantor bekannt`` trifft damit genau diese dritte,
+bruchtreue Welt -- nicht die gestalttreue (deren Grenzraum der
+Strukturhalbring ist) und nicht die im Folgenden bewiesenen Sätze
+über das Zusammenspiel. Bruch, Gestalt und Wert sind paarweise
+verschiedene Invarianten.
+\end{bemerkung}
+
+\section{Zweites Hauptresultat: duale Projektorhalbringe}
+
+Die beiden \emph{Kompaktifizierungen}\footnote{Nicht
+topologisch gemeint: idempotente Retraktionen auf den jeweiligen
+Minimalhorizont.}
+$\KV(n,x)=(\mu(x),x)$ (Wert behalten, kleinstes Zuhause) und
+$\KS(n,P)=(\sigma(P),P)$ (Gestalt behalten, kleinstes Zuhause) sind
+idempotent und kommutieren nicht; das kleinste Beispiel ist die
+Ziffernfolge $010$ in $H_3$ (Wert 4).
+
+\begin{satz}[Wertseite]\label{satz:wertseite}
+Mit
+\[
+(n,x)\oplus(m,y)=\bigl(\max(n,m,\mu(x{+}y)),\,x{+}y\bigr),
+\qquad
+(n,x)\otimes(m,y)=\bigl(\mu(xy),\,xy\bigr)
+\]
+ist $\Hori$ ein kommutativer Halbring ohne Eins; $(0,0)$ ist neutral
+und absorbierend; die $\KV$-Fixpunkte bilden einen zu
+$(\NN,+,\cdot)$ isomorphen Unterhalbring mit Eins $(1,1)$, und für
+alle $h$ gilt
+\[
+h\otimes(1,1)=\KV(h).
+\]
+\end{satz}
+
+\begin{proof}
+Kern ist die Monotonie von $\mu$. Assoziativität von $\oplus$: Beide
+Klammerungen liefern
+$\max(n,m,k,\mu(\text{Teilsumme}),\mu(x{+}y{+}z))$, und die inneren
+$\mu$-Terme werden von $\mu(x{+}y{+}z)$ absorbiert. Distributivität:
+$\max(\mu(xy),\mu(xz),\mu(xy{+}xz))=\mu(x(y{+}z))$, wieder Monotonie.
+Neutralität von $(0,0)$ folgt aus $n\ge\mu(x)$. Ein
+$\otimes$-neutrales Element müsste $\mu(x)=n$ für alle Elemente
+erzwingen, was an $(1,0)$ scheitert. Schließlich
+$(n,x)\otimes(1,1)=(\mu(x),x)=\KV(n,x)$.
+\end{proof}
+
+\begin{lemma}\label{lem:sigmamono}
+$\sigma(P+Q)\ge\max(\sigma(P),\sigma(Q))$.
+\end{lemma}
+
+\begin{proof}
+An der Maximalstelle $d^*$ von $P$ gilt
+$c_{d^*}(P{+}Q)\ge c_{d^*}(P)>0$.
+\end{proof}
+
+\begin{satz}[Strukturseite, Dualität]\label{satz:dualitaet}
+Mit
+\[
+(n,P)\boxplus(m,Q)=\bigl(\max(n,m,\sigma(P{+}Q)),\,P{+}Q\bigr),
+\qquad
+(n,P)\boxtimes(m,Q)=\bigl(\sigma(PQ),\,PQ\bigr)
+\]
+ist $\Hori$ ebenfalls ein kommutativer Halbring ohne Eins; die
+$\KS$-Fixpunkte bilden einen zu $\Struk$ isomorphen Unterhalbring;
+$\KS$ ist Homomorphismus beider Operationen, und für alle $h$ gilt
+\[
+h\boxtimes(1,1)=\KS(h).
+\]
+\end{satz}
+
+\begin{proof}
+Wörtlich spiegelbildlich zu Satz~\ref{satz:wertseite}, mit
+Lemma~\ref{lem:sigmamono} anstelle der $\mu$-Monotonie. Die
+Homomorphie von $\KS$: für $\boxplus$ ist
+$\max(\sigma P,\sigma Q,\sigma(P{+}Q))=\sigma(P{+}Q)$ nach dem
+Lemma; für $\boxtimes$ sind beide Seiten
+$(\sigma(PQ),PQ)$.
+\end{proof}
+
+\begin{bemerkung}
+Es ist \emph{dieselbe} Hori-Zahl $(1,1)$ --- die Eins in ihrem
+kleinsten Zuhause ---, die auf der Wertseite $\KV$ und auf der
+Strukturseite $\KS$ als innere Multiplikation trägt. Das
+Nichtkommutieren der Kompaktifizierungen ist das Nichtkommutieren
+zweier Multiplikationen mit ein und demselben Element. Das von
+$\KS,\KV$ erzeugte Transformationsmonoid ist übrigens endlich: Es
+hat genau sechs Elemente mit der Relation
+$\KV\KS\KV=\KS\KV$ (via eines Stabilitätslemmas: $\KS$ erhält
+Wertkompaktheit) und fünf Idempotenten.
+\end{bemerkung}
+
+\section{Drittes Hauptresultat: der Seitentreue-Satz}
+
+Eine Operation auf $\Hori$ heiße \emph{wertgetragen}, wenn der
+Ergebniswert Summe bzw.\ Produkt der Operandenwerte ist (der
+Ergebnishorizont ist frei, sofern gültig), und
+\emph{strukturgetragen}, wenn das Ergebnispolynom Summe bzw.\
+Produkt der Operandenpolynome ist (Horizont frei $\ge\sigma$).
+Sätze~\ref{satz:wertseite} und~\ref{satz:dualitaet} zeigen: Beide
+\emph{seitenreinen} Kombinationen sind mit geeigneten Horizontregeln
+gesetzestreu. Die gemischten sind es nie:
+
+\begin{satz}[Seitentreue]\label{satz:seitentreue}
+\emph{(A)} Ist $\oplus$ wertgetragen und $\otimes$ strukturgetragen,
+so ist bereits die Links-Distributivität für jede Wahl der
+Horizontregeln unerfüllbar.
+\emph{(B)} Ist $\oplus$ strukturgetragen und $\otimes$ wertgetragen,
+so sind Links-Distributivität und Kommutativität von $\otimes$
+zusammen unerfüllbar.
+\end{satz}
+
+\begin{proof}
+\emph{(A).} Sei $u=(1,1)$ (Struktur $1$) und $e_1=u$,
+$e_m=e_{m-1}\oplus u$, also $\val(e_m)=m$; die Struktur $Q_m$ von
+$e_m$ ist irgendeine gültige Darstellung von $m$.
+Links-Distributivität liefert induktiv
+\begin{equation}\label{eq:kette}
+\val(a\otimes e_m)=m\cdot\val(a\otimes u).
+\end{equation}
+
+\emph{Schritt 1: jedes $Q_m$ ist konstant.} Für $c\ge1$ hat
+$a_c=(c,c)$ die konstante Struktur $c$; Konstanten werten überall zu
+sich selbst aus, also $\val(a_c\otimes u)=c$. Mit \eqref{eq:kette}
+folgt $c\,Q_m(y_c{+}1)=mc$, also $Q_m(y_c{+}1)=m$, wobei
+$y_c\ge\sigma(cQ_m)=\max_d(d+c\,q_d)\ge c$ unbeschränkt wächst. Alle
+Auswertungspunkte liegen im streng monotonen Bereich von $Q_m$
+(Argumente $\ge\sigma+1\ge\deg+2$); bei $\deg Q_m\ge1$ gäbe es
+höchstens einen solchen Punkt. Also ist $Q_m$ konstant, und mit
+$a=u$ in \eqref{eq:kette} folgt $Q_m=m$.
+
+\emph{Schritt 2: Konstanten sterben.} Sei $g=(2,3)$ mit Struktur
+$X$ und $r=\val(g\otimes u)=t_g{+}1\ge3$ fest. Nach Schritt~1 hat
+$g\otimes e_m$ die Struktur $mX$ mit $\sigma(mX)=m{+}1$, also
+$\val(g\otimes e_m)=m(T{+}1)\ge m(m{+}2)$; nach \eqref{eq:kette}
+ist dieser Wert $mr$ --- Widerspruch für $m>r-2$.
+
+\emph{(B).} Nun addieren sich Strukturen und multiplizieren sich
+Werte. Sei $f_1=u$, $f_m=f_{m-1}\oplus u$; dann hat $f_m$ die
+konstante Struktur $m$ und den Wert $m$. Sei $A$ die Struktur von
+$g\otimes u$ (eine Darstellung der $3$). Induktiv hat $g\otimes f_m$
+die Struktur $mA$; als $\otimes$-Ergebnis vom Wert $3m$, realisiert
+auf seinem Horizont $T_m$, erzwingt die Gültigkeit (Ziffernschranke)
+$T_m\ge\sigma(mA)\ge m$ und $A(T_m{+}1)=3$. Wie in Schritt~1 ist
+$A$ konstant, also $A=3$. Betrachte nun $f_2'=g\oplus g$ mit
+Struktur $2X$, Horizont $H\ge\sigma(2X)=3$ und Wert
+$2(H{+}1)\ge8$. Links-Distributivität und Kommutativität geben
+\[
+u\otimes(g\oplus g)=(g\otimes u)\oplus(g\otimes u),
+\]
+rechts mit Struktur $2\cdot3=6$, also Wert $6$; links steht der Wert
+$2(H{+}1)\ge8$. Widerspruch.
+\end{proof}
+
+\begin{bemerkung}
+Beide Widersprüche benutzen dieselbe Eigenschaft:
+$\sigma(m\cdot P)$ wächst linear in $m$, weil die Ziffernschranke
+$c_d\le n-d$ große Koeffizienten in große Horizonte zwingt. Die
+Starrheit der beiden Identitäten ist damit eine direkte Konsequenz
+der definierenden Ziffernbedingung $0\le a_i\le i$. Auch der
+nichtkommutative Mischfall vom Typ~(B) ist unter beidseitiger
+Distributivität ausgeschlossen: Die Rechts-Distributivität spiegelt
+die Kettenkonstruktion und ersetzt die Kommutativität. Und die
+Seitentreue ist inzwischen \emph{dreiseitig}: Die Bruch-Identität
+(Cantor-Koordinate) trägt keine eigene Arithmetik -- ihre Addition
+kann die Eins überschreiten und ist nie total -- und lässt sich mit
+keiner der beiden Seiten verweben (Wert-$\oplus$ scheitert am
+konstanten Fakultätsquotienten, Struktur-$\oplus$ an der
+Halbkoeffizienten-Obstruktion $2A(Y)=Y^{\underline k}$).
+Es gibt genau zwei Rechenwelten.
+\end{bemerkung}
+
+\section{Das Tiefengesetz des Kommutators}
+
+Der Defekt
+$\delta(h)=\operatorname{hor}(\KS\KV h)-\operatorname{hor}(\KV\KS h)$
+ist beidseitig unbeschränkt, aber extrem asymmetrisch: Nach oben
+tritt $+2$ erstmals bei $h=(9,720)$ auf ($720=6!=10\cdot9\cdot8$ hat
+in $H_9$ die Struktur $\ff X3$; exhaustiv gesichert); die weiteren
+Schwellen sind nur nach oben beschränkt: $+3$ spätestens ab $n=14$,
+$+4$ spätestens ab $n=20$, $+5$ spätestens ab $n=26$.
+Nach unten ist die Tiefe $-g$ an die \emph{Schalenlücke} gebunden;
+die Sprungstellen sind
+\[
+m_g=3,\ 15,\ 84,\ 533,\ 3883,\ 31998,\ 294875\qquad(g=1,\dots,7).
+\]
+
+\begin{satz}\label{satz:asymptotik}
+Mit $c_g=(g{+}2)!\sum_{k\ge1}k/(g{+}k{+}1)!=1+O(1/g)$ gilt
+\[
+\frac{(g+2)!}{c_g}\le m_g+1\le(g+2)!,
+\qquad\text{insbesondere}\quad
+\frac{m_g}{(g+2)!}\to1 .
+\]
+\end{satz}
+
+\begin{proof}
+Umindexieren liefert exakt
+$M_{m-g}(m{+}1)/m!=(m{+}1)\sum_{k=1}^{m-g}k/(g{+}k{+}1)!$, wobei
+$M_s=\sum_{d<s}(s{-}d)\ff Xd$ das Maximalpolynom ist. Die rechte
+Seite wächst streng in $m$; für $m{+}1\ge(g{+}2)!$ genügt bereits
+der Term $k{=}1$, und für $m{+}1<(g{+}2)!/c_g$ ist auch die volle
+Reihe zu klein. Die Schranke $c_g\le1+\sum_{k\ge2}k(g{+}3)^{1-k}$
+gibt $c_g=1+O(1/g)$.
+\end{proof}
+
+Inzwischen ist auch die Gleichheit bewiesen: Das Minimum von
+$\delta$ über die Schale $m$ ist \emph{exakt} $-g(m)$, mit der
+Terminaldarstellung von $M_{s_{\min}}(m{+}1)$ als stets tauglichem
+(im Allgemeinen nicht einzigem) Zeugen.
+Empirisch ist $(g{+}2)!/c_g$ sogar auf $\pm1$ genau gleich $m_g$;
+die daraus abgeleitete Vorhersage $m_7=294\,875$ wurde
+\emph{exakt} bestätigt, ebenso zwei frühere Vorhersagen dieses
+Gesetzes ($-3$ ab Schale ${\approx}100$; $m_6=31998$ bei
+prognostizierten ${\approx}31930$).
+
+\section{Das Horizontkalkül}
+
+Für einen $k$-stelligen Operator $T$ auf dem Strukturhalbring
+$\Struk$ sei
+\[
+\Gamma_T(r_1,\ldots,r_k)=\max\{\sigma(T(P_1,\ldots,P_k)):
+\sigma(P_i)\le r_i\}
+\]
+der maximale Strukturhorizont des Ergebnisses.
+Wir schreiben $P\preceq Q$ für die koeffizientenweise Ordnung in der
+fallenden Fakultätsbasis und
+$M_r(X)=\sum_{d<r}(r{-}d)\,\ff Xd$ für das maximal gefüllte Polynom
+mit $\sigma(M_r)=r$.
+
+\begin{satz}[Extremalprinzip]\label{satz:extremal}
+Ist $T$ in jedem Argument koeffizientenmonoton --- was auf jeden aus
+Addition, Multiplikation und $\Delta$ zusammengesetzten Operator
+zutrifft, da alle Strukturkonstanten nichtnegativ sind ---, so gilt
+\[
+\Gamma_T(r_1,\ldots,r_k)=\sigma\bigl(T(M_{r_1},\ldots,M_{r_k})\bigr).
+\]
+\end{satz}
+
+\begin{proof}
+$\sigma(P)\le r$ ist äquivalent zu $P\preceq M_r$ (Ziffernschranke
+$c_d\le r-d$), und $\sigma$ ist $\preceq$-monoton; Monotonie von $T$
+liefert die obere Schranke, $M_{r_i}\in\mathcal F_{r_i}$ die
+Annahme.
+\end{proof}
+
+Damit besitzt jede Grundoperation ihr eigenes exaktes
+Wachstumsgesetz: $\Gamma_+(r,s)=r+s$ (linear, scharf bei
+Konstanten), $\Gamma_\times(r,s)=\beta(r,s)=\sigma(M_rM_s)$ (im
+Wesentlichen fakultätisch, siehe unten) --- und für die endliche
+Differenz:
+
+\begin{satz}[Differenzüberlauf]\label{satz:differenzueberlauf}
+Für $r\ge2$ gilt
+$\Gamma_\Delta(r)=\lfloor(r+1)^2/4\rfloor-1$, angenommen bei der
+Ein-Ziffern-Struktur $P=(r{-}d)\,\ff Xd$, $d=\lfloor(r+1)/2\rfloor$.
+\end{satz}
+
+\begin{proof}
+Nach Satz~\ref{satz:extremal} ist
+$\Gamma_\Delta(r)=\sigma(\Delta M_r)$ mit Koeffizienten
+$b_k=(k{+}1)(r{-}k{-}1)$, also
+$\Gamma_\Delta(r)=\max_{0\le k\le r-2}(k{+}1)(r{-}k)-1$; das Produkt
+zweier Zahlen mit Summe $r{+}1$ ist maximal
+$\lfloor(r{+}1)^2/4\rfloor$. (Exhaustiv bestätigt bis $r=8$:
+$1,3,5,8,11,15,19$.)
+\end{proof}
+
+$\Delta$ senkt also den Grad und erhöht die Kapazität quadratisch:
+Der Grad misst Dimension, $\sigma$ misst Kapazität; eine
+Gradfiltration sieht diesen Effekt nicht.
+
+Das Kalkül erfasst auch das Einsetzen:
+
+\begin{satz}[Kompositionsabschluss]\label{satz:komposition}
+$\Struk$ ist unter Komposition abgeschlossen, und $\circ$ ist in
+beiden Argumenten koeffizientenmonoton; insbesondere
+$\Gamma_\circ(r,s)=\sigma(M_r\circ M_s)$.
+\end{satz}
+
+\begin{proof}[Beweisskizze]
+Wegen $P\circ Q=\sum_d c_d(P)(Q)^{\underline d}$ genügt
+$(Q)^{\underline d}\in\Struk$. Interpretiert man $Q(x)$ als Anzahl
+der Paare aus einer Schablone der Stelligkeit $k$ (je $a_k$ Stück)
+und einer Injektion $[k]\hookrightarrow[x]$, so zählt
+$Q(x)^{\underline d}$ die $d$-Tupel paarweise verschiedener solcher
+Paare. Klassifikation nach der Bildvereinigung liefert
+$Q(x)^{\underline d}=\sum_m N_m\binom xm$; auf den ausschöpfenden
+Tupeln wirkt $S_m$ durch Umbenennung der Grundmenge \emph{frei}
+(eine Permutation, die jede Injektion fixiert, fixiert die
+ausgeschöpfte Vereinigung punktweise), also $m!\mid N_m$ und
+$(Q)^{\underline d}=\sum_m(N_m/m!)X^{\underline m}\in\Struk$ ---
+Positivität und Ganzzahligkeit in einem Zug. Monotonie in $Q$ folgt,
+weil größere Schablonenvorräte die Tupelmengen nur vergrößern.
+(Exhaustiv bestätigt für $r,s\le4$.)
+\end{proof}
+
+Die Diagonale $\Gamma_\circ(r,r)=1,4,23,6541,477149751,\ldots$
+wächst turmartig und ist die neunte OEIS-unbekannte Folge des
+Projekts; ihre Asymptotik ist offen. Der Verschiebeoperator
+$E\,P(X)=P(X{+}1)$ als einfachster Spezialfall kostet exakt
+$\Gamma_E(r)=r+\lfloor r^2/4\rfloor=\Gamma_\Delta(r{+}1)$ ---
+Verschieben kostet so viel wie Ableiten einen Horizont höher; diese
+Wertfolge ist die klassische Viertelquadrat-Folge (A024206), neu ist
+das Gesetz, nicht die Folge. Das stetige Analogon des
+Kompositionsabschlusses ist klassisch (absolut monotone Funktionen,
+Faà di Bruno); Satz~\ref{satz:komposition} ist die diskrete
+Gitterverschärfung mit der zusätzlichen Teilbarkeit $m!\mid N_m$. Additiv ist
+$(\mathcal F_r)_r$ mit $\mathcal F_r=\{P:\sigma(P)\le r\}$,
+$|\mathcal F_r|=(r{+}1)!$, eine klassisch verträgliche Filtration;
+multiplikativ ist sie nichtlinear mit optimalem Wachstumsgesetz
+$\beta$. Via Newton-Entwicklung ($c_d=\Delta^dP(0)/d!$) ist
+$\sigma(P)=\max_{\Delta^dP(0)>0}\bigl(d+\Delta^dP(0)/d!\bigr)$ eine
+basisfreie \emph{Kapazitätshöhe}; sie ist keine Bitkomplexität
+($\sigma$ einer Konstanten $c$ ist $c$ selbst).
+
+\section{Die Zählbreite: eine \#P-Interpretation}
+
+Wegen $X^{\underline d}=d!\binom Xd$ hat jedes $P\in\Struk$
+nichtnegative ganzzahlige Koeffizienten in der Binomialbasis
+($b_d=c_d\,d!$) und liegt damit in der Klasse der
+\emph{binomial-good}-Polynome, die als die (relativierenden)
+polynomiellen \#P-Abschlussoperationen charakterisiert sind
+(Ikenmeyer--Pak, FOCS 2022, arXiv:2204.13149). $\Struk$ ist eine
+\emph{echte} Teilklasse ($\binom X2\notin\Struk$); die
+$d!$-Teilbarkeit entspricht geordneten Tupeln statt ungeordneten
+Auswahlen.
+
+\begin{satz}[Hori-\#P-Satz]\label{satz:sharpp}
+Für $f\in\#\mathrm P$ und $P\in\Struk$ ist
+$P\circ f\in\#\mathrm P$.
+\end{satz}
+
+\begin{proof}
+Rate $d\le\deg P$, eine Variante $\ell\le c_d$ und $d$
+Zeugenkandidaten; akzeptiere bei $d$ paarweise verschiedenen
+gültigen Zeugen. Die Anzahl akzeptierender Pfade ist
+$\sum_d c_d f(x)^{\underline d}=P(f(x))$; da $P$ fest ist, bleibt
+alles polynomiell.
+\end{proof}
+
+In dieser Lesart erhalten die Hori-Operationen eine Zählsemantik:
+Addition ist disjunkte Vereinigung von Zählkonstruktionen,
+Multiplikation koppelt Konstruktionen (die
+Linearisierungskoeffizienten $\binom pj\binom qj j!$ zählen die
+Überlappungsmuster), $\Delta$ zählt die durch einen zusätzlichen
+Zeugen ermöglichten Strukturen
+($(n{+}1)^{\underline d}-n^{\underline d}=d\,n^{\underline{d-1}}$),
+und $\sigma(P)=\max(d+c_d)$ misst die maximale Kombination aus
+Zeugenanzahl und Variantenanzahl eines Bausteins
+(\emph{Zählbreite}; geometrisch die kleinste Treppe über dem
+Koeffizientenprofil). Jedes $\mathcal F_r$ ist damit eine endliche
+Familie von genau $(r{+}1)!$ \#P-Abschlussoperatoren, und das
+Horizontkalkül beziffert optimal das Wachstum der Zählbreite unter
+$+$, $\times$, $\Delta$ und $\circ$. Abgrenzung: Die
+Binomial-Basis-Vermutung von Ikenmeyer--Pak (deren univariate
+Fassung P$\,\ne\,$NP implizieren würde) bleibt unberührt; die
+Hori-Operatoren liegen auf der bekannten, relativierenden Seite.
+Neu ist ausschließlich die quantitative Hierarchie.
+
+\section{Neun Zählfolgen}
+
+Die folgenden Folgen entstammen der Horimetrik und lieferten in der
+OEIS keinen Treffer (zuletzt geprüft am 14.\,Juli 2026; ein
+Negativbefund ist kein Neuheitsbeweis). Die Einreichung läuft;
+erweiterte Datentafeln (Sprungstellen bis $g=20$, Springer-,
+Nicht-Springer- und Fixpunktfolge bis $n=40$, Interchange bis
+$H_{12}$, 78 Ein-Ziffern-Terme) liegen als b-Files im
+Repositorium:
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Folge & Anfangswerte\\
+\midrule
+$\beta(r,r)$, maximale Strukturhöhe von Produkten &
+$1,6,22,87,407,2473,19527,\dots$\\
+Defekt $D(n)$ (Ein-Schritt-Schalenspringer) &
+$1,8,60,360,2520,21168,211680$\\
+beidseitige Fixpunkte $F(n)=n\cdot n!-D(n)$ &
+$4,17,88,540,3960,32760$\\
+Sprungstellen $m_g$ des Tiefengesetzes &
+$3,15,84,533,3883,31998,294875$\\
+Interchange-Maxima $\max\Omega$ auf $H_n$ &
+$0,1,6,43,351,2873,26443,270291$\\
+Interchange-Nullzähler $\#\{\Omega=0\}$ &
+$2,5,13,23,61,111,274,564$\\
+Nicht-Springer $n!-D(n)$ &
+$5,16,60,360,2520,19152$\\
+Ein-Ziffern-Fakultäten $\{n: n!\ \text{einziffrig in } H_{\mu(n!)}\}$ &
+$1,2,5,7,11,23,29,39,59,119$\\
+Kompositionshöhe $\Gamma_\circ(r,r)$ &
+$1,4,23,6541,477149751,\dots$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Dabei ist $\Omega(h)=\val(LZh)-\val(ZLh)$ der Defekt zwischen den
+beiden Wachstumsreihenfolgen; die Positivität $\Omega\ge0$ ist
+bewiesen (Multiplikationslemma mit scharfer Regime-Grenze; zusätzlich
+exhaustiv mitbestätigt bis $H_{12}$, also über $6{,}2\cdot10^9$
+Elemente), die
+Gleichheitsfälle sind charakterisiert und vollständig in
+Ziffernbedingungen entfaltet (pro Ebene zwei Ungleichungen bei
+wachsendem Exzess), und der Nullzähler gehorcht einer daraus
+abgeleiteten Zählformel (exakt für alle gemessenen Terme) mit
+bewiesener oberer Schranke $(n{+}1)^{n+1}/n!$ — Gleichgültigkeit
+gegenüber der Wachstumsreihenfolge ist asymptotisch extrem selten. Für
+$\beta(r,r)$ ist die Asymptotik bewiesen:
+$\ln(\beta(r,r)/r!)=2\sqrt r+O(\log r)$ (Reduktion auf einen
+Maximalterm plus elementare Schranken). $D(n)$ zählt nach dem Schalensprung-Lemma
+genau die Elemente, die eine einzige führende Null in die nächste
+Fakultätsschale hebt; die zugehörige Ziffernformel läuft über die
+Eigen-Darstellung von $n!$, deren Ein-Ziffern-Fälle vollständig
+charakterisiert sind ($n=(i{+}1)!/d-1$, $1\le d\le i$). Alle neun Folgen werden bei der OEIS
+eingereicht; die A-Nummern werden nach Vergabe in diesem Text
+nachgetragen, sodass Text und Datenbank wechselseitig
+referenzieren.
+
+\section{Einordnung und Ehrlichkeit}
+
+Die Bausteine sind bekannte Mathematik: Mischbasensysteme und
+Faktoradics, Lehmer-Codes, fallende Fakultäten und endliche
+Differenzen, direkte Limites, Produkthalbringe. Die nächsten
+bekannten Nachbarn der Nullen-Semantik sind abstrakte
+Numerationssysteme; dort ändern führende Nullen den Wert über die
+Radix-Ordnung, ohne dass eine Halbringtheorie darüber errichtet
+wird. Was wir in dieser Form nicht gefunden haben, ist die
+Konstellation: endliche Fakultätshorizonte mit laufender Auswertung,
+Wert-/Struktur-Dualität mit zwei Projektoren zur selben Eins, und
+ein Starrheitssatz, der die Mischung der Identitäten verbietet.
+
+Die philosophische Motivation --- Unendlichkeit als Treppe endlicher
+Horizonte --- ist Motivation, kein Argument. Die belastbare Fassung
+lautet: Unendliche Strukturen lassen sich als Systeme endlicher
+Horizonte auffassen, und \emph{verschiedene Konsistenzbegriffe
+zwischen den Horizonten erzeugen verschiedene globale Räume}
+(Satz~\ref{satz:limits}).
+
+Am präzisesten fasst der Grundraum selbst die Lage. Ergänzt man die
+Ziffern um eine führende Null, $e=(0,a_1,\dots,a_n)$, so gilt
+$0\le e_j<j$: $H_n$ ist als Menge der Raum der Inversionsfolgen der
+Länge $n{+}1$, also $H_n\cong S_{n+1}$. Der Strukturhorizont wird
+zur Permutationsstatistik
+$\sigma(P_a)=n-\min_{e_j>0}((j{-}1)-e_j)$ mit exakter Verteilung
+$|\{\sigma=r\}|=r\cdot r!$; ob sie einer klassischen Statistik
+entspricht, ist offen. Koordinatenweise wird jeder Horizont zum
+distributiven Gitter (die \emph{middle order} auf Permutationen,
+arXiv:2405.08943), in dem $\mathcal F_r$ das Hauptideal unter $M_r$
+ist. Die Bewohner sind also bekannte Permutationscodes; neu sind die
+Operationen darauf --- die umgedrehte Wertung, die Horizontübergänge,
+die Dualität, die Seitentreue und das Kapazitätskalkül. Das ist die
+günstigste Lage für eine junge Theorie: bekannter Grundraum, neue
+Sätze.
+
+Mehrere frühere Vermutungen dieses Projekts wurden durch eigene
+Rechnungen widerlegt (eine Schrankenvermutung fiel zweimal an zu
+kleinen Testbereichen; eine Formelvermutung an ihrem vierten
+Datenpunkt). Wir werten das als Qualitätsmerkmal des Verfahrens,
+nicht als Schwäche des Gegenstands.
+
+\section{Offene Fragen}
+
+(1)~Die \emph{oberen} Schwellen des Tiefengesetzes exakt (bisher
+nur „spätestens ab“-Schranken; die untere Seite ist vollständig
+bewiesen). (2)~Feinstruktur der $\beta$-Asymptotik (vermutet:
+$-\tfrac32\ln r$ im Logarithmus-Term). (3)~Allgemeine
+Ziffernstatistik von $n!$ in der eigenen Schale (die Ein-Ziffern-Fälle
+sind vollständig charakterisiert); daraus die Verteilungsasymptotik
+von $D(n)$. (4)~Klassifikation der \emph{gekoppelten} Arithmetiken
+innerhalb einer Seite (jenseits der Produktkonstruktionen).
+(5)~Eine untere Schranke für den Interchange-Nullzähler.
+(6)~$\Gamma_T$ für weitere Operatoren (Komposition, Shift) und die
+Frage, ob die Kapazitätshöhe $\max_d(d+c_d)$ anderswo bereits
+untersucht wurde. (7)~Formalisierung des Seitentreue-Satzes (die
+fallenden Fakultäten liegen in Lean~4/Mathlib bereits vor).
+
+\bigskip
+\noindent\textbf{Reproduzierbarkeit.} Alle Enumerationen und
+Verifikationen dieses Textes sind als Python-Referenz\-implementierung
+mit Selbsttests verfügbar; jedes Resultat trägt in den Arbeitsdateien
+den Status bewiesen/vermutet/widerlegt mit Datum. Quellcode,
+b-Files, das ausführliche Buch (deutsch und englisch, mit allen
+Beweisen) und dieser Text liegen unter
+\texttt{github.com/christianbuerckert/horimetrik}; eine archivierte
+Fassung liegt auf Zenodo (doi:10.5281/zenodo.21400755).
+
+\begin{thebibliography}{9}
+\bibitem{gkp} R.~L. Graham, D.~E. Knuth, O.~Patashnik:
+\emph{Concrete Mathematics}, 2.~Aufl., Addison--Wesley, 1994.
+\bibitem{rigo} M.~Rigo, M.~Stipulanti: \emph{Revisiting regular
+sequences in light of rational base numeration systems},
+arXiv:2103.16966.
+\bibitem{kiselman} G.~Kudryavtseva, V.~Mazorchuk: \emph{On
+Kiselman's semigroup}, arXiv:math/0511374; O.~Ganyushkin,
+V.~Mazorchuk: \emph{On Kiselman quotients of 0-Hecke monoids},
+arXiv:1006.0316.
+\bibitem{ybe} D.~Simon: \emph{Mixed radix numeration bases:
+Horner's rule, Yang-Baxter equation and Furstenberg's conjecture},
+arXiv:2405.19798.
+\bibitem{ikenmeyerpak} C.~Ikenmeyer, I.~Pak: \emph{What is in \#P
+and what is not?}, FOCS 2022, arXiv:2204.13149.
+\bibitem{middleorder} M.~Bouvel, L.~Ferrari, B.~E.~Tenner:
+\emph{Between weak and Bruhat: the middle order on permutations},
+arXiv:2405.08943.
+\end{thebibliography}
+
+\end{document}

@@ -1,0 +1,53 @@
+\documentclass[11pt,a4paper]{book}
+
+\usepackage{fontspec}
+\usepackage[british]{babel}
+\usepackage[a4paper,top=2.5cm,bottom=2.8cm,inner=2.6cm,outer=2.2cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{microtype}
+\usepackage{parskip} % no paragraph indent, small vertical gap instead
+\usepackage{emptypage} % blank pages really blank
+\setlength{\emergencystretch}{1.5em}
+\usepackage{horimetrik}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Horimetrik — Numbers with a Horizon},
+  pdfauthor={Christian Felix Bürckert},
+  pdfsubject={Value, shape, and horizon in a positional number system with decreasing bases},
+  pdfkeywords={Horimetrik, factorial number system, mixed radix, semiring, side fidelity}}
+
+\title{Horimetrik\\\large Numbers with a Horizon}
+\author{Christian Felix Bürckert, M.\,Sc.\\[4pt]
+\normalsize with mathematical collaboration by Claude (Anthropic)\\
+\normalsize and ideas contributed by GPT (OpenAI)}
+\date{Working draft \today\\[4pt]
+\normalsize License: CC\,BY\,4.0 (text) --- companion programs: MIT\\[6pt]
+\normalsize\itshape Translated from the German original
+(\texttt{buch/} in the project repository).\\
+\normalsize\itshape Where the two versions differ, the German text
+is authoritative.}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\input{chapters/00-preface}
+\input{chapters/01-idea}
+\input{chapters/02-horizons}
+\input{chapters/i1-surface}
+\input{chapters/03-two-extensions}
+\input{chapters/04-structure-polynomials}
+\input{chapters/i2-surface}
+\input{chapters/05-arithmetic}
+\input{chapters/06-counting-sequences}
+\input{chapters/07-dead-ends}
+\input{chapters/08-open-questions}
+\input{chapters/09-where-it-lives}
+\input{chapters/literature}
+
+\appendix
+\input{chapters/a1-reference}
+\input{chapters/a2-proofs}
+
+\end{document}
